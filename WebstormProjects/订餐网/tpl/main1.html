@@ -1,0 +1,131 @@
+<nav class="navbar navbar-default navbar-fixed-top bjcolor1">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">订餐</a>
+    </div>
+  </div>
+</nav>
+<div class="container " ng-controller="Mc1">
+      <div class="jumbotron bj">
+        <div class="form-group has-warning has-feedback">
+          <input type="text" class="form-control bjcolor2" id="inputWarning2" placeholder="搜索菜品名称和原料...">
+          <span class="glyphicon glyphicon-search form-control-feedback" aria-hidden="true"></span>
+          <span id="inputWarning2Status" class="sr-only">(warning)</span>
+        </div>
+      </div>
+      <ul class="list-group ">
+        <li class="list-group-item list_z bjcolor2">
+          <div class="media">
+            <div class="media-left media-middle">
+              <a href="#/main20">
+                <img class="media-object" src="img/p0281.jpg" alt="...">
+              </a>
+            </div>
+            <div class="media-body textcolor">
+              <h4 class="media-heading">【酸甜开喂虾】</h4>
+              <p>主要食料:明虾、番茄酱、白糖、白醋、葱、姜、淀粉</p>
+              <div class="hengxian"></div>
+              <span>￥36.00</span>
+            </div>
+          </div>
+        </li>
+        <li class="list-group-item bjcolor2">
+          <div class="media">
+            <div class="media-left media-middle">
+              <a href="#">
+                <img class="media-object" src="img/p2679.jpg" alt="...">
+              </a>
+            </div>
+            <div class="media-body textcolor">
+              <h4 class="media-heading">【桂香紫薯山药组】</h4>
+              <p>主要食料:切片吐司、紫薯、铁棍山药、糖桂花、炼乳</p>
+              <div class="hengxian"></div>
+              <span>￥16.50</span>
+            </div>
+          </div>
+        </li>
+        <li class="list-group-item bjcolor2">
+          <div class="media">
+            <div class="media-left media-middle">
+              <a href="#">
+                <img class="media-object" src="img/p8489.jpg" alt="...">
+              </a>
+            </div>
+            <div class="media-body textcolor">
+              <h4 class="media-heading">【小米椒爆炒小公鸡】</h4>
+              <p>主要食料:三黄鸡、杭椒、干红椒、新鲜小米椒、麻椒、八角、香叶、葱、姜、生抽</p>
+              <div class="hengxian"></div>
+              <span>￥32.00</span>
+            </div>
+          </div>
+        </li>
+        <li class="list-group-item bjcolor2">
+          <div class="media">
+            <div class="media-left media-middle">
+              <a href="#">
+                <img class="media-object" src="img/p7818.jpg" alt="...">
+              </a>
+            </div>
+            <div class="media-body textcolor">
+              <h4 class="media-heading">【口袋饼】</h4>
+              <p>主要食料:面粉、黄瓜、香肠、热水、土豆、盐、醋、生抽、油</p>
+              <div class="hengxian"></div>
+              <span>￥6.50</span>
+            </div>
+          </div>
+        </li>
+        <li class="list-group-item bjcolor2">
+          <div class="media">
+            <div class="media-left media-middle">
+              <a href="#">
+                <img class="media-object" src="img/p9138.jpg" alt="...">
+              </a>
+            </div>
+            <div class="media-body textcolor">
+              <h4 class="media-heading">【橄榄油版酸奶蛋糕】</h4>
+              <p>主要食料:鸡蛋、玉米淀粉、绵白糖、白醋、低筋粉、橄榄油、酸奶</p>
+              <div class="hengxian"></div>
+              <span>￥32.00</span>
+            </div>
+          </div>
+        </li>
+        <li class="list-group-item bjcolor2" ng-repeat="k in name">
+          <div class="media">
+            <div class="media-left media-middle">
+              <a href="#">
+                <img class="media-object" src="img/{{k.img}}" alt="...">
+              </a>
+            </div>
+            <div class="media-body textcolor">
+              <h4 class="media-heading">{{k.bti}}</h4>
+              <p>{{k.duanluo}}</p>
+              <div class="hengxian"></div>
+              <span>{{k.much}}</span>
+            </div>
+          </div>
+        </li>
+      </ul>
+      <button type="button" class="btn btn-success btn-md btn-block" ng-click="add()" ng-hide="show">加载更多</button>
+      <button type="button" class="btn btn-md btn-block bjcolor3" ng-show="show" ng-disabled="show"><span class="glyphicon glyphicon-warning-sign" ></span>没有更多数据了</button>
+    </div>
+<nav class="navbar navbar-default navbar-fixed-bottom bjcolor1">
+  <div class="container ctn">
+    <div class="row">
+      <div class="col-xs-4">
+        <span class="glyphicon glyphicon-home dis_b"></span>
+      </div>
+      <div class="col-xs-4">
+        <span class="glyphicon glyphicon-user dis_b"></span>
+      </div>
+      <div class="col-xs-4">
+        <span class="glyphicon glyphicon-th-list dis_b"></span>
+      </div>
+    </div>
+  </div>
+</nav>

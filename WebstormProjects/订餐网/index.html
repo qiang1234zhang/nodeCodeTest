@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html ng-app="Md1">
+<head lang="en">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta http-equiv="X-UA-Compitable" content="IE=edge">
+    <link rel="stylesheet" href="css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="css/2.css"/>
+    <title>订餐</title>
+</head>
+<body class="bjcolor4">
+<div  ng-view></div>
+<!--[if lte IE 9]>
+<script src="js/html5shiv.min.js"></script>
+<script src="js/respond.min.js"></script>
+<![endif]-->
+<script src="js/jquery-1.11.3.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/angular.js"></script>
+<script src="js/angular-route.js"></script>
+<script>
+    angular.module("Md1",['ng','ngRoute']).controller("Mc1",function($scope,$http){
+        $scope.add=function(){
+            $http.get("js/1.json").success(function(data) {$scope.name = data.records;});
+            $scope.show=true;
+        }
+
+    }).controller('Mc2',function($scope,$location){
+        $scope.tz=function(){
+            $location.path('/main333');
+        }
+        $scope.tzz=function(){
+            $location.path('/main100');
+        }
+        $scope.jump=function(){
+            $location.path('/main444');
+        }
+    }).config(function($routeProvider){
+        $routeProvider.when("/start",{
+            templateUrl:"tpl/start.html"
+        }).when("/main100",{
+            templateUrl:"tpl/main1.html"
+        }).when("/main20",{
+            templateUrl:"tpl/main2.html"
+        }).when("/main333",{
+            templateUrl:"tpl/main3.html"
+        }).when("/main444",{
+            templateUrl:"tpl/main4.html"
+        }).otherwise({
+            redirectTo:"/start"
+        });
+    });
+</script>
+</body>
+</html>

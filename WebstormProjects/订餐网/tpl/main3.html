@@ -1,0 +1,52 @@
+<nav class="navbar navbar-default navbar-fixed-top bjcolor1">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">订餐</a>
+        </div>
+    </div>
+</nav>
+<div class="container mt58  mlr15" ng-controller="Mc2">
+    <div class="panel panel-default bjcolor2 pl15">
+        <form>
+            <div class="form-group ">
+                <label for="exampleInputEmail1">联系人:</label>
+                <input type="text" class="form-control bjcolor2" id="exampleInputEmail1" placeholder="会 会">
+            </div>
+            <p><strong>性别:</strong></p>
+            <label class="radio-inline">
+                <input type="radio" class="bjcolor2" name="inlineRadioOptions" id="inlineRadio1" value="option1"> 先生
+            </label>
+            <label class="radio-inline">
+                <input type="radio"class="bjcolor2" name="inlineRadioOptions" id="inlineRadio2" value="option2"> 女士
+            </label>
+            <div class="form-group">
+                <label for="exampleInputPassword1">联系电话:</label>
+                <input type="text" class="form-control bjcolor2" id="exampleInputPassword1" placeholder="13052169854">
+            </div>
+            <p><strong>送餐地址:</strong></p>
+            <textarea class="form-control bjcolor2" rows="3" placeholder="北京市某某某"></textarea>
+            <button type="button" class="btn btn-success btn-md btn-block" ng-click="jump()">确认下单</button>
+        </form>
+    </div>
+</div>
+<nav class="navbar navbar-default navbar-fixed-bottom bjcolor1">
+    <div class="container ctn">
+        <div class="row">
+            <div class="col-xs-4">
+                <span class="glyphicon glyphicon-home dis_b"></span>
+            </div>
+            <div class="col-xs-4">
+                <span class="glyphicon glyphicon-user dis_b"></span>
+            </div>
+            <div class="col-xs-4">
+                <span class="glyphicon glyphicon-th-list dis_b"></span>
+            </div>
+        </div>
+    </div>
+</nav>
