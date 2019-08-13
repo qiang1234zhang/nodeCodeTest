@@ -1,0 +1,142 @@
+#dataPublish .iovModal .modal-input .modal-column {
+    width: 100%;
+    padding: 0;
+}
+
+#dataPublish fieldset {
+    padding: .15em .625em .75em;
+    border: 1px solid #3C763D;
+}
+
+#dataPublish fieldset legend {
+    padding: .5em .5em 0 .5em;
+    border: 0;
+    width: auto;
+    font-size: 14px;
+}
+
+#dataPublish .fieldList fieldset {
+    float: left;
+    width: 31%;
+    height: 299px;
+    margin-left: 15px;
+}
+#dataPublish .publishEdit fieldset {
+    /*float: left;*/
+    width: 100%;
+    height: 220px;
+}
+#dataPublish .fieldList .fieldBtnAdd {
+    padding-top: 100px;
+    float: left;
+    margin: 0 26px;
+}
+
+#dataPublish .iovModal .modal-input .modal-column .form-group {
+    margin: 6px 0;
+}
+
+#dataPublish .scroll {
+    height: 190px;
+    overflow: auto;
+}
+
+#dataPublish .pbContentTool {
+    width: 100%;
+    height: 50px;
+}
+
+#dataPublish .pbContentTool .iovButtonGroup {
+    height: 100%;
+    float: left;
+}
+
+#dataPublish .pbContentTool .iovButtonGroup li {
+    display: block;
+    float: left;
+    height: 100%;
+    margin-right: 20px;
+}
+
+#dataPublish .pbContentTool .iovButtonGroup li {
+    display: block;
+    float: left;
+    height: 36px;
+    margin-right: 20px;
+}
+
+#dataPublish #searchBox ul {
+    height: 36px;
+    background-color: #ECEBEA;
+    /*opacity: 19;*/
+}
+#dataPublish #publishTree {
+    background-color: #F5F7F7;
+}
+#dataPublish #searchBox {
+    height: 36px;
+    /* background-color: #ECEBEA; */
+    display: none;
+    position: absolute;
+    top: 30px;
+    z-index: 999;
+}
+#dataPublish .menuContent{
+    width: 108%;
+}
+#searchBoxTree {
+    margin-top: 2px;
+    margin-left: 145px;
+    height: 250px;
+    width: 218px;
+    overflow-x: auto;
+    overflow-y: auto;
+}
+
+/*动态设置表格中过长的的内容只显示部分====START====*/
+#dataPublish .table {
+    table-layout: fixed;
+}
+#dataPublish .table td {
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow: ellipsis;
+}
+/*动态设置表格中过长的的内容只显示部分====END====*/
+#dataPublish .treeOverflow {
+    margin-top: 5px;
+    margin-left: 40px;
+    height: 326px;
+    overflow: auto;
+    z-index: 1;
+}
+#dataPublish #publishTree {
+    margin-left: 18px;
+    background-color: #e5f7e8;
+    z-index: 999;
+}
+#dataPublish #resultLis {
+    width: 100%;
+}
+#dataPublish .fieldsetUl {
+    height: 269px;
+    width: 104%;
+    overflow: auto;
+}
+#dataPublish .rightside {
+    height: 475px;
+    border: 1px #C9C9C9 solid;
+    width: 639px;
+    float: right;
+    display: block;
+    position: absolute;
+    left: 159px;
+    top: 0;
+}
+#dataPublish .leftside {
+    display: block;
+    height: 475px;
+    width: 160px;
+    border: 1px #C9C9C9 solid;
+    /*padding: 20px;*/
+}

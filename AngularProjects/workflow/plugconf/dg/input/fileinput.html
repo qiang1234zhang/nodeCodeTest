@@ -1,0 +1,125 @@
+<div class="tab-content">
+    <div id="baseConfig" class="active">
+        ${component | componentFormat('CommonTextInputComponent', 'label:步骤名称,mappingProp:pluginName,required:required')}
+        ${component | componentFormat('FileComponent','disabled:disabled')}
+
+        <div class="form-group">
+            <label class="col-sm-3 control-label">查询规则:</label>
+            <div class="col-sm-9">
+                <select class="form-control" ms-duplex-string="@incrementFlag">
+
+                    <option value="0">全量查询</option>
+                    <option value="1">增量查询</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-3 control-label">过滤规则:</label>
+            <div class="col-sm-9">
+                <select class="form-control" ms-duplex-string="@filterType">
+
+                    <option value="0">全部</option>
+                    <option value="1">只取</option>
+                    <option value="2">过滤</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group" ms-if="@filterType!=0">
+            <label class="col-sm-3 control-label">规则内容:</label>
+            <div class="col-sm-9">
+                <input class="form-control" ms-duplex-string="@filterContent">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">分包策略:</label>
+            <div class="col-sm-9">
+                <select class="form-control" ms-duplex-boolean="@isCustomizePack">
+                    <option value="false">默认</option>
+                    <option value="true">自定义</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group" ms-if="@isCustomizePack">
+            <label class="col-sm-3 control-label">分包大小:</label>
+
+            <div class="col-sm-9">
+                <select class="form-control" ms-duplex-number="@packageSize">
+                    <option value="0">请选择</option>
+                    <option value="10000">10000</option>
+                    <option value="20000">20000</option>
+                    <option value="30000">30000</option>
+                    <option value="40000">40000(推荐使用)</option>
+                    <option value="50000">50000</option>
+                    <option value="60000">60000</option>
+                    <option value="70000">70000</option>
+                    <option value="80000">80000</option>
+                </select>
+            </div>
+        </div>
+
+        ${component | componentFormat('CommonTextInputComponent', 'label:输出变量,mappingProp:outValue,required:required')}
+    </div>
+</div>
+<script type="text/javascript">
+    require(["component", "wfdata", "jsonFieldMapping"], function (component, wfdata, jsonFieldMapping) {
+        var mappingField = [
+            "fileType", "isDir","fileSourceId", "filePath", "filterType", "filterContent", "packageSize", "inValue", "outValue","incrementFlag"
+        ];
+        jsonFieldMapping.setNodeSaveField(mappingField);
+
+        /**
+         * model自定义属性定义
+         * @param avaConfig
+         */
+        function avalonCustomizeConfigInit(avaConfig) {
+            avaConfig.isCustomizePack = false;//分包策略
+            avaConfig.packageSize = 0;
+            avaConfig.filterType = 0;
+            avaConfig.filterContent = "";
+            avaConfig.incrementFlag=0;
+        }
+
+        /**
+         *页面打开时候初始化页面信息
+         * @constructor
+         */
+        function CustomizeInitFormValue() {
+            if (wfdata.swapValue.avaWf.packageSize) {
+                wfdata.swapValue.avaWf.isCustomizePack = true;
+            } else {
+                wfdata.swapValue.avaWf.isCustomizePack = false;
+            }
+
+            if(window.parent.flashapi.config.popupParam.sourceType){
+                wfdata.swapValue.avaWf.fileTypeId =window.parent.flashapi.config.popupParam.sourceType;
+            }
+        }
+
+
+        /**
+         * 当avalon.define之后，可以进行model属性监控,$watch方法
+         */
+        function vmCustomizeDefineDoneCallback() {
+            wfdata.swapValue.avaWf.$watch("isCustomizePack", function (newValue) {
+                if (newValue&&wfdata.swapValue.avaWf.packageSize==0) {
+
+                    wfdata.swapValue.avaWf.packageSize = 40000;
+                }
+                if(!newValue) {
+                    wfdata.swapValue.avaWf.packageSize = 0;
+                }
+            });
+        }
+
+
+        //页面里的avalon model定义接口，需要暴露出来到window对象
+        window.avalonCustomizeConfigInit = avalonCustomizeConfigInit;
+        window.CustomizeInitFormValue = CustomizeInitFormValue;
+        window.vmCustomizeDefineDoneCallback = vmCustomizeDefineDoneCallback;
+
+        //开始初始化avalon对象
+        window.initAvalon();
+
+    })
+</script>

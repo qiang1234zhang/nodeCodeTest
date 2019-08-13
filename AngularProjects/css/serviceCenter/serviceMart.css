@@ -1,0 +1,43 @@
+#serviceMart .drag {
+    width: 800px;
+}
+#serviceMart .itemBtn {
+    width: 89.58px;
+    height: 33px;
+    background-color: rgb(48, 175, 174);
+    color: #FFF;
+    font: 400 16px 'microsoft yahei';
+}
+#serviceMart .itemBtn span {
+    margin-right: 4px
+}
+
+#serviceMart .fieldList fieldset {
+    float: left;
+    width: 31%;
+    height: 299px;
+    margin-right: 15px;
+    margin-bottom: 15px;
+}
+#serviceMart .fieldList {
+    position: relative;
+}
+
+#serviceMart fieldset {
+    padding: .15em .625em .75em;
+    /*margin:0 2px;*/
+    border: 1px solid #3C763D;
+}
+
+#serviceMart fieldset legend {
+    padding: .5em .5em 0 .5em;
+    border: 0;
+    width: auto;
+    font-size: 14px;
+}
+
+#serviceMart .fieldsetUl {
+    height: 263px;
+    width: 101%;
+    overflow: auto;
+}

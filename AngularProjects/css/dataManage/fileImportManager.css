@@ -1,0 +1,12 @@
+#fileImportManager .iovModal .modal-input .modal-column{
+    width:100%;
+}
+
+#fileImportManager .drag{
+    width: 400px;
+}
+
+#fileImportManager .iovModal .modal-submit{
+    text-align: center;
+}
+

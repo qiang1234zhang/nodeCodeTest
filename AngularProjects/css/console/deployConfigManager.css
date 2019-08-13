@@ -1,0 +1,27 @@
+#deployConfigManager .contentBottom .run{
+    margin-top: 21px;
+    margin-left:15px;
+    height:31px;
+    line-height: 31px;
+    color: #fff;
+    padding:0 15px;
+    font-size: 14px;
+    background-color: #36B084;
+}
+
+#deployConfigManager .contentBottom .run:hover{
+    background-color: #0D865A;
+}
+#deployConfigManager .contentBottom .stop{
+     margin-top: 21px;
+     margin-left:15px;
+     height:31px;
+     line-height: 31px;
+     color: #fff;
+     padding:0 15px;
+     font-size: 14px;
+     background-color: #36B084;
+ }
+#deployConfigManager .contentBottom .stop:hover{
+    background-color: #0D865A;
+}

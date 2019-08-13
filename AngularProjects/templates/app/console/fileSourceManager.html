@@ -1,0 +1,173 @@
+<div id="fileSourceManager">
+    <div class="contentTitle"><span class="icon-map-marker"></span>平台管理>数据源管理</div>
+    <div class="contentMain">
+        <div class="contentTool">
+            <ul class="iovButtonGroup">
+                <li>
+					<span class="create" data-toggle="modal" data-target="#create" ng-click="addForm.$setPristine();getAddPage()">
+					<span class="icon-plus"></span>新建</span>
+                </li>
+            </ul>
+            <div class="iovSearchBox">
+                <div class="input-group">
+                    <input type="text" ng-model="key" class="form-control" ng-change="pageChanged()" ng-keyup="mykey($event)" placeholder="请输入<数据源名称>搜索">
+                    <span class="input-group-btn">
+		 		        <button class="btn btn-default" type="button" ng-click="pageChanged()"><span class="icon-search"></span></button>
+					</span>
+                </div>
+            </div>
+        </div>
+        <div class="contentTable">
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered">
+                    <thead>
+                    <tr>
+                        <th><input type="checkbox" ng-click="selectAll=!selectAll" ng-checked="selectAll"/>序号</th>
+                        <th>文件系统名称</th>
+                        <th>文件系统类型</th>
+                        <th>索引库名称</th>
+                        <th>目录名称</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="x in dataItems">
+                        <td><input type="checkbox"  ng-checked="selectAll" class="massDeletion" id="{{x.id}}"/>{{$index + 1}}</td>
+                        <td>{{x.sourceName}}</td>
+                        <td ng-if="x.sourceType == '00000100'">Alluxio</td>
+                        <td ng-if="x.sourceType == '00000101'">HDFS</td>
+                        <td>{{x.esTableName}}</td>
+                        <td>{{x.fileDir}}</td>
+                        <td class="pointer">
+                            <span class="icon-pencil" uib-tooltip="编辑" data-toggle="modal" data-target="#edit"
+                                  ng-click="getUpdatePage(x)"></span>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="contentBottom">
+            <span class="iovButton delete"  ng-click="massDeletion()">删除</span>
+            <uib-pagination ng-change="selectAll=false;pageChanged()" items-per-page="pageItemNum" total-items="pageTotal" ng-model="pageNum" max-size="5" first-text="首页" previous-text="0" next-text="0" last-text="尾页" boundary-links="true" boundary-link-numbers="true">
+            </uib-pagination>
+        </div>
+    </div>
+
+    <!-----------------------数据源-文件系统-新建------------------------------->
+    <div class="modal fade iovModal" id="create">
+        <div class="drag" drag>
+            <div class="modal-content">
+                <div class="modal-header" drag-cursor drag-handle>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">新建</h4>
+                </div>
+                <div class="modal-body">
+                    <form name="addForm" ng-submit="create(addForm.$valid)" novalidate="novalidate">
+                        <div class="modal-input">
+                            <div class="modal-column">
+                                <controls title="文件系统名称" controls="addForm.sourceName" messages='[{"name":"required","text":"请填写文件系统名称"},{"name":"maxlength","text":"最长为20位"}]' unique="该文件系统名称已存在">
+                                    <input type="text" class="form-control" name="sourceName" placeholder="*文件系统名称" ng-model="create.sourceName" ng-pattern="" ng-maxlength="20"  ng-focus="create.isChecked=true;addForm.sourceName.$setValidity('unique', true);" ng-blur="removeRepeat(create.sourceName)" required/>
+                                </controls>
+                                <controls title="IP" controls="addForm.IP" messages='[{"name":"required","text":"请填写IP"},{"name":"pattern","text":"请填写正确格式的IP"}]'>
+                                    <input type="text" class="form-control" name="IP" placeholder="*IP" ng-model="create.IP" ng-pattern="/^(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$/" required/>
+                                </controls>
+
+                                <controls title="索引库名称" controls="addForm.dbSourceId" messages='[{"name":"required","text":"请选择索引库"},{"name":"pattern","text":"请选择索引库"}]'>
+                                    <select class="iovoption" name="dbSourceId" ng-model="create.dbSourceId" ng-pattern="/^((?!请选择索引库).)*$/">
+                                        <option disabled="disabled">请选择索引库</option>
+                                        <option ng-repeat="x in esDatabase" value="{{x.id}}">{{x.esClusterName}}&lt;&nbsp;{{x.esIndex}}&nbsp;&gt;</option>
+                                    </select>
+                                </controls>
+                                <controls title="存储目录名称" controls="addForm.fileDir" messages='[{"name":"required","text":"请填写存储目录名称"},{"name":"maxlength","text":"最长为125位"}]'>
+                                    <input type="text" class="form-control" name="fileDir" placeholder="*存储目录名称" ng-model="create.fileDir" ng-pattern="" ng-maxlength="125" required/>
+                                </controls>
+                            </div>
+                            <div class="modal-column">
+                                <controls title="类型" controls="addForm.sourceType" messages='[{"name":"required","text":"请选择类型"},{"name":"pattern","text":"请选择类型"}]'>
+                                    <select class="iovoption" name="sourceType" ng-model="create.sourceType"
+                                            ng-pattern="/^((?!请选择类型).)*$/" ng-disabled="isfileSourceEditPage">
+                                        <option disabled>请选择类型</option>
+                                        <option value="00000100">Alluxio</option>
+                                        <option value="00000101">HDFS</option>
+                                    </select>
+                                </controls>
+                                <controls title="PORT" controls="addForm.PORT" messages='[{"name":"required","text":"请填写PORT"},{"name":"pattern","text":"请填写正确格式的PORT"},{"name":"maxlength","text":"最长为5位"}]'>
+                                    <input type="text" class="form-control" name="PORT" placeholder="*PORT" ng-model="create.PORT" ng-maxlength="5" ng-pattern="/^([0-9]|[1-9]\d|[1-9]\d{2}|[1-9]\d{3}|[1-5]\d{4}|6[0-4]\d{3}|65[0-4]\d{2}|655[0-2]\d|6553[0-5])$/" required/>
+                                </controls>
+                                <controls title="索引表名称" controls="addForm.esTableName" messages='[{"name":"required","text":"请填写索引表名称"},{"name":"maxlength","text":"最长为32位"}]'>
+                                    <input type="text" class="form-control" name="esTableName" placeholder="*索引表名称" ng-model="create.esTableName" ng-pattern="" ng-maxlength="32" required/>
+                                </controls>
+                            </div>
+
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="modal-submit">
+                            <button type="submit" class="iovFormButton btn confirm" ng-disabled="addForm.$invalid">确定</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-----------------------数据源-文件系统-编辑------------------------------->
+    <div class="modal fade iovModal" id="edit">
+        <div class="drag" drag>
+            <div class="modal-content">
+                <div class="modal-header" drag-cursor drag-handle>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">编辑</h4>
+                </div>
+                <div class="modal-body">
+                    <form name="editForm" ng-submit="edit(editForm.$valid)" novalidate="novalidate">
+                        <div class="modal-input">
+                            <div class="modal-column">
+                                <controls title="文件系统名称" controls="editForm.sourceName" messages='[{"name":"required","text":"请填写文件系统名称"},{"name":"maxlength","text":"最长为20位"}]' unique="该文件系统名称已存在">
+                                    <input type="text" class="form-control" name="sourceName" placeholder="*文件系统名称" ng-model="edit.sourceName" ng-pattern="" ng-maxlength="20"  ng-focus="edit.isChecked=true;editForm.sourceName.$setValidity('unique', true);" ng-blur="removeRepeat(edit.sourceName)" required/>
+                                </controls>
+                                <controls title="IP" controls="editForm.IP" messages='[{"name":"required","text":"请填写IP"},{"name":"pattern","text":"请填写正确格式的IP"}]'>
+                                    <input type="text" class="form-control" name="IP" placeholder="*IP" ng-model="edit.IP" ng-pattern="/^(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$/" required/>
+                                </controls>
+
+                                <controls title="索引库名称" controls="editForm.dbSourceId" messages='[{"name":"required","text":"请选择索引库"},{"name":"pattern","text":"请选择索引库"}]'>
+                                    <select class="iovoption" name="dbSourceId" ng-model="edit.dbSourceId" ng-pattern="/^((?!请选择索引库).)*$/">
+                                        <option disabled="disabled">请选择索引库</option>
+                                        <option ng-repeat="x in esDatabase" value="{{x.id}}">{{x.esClusterName}}&lt;&nbsp;{{x.esIndex}}&nbsp;&gt;</option>
+                                    </select>
+                                </controls>
+                                <controls title="存储目录名称" controls="editForm.fileDir" messages='[{"name":"required","text":"请填写存储目录名称"},{"name":"maxlength","text":"最长为125位"}]'>
+                                    <input type="text" class="form-control" name="fileDir" placeholder="*存储目录名称" ng-model="edit.fileDir" ng-pattern="" ng-maxlength="125" required/>
+                                </controls>
+                            </div>
+                            <div class="modal-column">
+                                <controls title="类型" controls="editForm.sourceType" messages='[{"name":"required","text":"请选择类型"},{"name":"pattern","text":"请选择类型"}]'>
+                                    <select class="iovoption" name="sourceType" ng-model="edit.sourceType"
+                                            ng-pattern="/^((?!请选择类型).)*$/" ng-disabled="isfileSourceEditPage">
+                                        <option disabled>请选择类型</option>
+                                        <option value="00000100">Alluxio</option>
+                                        <option value="00000101">HDFS</option>
+                                    </select>
+                                </controls>
+                                <controls title="PORT" controls="editForm.PORT" messages='[{"name":"required","text":"请填写PORT"},{"name":"pattern","text":"请填写正确格式的PORT"},{"name":"maxlength","text":"最长为5位"}]'>
+                                    <input type="text" class="form-control" name="PORT" placeholder="*PORT" ng-model="edit.PORT" ng-maxlength="5" ng-pattern="/^([0-9]|[1-9]\d|[1-9]\d{2}|[1-9]\d{3}|[1-5]\d{4}|6[0-4]\d{3}|65[0-4]\d{2}|655[0-2]\d|6553[0-5])$/" required/>
+                                </controls>
+                                <controls title="索引表名称" controls="editForm.esTableName" messages='[{"name":"required","text":"请填写索引表名称"},{"name":"maxlength","text":"最长为32位"}]'>
+                                    <input type="text" class="form-control" name="esTableName" placeholder="*索引表名称" ng-model="edit.esTableName" ng-pattern="" ng-maxlength="32" required/>
+                                </controls>
+                            </div>
+
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="modal-submit">
+                            <button type="submit" class="iovFormButton btn confirm" ng-disabled="editForm.$invalid">确定</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <del modal-id="massDeletion" content="您即将删除{{massDeletionArr.length}}条数据。您确定要继续吗？" click="delete()"></del>
+    <tips content=content animate="animate"></tips>
+
+</div>

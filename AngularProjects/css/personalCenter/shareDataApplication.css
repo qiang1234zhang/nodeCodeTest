@@ -1,0 +1,103 @@
+#shareDataApplication .iovModal .modal-input .modal-column {
+    width: 100%;
+    padding:0;
+}
+
+#shareDataApplication .iovModal .modal-input .modal-column .form-group{
+    margin:6px 0;
+}
+
+#shareDataApplication .drag {
+    width: 600px;
+
+}
+
+#shareDataApplication fieldset {
+    padding: .15em .625em .75em;
+    border: 1px solid #3C763D;
+}
+
+#shareDataApplication fieldset legend {
+    padding: .5em .5em 0 .5em;
+    border: 0;
+    width: auto;
+    font-size: 14px;
+}
+
+#shareDataApplication .fieldList fieldset {
+    float: left;
+    width: 45%;
+    height: 220px;
+}
+
+#shareDataApplication .fieldList .fieldBtnAdd {
+    padding-top: 100px;
+    float: left;
+    margin:0 12px;
+}
+
+#shareDataApplication .leftMenuBar {
+    width: 230px;
+    height: 100%;
+    padding: 22px 15px 15px 15px;
+    border-right: 1.5px #C9C9C9 solid;
+    position: relative;
+    border-top: 5px solid #30AFAE;
+}
+
+#shareDataApplication .menuContentMain {
+    position: absolute;
+    top: 50px;
+    bottom: 0;
+    left: 250px;
+    right: 0;
+    padding: 25px 25px 25px 0;
+
+}
+
+#shareDataApplication .MenuBarContent {
+    width: 100%;
+    position: relative;
+    top: 46px;
+    bottom: 0;
+}
+
+.treeBtn {
+    margin-bottom: 15px;
+    margin-left: 10px;
+}
+
+#shareDataApplication .treeIovModal .modal-input .modal-column {
+    width: 100%;
+}
+
+#shareDataApplication .treeIovModal .drag {
+    width: 500px;
+}
+#shareDataApplication .scroll{
+    height:190px;
+    overflow: auto;
+}
+
+#shareDataApplication .iovSearchBox {
+    width:auto;
+}
+
+#shareDataApplication .iovSearchBox .form-inline .form-control{
+    width:130px;
+}
+
+#shareDataApplication .iovModal .modal-input .modal-column{
+    width:100%;
+}
+#shareDataApplication .iovModal .modal-submit{
+    text-align: center;
+    padding: 0px 30px;
+}
+#shareDataApplication .KinshipsOrgTree {
+    height: 80px;
+    width: 100%;
+    overflow: auto;
+}
+
+

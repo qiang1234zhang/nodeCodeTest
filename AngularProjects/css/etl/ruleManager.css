@@ -1,0 +1,34 @@
+#ruleManager .leftMenuBar{
+    width: 230px;
+    height: 100%;
+    padding: 22px 15px 15px 15px;
+    border-right: 1.5px #C9C9C9 solid;
+    position: relative;
+    border-top: 5px solid #30AFAE;
+}
+
+#ruleManager .menuContentMain{
+    position: absolute;
+    top: 50px;
+    bottom: 0;
+    left: 220px;
+    right: 0;
+    padding: 25px 25px 25px 25px;
+
+}
+
+#ruleManager .MenuBarContent{
+    width: 100%;
+    position: relative;
+    top:46px;
+    bottom:0;
+}
+
+
+
+#ruleManager .treeIovModal .modal-input .modal-column{
+    width:100%;
+}
+#ruleManager .treeIovModal .drag{
+    width: 500px;
+}

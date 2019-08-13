@@ -1,0 +1,62 @@
+#resourceManager .iovModal .modal-input .modal-column{
+    width:100%;
+}
+#resourceManager .drag{
+    width: 400px;
+}
+.iovFileUpload{
+    position: relative;
+    height:34px;
+}
+.iovFileUpload .iovFileInput{
+    position: absolute;
+    width:220px;
+    height:34px;
+}
+
+.iovFileUpload .iovFileBtn{
+    position: absolute;
+    width:40px;
+    height:34px;
+    left:220px;
+    background-color: #fff;
+    border-top:1px solid #3C763D;
+    border-right:1px solid #3C763D;
+    border-bottom:1px solid #3C763D;
+}
+
+.iovFileUpload .uploadBtn{
+    position: absolute;
+    width:40px;
+    height:34px;
+    left:260px;
+    background-color: #fff;
+    border-top-right-radius:4px;
+    border-bottom-right-radius:4px;
+    border-top:1px solid #3C763D;
+    border-right:1px solid #3C763D;
+    border-bottom:1px solid #3C763D;
+    border-left:none;
+}
+
+
+.iovFileUpload .iovFileBtn .icon-folder-open-alt{
+    display: inline-block;
+    font-size:24px;
+    margin-top: 4px;
+    margin-left: 7px;
+    color: #3C763D;
+}
+#resourceManager  .iovModal  .fileErrorTips{
+    top: 62px;
+}
+
+#resourceManager .progress {
+    height: 20px;
+    margin-bottom: 20px;
+    overflow: hidden;
+    background-color: #DBDBDB;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, .1);
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, .1);
+}

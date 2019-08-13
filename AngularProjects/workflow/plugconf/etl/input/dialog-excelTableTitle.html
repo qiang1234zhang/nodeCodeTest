@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script>
+        document.write('<link rel="stylesheet" type="text/css" href="' + window.parent.fpath + '/css/iov-workflow.css"\/>')
+        document.write('<script type="text/javascript" src="' + window.parent.fpath + '/js/Tool_JavaScripts/avalon2.js"><\/script>')
+    </script>
+</head>
+<body class="excelList">
+
+<div  ms-controller="tableTitle" id="div123">
+    <div class="form-group">
+        <label class="col-sm-3 control-label">属性：</label>
+        <div class="col-sm-5">
+            <select  class="form-control" ms-duplex-string="@inValue_" >
+                <option value="">请选择</option>
+                <option ms-attr="{value: el.fieldName,selected: @inValue_ == el.fieldName}" ms-for="el in @attributes">{{el.fieldName}}</option>
+            </select>
+        </div>
+        <div class="col-sm-2">
+            <button ms-click="@addToTable()" class="btn btn-primary">添加</button>
+        </div>
+        <div class="col-sm-2">
+            <button ms-click="@_refetch()" class="btn btn-primary">重置属性</button>
+        </div>
+    </div>
+
+    <div class="form-group" style="margin-top: 50px;width:768px;height:330px; overflow-y:scroll; border:0px solid;">
+        <div>
+            <table class="table" style="height: 200px">
+                <thead>
+                <th class="col-sm-1">序号</th>
+                <th class="col-sm-2">名称</th>
+                <th class="col-sm-2">类型</th>
+                <th class="col-sm-2">格式</th>
+                <th class="col-sm-1">操作</th>
+                </thead>
+                <tr ms-for="($index,el) in @tableTitleitems">
+                    <td>{{$index+1}}</td>
+                    <td>{{el.fieldName}}</td>
+                    <td>
+                        <input type="hidden"  ms-duplex-string="el.fieldTypeName" />
+                        <select class="form-control" ms-duplex-string="el.fieldType">
+                        <option ms-attr="{value: fl.id,selected: fl.id == el.fieldType}"
+                                ms-for="fl in @formatLists">{{fl.format}}
+                        </option></select>
+                    </td>
+                    <td>
+                        <select class="form-control" ms-duplex-string="el.fieldFormat">
+                            <option value="">默认</option>
+                            <option ms-attr="{value: ec.regex,selected: ec.regex == el.fieldFormat}"
+                                    ms-for="ec in @formatItems">{{ec.regex}}
+                            </option>
+                        </select>
+                    </td>
+                    <td>
+                        <buttton class="btn btn-danger"  ms-click="@_remove($index)">X</buttton>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="form-group">
+            <buttton class="btn btn-primary" style="margin-left:680px"  ms-click="@save()" >保存</buttton>
+        </div>
+    </div>
+</div>
+<script>
+    (function () {
+        var parentPar=window.parent.getSourceColumList();
+        var vm= avalon.define({
+            $id: "tableTitle",
+            inValue_:"",
+            formatId:"",
+            //formatLists:[{id:"12",format:"String"},{id:"8",format:"Double"},{id:"4",format:"Int"},{id:"6",format:"Float"},{id:"91",format:"Date"}],
+            formatLists:parentPar.initDataType,
+            attributes: parentPar.newArr,
+            tableTitleitems: parentPar.tabbleAttr,//table tr 内容,
+            formatItems: parentPar.initFormatItems,//格式化类型下拉列表
+            addToTable:function(){
+                _add();
+            },
+            save:function(){
+                window.parent.saveTableTitle(vm.tableTitleitems);
+            },
+            _remove:function(index){
+                vm.tableTitleitems.removeAt(index);
+            },
+            _refetch:function() {
+                vm.tableTitleitems =[];
+                parentPar=window.parent.getSourceColumList();
+                vm.attributes=parentPar.newArr;
+                vm.tableTitleitems=parentPar.tabbleAttr;
+            }
+        });
+
+        function _add(){
+            if(vm.inValue_){
+                var flag=false;
+                for(var ts in vm.tableTitleitems){
+                    if(vm.tableTitleitems[ts].name==vm.inValue_){
+                        flag=true;
+                        break;
+                    }
+                }
+                if(flag){
+                    alert("该属性已存在,不允许添加。");
+                }else{
+                   // vm.tableTitleitems.push({fieldName: vm.inValue_, fieldType: '', fieldFormat: ''})
+                    var _index=0;
+                    for(var index in vm.attributes){
+                        if(vm.attributes[index].fieldName==vm.inValue_){
+                            _index=index;
+                            break;
+                        }
+                    }
+                    vm.tableTitleitems.push(vm.attributes[_index]);
+                }
+            }else{
+                alert("请先选择需要添加属性");
+                return;
+            };
+        }
+
+        vm.$watch("tableTitleitems.*.fieldType", function (a, b, name) {
+
+            for(var dt in vm.formatLists){
+                if(vm.formatLists[dt].id==a){
+                    this.fieldTypeName=vm.formatLists[dt].format;
+                    break;
+                }
+            }
+
+        });
+        avalon.scan(document.getElementById("div123"));
+    })();
+</script>
+</body>
+</html>

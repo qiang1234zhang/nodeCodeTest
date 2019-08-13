@@ -1,0 +1,12 @@
+#tableStructure .itemBtn {
+   /*width: 89.58px;
+    height: 33px;*/
+    padding:6px 20px;
+    background-color: rgb(48, 175, 174);
+    color: #FFF;
+    font: 400 16px 'microsoft yahei';
+    margin-right: 20px
+}
+#tableStructure .itemBtn span {
+    margin-right: 4px
+}

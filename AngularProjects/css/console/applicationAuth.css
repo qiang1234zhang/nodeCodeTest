@@ -1,0 +1,87 @@
+#applicationAuth .contentMainLeft{
+	float: left;
+	width: 50%;
+	height: 75%;
+	border-left:1px solid #E1E1E2;
+	border-right:1px solid #E1E1E2;
+	border-bottom:1px solid #E1E1E2 ;
+}
+#applicationAuth .contentMainLeft .contentMainLeftTop{
+	width: 100%;
+	height: 40px;
+	background-color: #F6F6F6;
+}
+
+#applicationAuth .contentMainLeft .contentMainLeftContent{
+	padding-top: 15px;
+}
+
+#applicationAuth .contentMainLeft .contentMainLeftContent ul li{
+	margin-left: 15px;
+}
+#applicationAuth .contentMainLeft .contentMainLeftTop span{
+	height: 40px;
+	line-height: 40px;
+	font-family: "microsoft yahei";
+	font-size: 14px;
+	font-weight: 300;
+	margin-left:15px;
+}
+#applicationAuth .contentMainRight{
+	float: right;
+	width: 50%;
+	height: 75%;
+	border-bottom:1px solid #E1E1E2 ;
+	border-right:1px solid #E1E1E2 ;
+}
+#applicationAuth .contentMainRight .contentMainRightContent {
+	padding-top: 15px;
+	overflow: auto;
+	height:560px;
+}
+#applicationAuth .contentMainRight .contentMainRightContent ul li{
+	margin-left: 15px;
+}
+
+#applicationAuth .contentMainRight .contentMainRightTop{
+	width: 100%;
+	height: 40px;
+	background-color: #F6F6F6;
+}
+
+#applicationAuth .contentMainRight .contentMainRightTop span{
+	height: 40px;
+	line-height: 40px;
+	font-family: "microsoft yahei";
+	font-size: 14px;
+	font-weight: 300;
+	margin-left:15px;
+}
+
+#applicationAuth .contentMainBottom{
+	float: left;
+	width: 100%;
+	height: 75px;
+	border-bottom: 1px solid #E1E1E2;
+	border-left: 1px solid #E1E1E2;
+	border-right: 1px solid #E1E1E2;
+}
+#applicationAuth .imgIcon{
+	display: inline-block;
+	height:16px;
+	width:16px;
+	margin-left:25px;
+	background-position: -110px -16px;
+	vertical-align: top;
+	background-image:url("../../css/basecss/img/zTreeStandard.png");
+}
+#applicationAuth .permissionTitle{
+	display: inline-block;
+	font-size:12px;
+}
+#applicationAuth .contentMainBottom .iovButton{
+	float: right;
+	margin-right: 15px;
+	margin-top: 20px;
+}
+

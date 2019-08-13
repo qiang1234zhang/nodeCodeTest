@@ -1,0 +1,36 @@
+<div id="permissionManagement">
+	<div class="contentTitle"><span class="icon-map-marker"></span>平台管理>菜单授权</div>
+	<div class="contentMain">
+		<div class="contentMainLeft">
+			<div class="contentMainLeftTop">
+				<span>角色列表</span>
+			</div>
+			<div  style="height:90%; overflow:auto;"  class="contentMainLeftContent">
+				<ul class="roleList">
+					<li ng-repeat="x in dataItems" >
+						<input type="radio" name="radio" ng-model="$parent.roleAuth" ng-click="getMenuShow(x.id)" ng-value="x.id"/>
+						<span>{{x.name}}</span>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="contentMainRight">
+			<div class="contentMainRightTop">
+				<span>平台菜单</span>
+			</div>
+			<div class="contentMainRightContent">
+				<div style="height:90%; overflow:auto;" class="zTreeDemoBackground left">
+					<ul class="ztree" id="treeAuth"></ul>
+					<!--<ul menutree class="ztree" id="treeAuth" ng-model="selectNode"></ul>-->
+				</div>
+			</div>
+		</div>
+	
+		<div class="contentMainBottom">
+			<span class="iovButton create" ng-click="permissionChooseConfirm()">授权</span>
+		</div>
+	</div>
+	<tips content=content animate="animate"></tips>
+</div>
+		
+

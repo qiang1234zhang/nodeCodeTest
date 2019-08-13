@@ -1,0 +1,41 @@
+<div id="applicationAuth">
+	<div class="contentTitle"><span class="icon-map-marker"></span>平台管理>应用授权</div>
+	<div class="contentMain">
+		<div class="contentMainLeft">
+			<div class="contentMainLeftTop">
+				<span>租户列表</span>
+			</div>
+			<div class="contentMainLeftContent">
+				<ul>
+					<li ng-repeat="x in dataItems">
+						<input type="radio" name="tenantId"  ng-click="queryAppByUserId(x)"/>
+						<span>{{x.userName}}</span>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="contentMainRight">
+			<div class="contentMainRightTop">
+				<span>应用列表</span>
+			</div>
+
+			<div class="contentMainRightContent">
+
+				<ul>
+					<li ng-repeat="x in dataAppItems">
+						<input type="checkbox" id="{{x.id}}" ng-checked="x.checked" class="itemApp"/>
+						<span>{{x.name}}</span>
+					</li>
+				</ul>
+
+			</div>
+		</div>
+
+		<div class="contentMainBottom">
+			<span class="iovButton create" ng-click="authAppToUser()">保存</span>
+		</div>
+	</div>
+	<tips content=content animate="animate"></tips>
+</div>
+		
+

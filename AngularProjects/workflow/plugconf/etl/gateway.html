@@ -1,0 +1,42 @@
+<div class="tab-content">
+    <div id="baseConfig" class="active">
+        <div class="form-group">
+            <label class="col-sm-3 control-label">网关条件:</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" ms-duplex-string="@conditionExpression">
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    require(["component", "wfdata", "jsonFieldMapping"], function (component, wfdata, jsonFieldMapping) {
+        var mappingField = [
+            "conditionExpression"
+        ];
+        jsonFieldMapping.setNodeSaveField(mappingField);
+
+        /**
+         * model自定义属性定义
+         * @param avaConfig
+         */
+        function avalonCustomizeConfigInit(avaConfig) {
+            avaConfig.conditionExpression = "";//条件
+        }
+
+        /**
+         *页面打开时候初始化页面信息
+         * @constructor
+         */
+        function CustomizeInitFormValue() {
+
+        }
+
+        //页面里的avalon model定义接口，需要暴露出来到window对象
+        window.avalonCustomizeConfigInit = avalonCustomizeConfigInit;
+        window.CustomizeInitFormValue = CustomizeInitFormValue;
+
+        window.initAvalon();
+
+
+    })
+</script>

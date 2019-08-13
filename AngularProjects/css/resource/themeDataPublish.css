@@ -1,0 +1,120 @@
+#themeDataPublish .iovModal .modal-input .modal-column {
+    width: 100%;
+    padding: 0;
+}
+
+#themeDataPublish .drag {
+    width: 600px;
+}
+
+#themeDataPublish fieldset {
+    padding: .15em .625em .75em;
+    border: 1px solid #3C763D;
+}
+
+#themeDataPublish fieldset legend {
+    padding: .5em .5em 0 .5em;
+    border: 0;
+    width: auto;
+    font-size: 14px;
+}
+
+#themeDataPublish .fieldList fieldset {
+    float: left;
+    width: 45%;
+    height: 220px;
+}
+#themeDataPublish .publishEdit fieldset {
+    /*float: left;*/
+    width: 100%;
+    height: 220px;
+}
+#themeDataPublish .fieldList .fieldBtnAdd {
+    padding-top: 100px;
+    float: left;
+    margin: 0 26px;
+}
+
+#themeDataPublish .iovModal .modal-input .modal-column .form-group {
+    margin: 6px 0;
+}
+
+#themeDataPublish .scroll {
+    height: 190px;
+    overflow: auto;
+}
+
+#themeDataPublish .pbContentTool {
+    width: 100%;
+    height: 50px;
+}
+
+#themeDataPublish .pbContentTool .iovButtonGroup {
+    height: 100%;
+    float: left;
+}
+
+#themeDataPublish .pbContentTool .iovButtonGroup li {
+    display: block;
+    float: left;
+    height: 100%;
+    margin-right: 20px;
+}
+
+#themeDataPublish .pbContentTool .iovButtonGroup li {
+    display: block;
+    float: left;
+    height: 36px;
+    margin-right: 20px;
+}
+
+#themeDataPublish #searchBox ul {
+    height: 36px;
+    background-color: #ECEBEA;
+    /*opacity: 19;*/
+}
+#themeDataPublish #publishTree {
+    background-color: #F5F7F7;
+}
+#themeDataPublish #searchBox {
+    height: 36px;
+    /* background-color: #ECEBEA; */
+    display: none;
+    position: absolute;
+    top: 30px;
+    z-index: 999;
+}
+#themeDataPublish .menuContent{
+    width: 108%;
+}
+#searchBoxTree {
+    margin-top: 2px;
+    margin-left: 145px;
+    height: 250px;
+    width: 218px;
+    overflow-x: auto;
+    overflow-y: auto;
+}
+
+/*动态设置表格中过长的的内容只显示部分====START====*/
+#themeDataPublish .table {
+    table-layout: fixed;
+}
+#themeDataPublish .table td {
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow: ellipsis;
+}
+/*动态设置表格中过长的的内容只显示部分====END====*/
+#themeDataPublish .treeOverflow {
+    margin-top: 5px;
+    margin-left: 40px;
+    height: 326px;
+    overflow: auto;
+    z-index: 1;
+}
+#themeDataPublish #publishTree {
+    margin-left: 18px;
+    background-color: #e5f7e8;
+    z-index: 999;
+}

@@ -1,0 +1,79 @@
+#applicationRegister .itemBtn {
+    width: 89.58px;
+    height: 33px;
+    background-color: rgb(48, 175, 174);
+    color: #FFF;
+    font: 400 16px 'microsoft yahei';
+}
+#applicationRegister .itemBtn span {
+    margin-right: 4px
+}
+
+#applicationRegister .fieldList ul li:hover {
+    background-color: #DFE0E0;
+}
+
+#applicationRegister .fieldList ul li.active {
+    background-color: #DFE0E0;
+}
+
+#applicationRegister fieldset{
+    padding:.15em .625em .75em;
+    margin:0 2px;
+    border:1px solid #3C763D;
+}
+
+#applicationRegister .fieldList{
+    position: relative;
+}
+
+#applicationRegister .fieldBtn{
+    padding-top:80px;
+    width:35px;
+    float:left;
+}
+
+#applicationRegister .fieldList .fieldBtnAdd {
+    padding-top:100px;
+
+}
+
+#applicationRegister .fieldBtnDel{
+    margin-top:5px;
+    text-align: right;
+}
+
+#applicationRegister .fieldList fieldset{
+    float:left;
+    width:180px;
+    height:220px;
+}
+
+#applicationRegister fieldset legend{
+    padding:.5em .5em 0 .5em;
+    border:0;
+    width:auto;
+    font-size:14px;
+}
+#applicationRegister .disabledBtn {
+    width: 121.58px;
+    height: 33px;
+    background-color: rgb(48, 175, 174);
+    color: #FFF;
+    font: 400 16px 'microsoft yahei';
+}
+#applicationRegister .disabledBtn span {
+    margin-right: 4px
+}
+/*不可点击按钮css*/
+#applicationRegister .disabledBtn {
+    width: 90px;
+    height: 33px;
+    background-color: rgb(48, 175, 174);
+    color: #FFF;
+    font: 400 16px 'microsoft yahei';
+}
+#applicationRegister .disabledBtn span {
+    margin-right: 4px
+}
+/*不可点击按钮css*/

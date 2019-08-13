@@ -1,0 +1,440 @@
+
+<div >
+    <div >
+        ${component | componentFormat('CommonTextInputComponent', 'label:步骤名称,mappingProp:pluginName,required:required')}
+        ${component | componentFormat('SingleInVarComponent', 'required: required')}
+        ${component | componentFormat('CommonTextInputComponent', 'label:输出变量,mappingProp:outValue,required: required')}
+    </div>
+    <div >
+        <div class="form-group config-Fieldset" id="_div_mapf1">
+            <div>
+                <div class="col-xs-3">
+                    <fieldset style="margin-left: 10px">
+                        <legend>源字段</legend>
+                        <div style="height: 300px;overflow-y: auto;">
+                            <div class="list-group" id="sourceDiv">
+                                <div class="list-group-item" ms-for="el in @sourceFields"
+                                     ms-click="@selectItem($event, 's', el)"
+                                     ms-attr="{title:el.fieldlableName}">
+                                    <input class="items" type="checkbox" ms-attr="{checked:el.selected?true:false}"  ms-data-index=$index ms-click="@checkOne($event,el)" />
+                                    {{el.fieldlableName}}
+                                </div>
+                            </div>
+
+                        </div>
+                    </fieldset>
+                </div>
+                <div class="col-xs-2" style="height: 300px;">
+                    <fieldset>
+                        <legend>转换方式</legend>
+                        <div style="height: 300px;overflow-y: auto;">
+                            <div class="list-group" id="targetDiv">
+                                <a class="list-group-item" ms-for="el in @dataTransTypeList"
+                                   ms-click="@selectItem($event, 't', el)"
+                                   ms-attr="{title:el.desc,value:el.id}">
+                                    {{el.name}}
+                                </a>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+                <div class="col-xs-7" style="height: 300px;font-size: 12px;margin-left: -20px;">
+                    <div style="width: 75px;float: left;height: 100%;">
+                        <div style="height: 100%;display: table">
+                            <div style="display: table-cell;vertical-align: middle;">
+
+                                <button type="button" class="btn btn-primary btn-sm" style="margin-bottom: 10px;width:70px;"
+                                        ms-click="@autoMapp()">增加
+                                </button>
+                                <button type="button" class="btn btn-primary btn-sm"
+                                        style="margin-bottom: 10px;margin-top: 30px;width:70px;"
+                                        ms-click="@removeMap()">
+                                    移出
+                                </button>
+                                <button type="button" class="btn btn-primary btn-sm" style="width:70px;"
+                                        ms-click="@resetMapp()">重置
+                                </button>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div style="float: none;">
+                        <fieldset >
+                            <legend>映射</legend>
+                            <div style="height: 300px;overflow: hidden;font-size: 14px">
+
+                                <table style="width:100%;table-layout: fixed; ">
+                                    <thead>
+                                    <th >源</th>
+                                    <th >转换方式</th>
+                                    <th >输出字段</th>
+                                    <th >输出类型</th>
+                                    <th >输出格式</th>
+                                    </thead>
+                                    <tr style="height: 23px" ms-for="el in @transformationList"
+                                        ms-click="@selectItem($event, 'map', el)">
+                                        <td style="width: 100px;overflow: hidden;white-space: nowrap;text-overflow:ellipsis;"
+                                            ms-attr="{title:el.fieldName}">{{el.fieldName}}
+                                        </td>
+                                        <td style="width: 50px;overflow: hidden;white-space: nowrap;text-overflow:ellipsis;">
+                                            {{el.transforMode |trans_filter(el.transforMode) }}
+                                        </td>
+                                        <td style="width: 60px;white-space:nowrap;margin-right: 3px">
+                                            <input style="width: 60px;height: 20px;"  ms-attr="{title:el.fieldlableName}" type="text"  ms-duplex-string="el.fieldlableName"  required/>
+                                        </td>
+                                        <td style="width: 60px;white-space:nowrap;">
+                                            <select ms-duplex-string="el.fieldType" style="width: 60px;"
+                                                    ms-attr="{title:@fieldType_filter(el.fieldType)}" required >
+                                                <option value="">默认</option>
+                                                <option ms-for="el2 in @dataTypeList"
+                                                        ms-attr="{title: el2.name, value: el2.id, selected: el2.id == el.fieldType}">
+                                                    {{el2.name}}
+                                                </option>
+                                            </select>
+                                        </td>
+                                        <td style="width: 60px;white-space:nowrap;margin-right: 3px">
+                                            <select ms-duplex-string="el.fieldFormat" style="width: 55px;"
+                                                    ms-attr="{title:@fieldFormat_filter(el.fieldFormat)}">
+                                                <option value="">默认</option>
+                                                <option ms-for="el2 in @dataFormatList"
+                                                        ms-attr="{title: el2.describe, value: el2.regex, selected: el2.regex == el.fieldFormat}">
+                                                    {{el2.describe}}
+                                                </option>
+                                            </select>
+                                        </td>
+
+
+                                    </tr>
+
+                                </table>
+                            </div>
+
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script type="text/javascript">
+    require(["component", "wfdata", "jsonFieldMapping", "avalon", "underscore"], function (component, wfdata, jsonFieldMapping, avalon, _) {
+
+        var mappingField = [
+            "queryBuilderList", "TransformationList", "inValue", "outValue"
+        ];
+        jsonFieldMapping.setNodeSaveField(mappingField);
+
+        avalon.filters.trans_filter = function(str){
+            if(str){
+                return _.find( wfdata.swapValue.avaWf.dataTransTypeList,{id:str}).name;
+            }else{
+                return "";
+            }
+
+        }
+
+        /**
+         * model自定义属性定义
+         * @param avaConfig
+         */
+        function avalonCustomizeConfigInit(avaConfig) {
+
+            avaConfig.$nodeSelectId = "";//根据本配置页面的输入变量得到的源节点的节点id
+
+            avaConfig.sourceFields = [];//源节点字段集合
+
+            avaConfig.$selectedSF = null;//选中的源字段
+            avaConfig.$selectedMap = null;//选中的映射
+            avaConfig.sourceConstConList = [];//当为变量时候select
+            
+            avaConfig.transformationList = [];//保存到后台的映射
+            avaConfig.dataTransTypeList=[];  //转换方式集合
+            avaConfig.dataTypeList=[];    //数据类型集合
+            avaConfig.dataFormatList=[];    //数据格式类型集合
+
+            avaConfig.autoMapp = function () {
+                addMapp();
+            };
+            avaConfig.fieldType_filter = function(str){
+
+                if(str){
+                    return _.find( wfdata.swapValue.avaWf.dataTypeList,{id:str}).name;
+                }else{
+                    return "";
+                }
+
+            }
+            avaConfig.fieldFormat_filter = function(str){
+                if(str){
+                    return _.find( wfdata.swapValue.avaWf.dataFormatList,{regex:str}).describe;
+                }else{
+                    return "";
+                }
+
+            }
+            //重置
+            avaConfig.resetMapp = function () {
+                if (wfdata.swapValue.avaWf.transformationList.length === 0) {
+                    return;
+                }
+                $.confirm({
+                    text: "您确定要重置映射关系吗?", confirm: function () {
+                        wfdata.swapValue.avaWf.transformationList = [];
+                    }
+                });
+
+            };
+            avaConfig.removeMap = function () {
+                removeMap()
+            };
+            avaConfig.selectItem = function (event, type, item) {
+                var ava = wfdata.swapValue.avaWf;
+                if(type == "s"){
+
+                }else if (type == "t") {
+                    $("#targetDiv").find(".active").removeClass("active");
+                    $("#_div_mapf1").find(".test_tr").removeClass("test_tr");
+                    $(event.target).addClass("active");
+                    ava.$selectedTF = item;
+                } else {
+                    $("#_div_mapf1").find(".active").removeClass("active");
+                    $("#_div_mapf1").find(".test_tr").removeClass("test_tr");
+                    $(event.currentTarget).addClass("test_tr");
+                    ava.$selectedMap = item;
+                }
+                ava = null;
+
+            };
+            //勾选需要转换的源字段
+            avaConfig.checkOne=function($event,el){
+                el.selected=$event.currentTarget.checked;
+            }
+        }
+
+        /**
+         * 当avalon.define之后，可以进行model属性监控,$watch方法
+         */
+        function vmCustomizeDefineDoneCallback() {
+            var ava=wfdata.swapValue.avaWf;
+            ava.$watch("inValue", function (newValue,oldValue) {
+                if(newValue){
+                    ava.sourceFields = [];//源节点字段集合
+                    ava.transformationList = [];//保存到后台的映射
+                    getInputList(newValue);
+                }
+                if(newValue===""){
+                    ava.sourceFields = [];//源节点字段集合
+                    ava.transformationList = [];//保存到后台的映射
+                }
+            });
+
+        }
+        function addMapp() {
+            var ava = wfdata.swapValue.avaWf;
+            if(!_.find(ava.sourceFields,{selected:true})){
+                alert("请勾选需要转换的源字段.");
+                return;
+            }
+            //如果没有选择转换方式,则从源字段获取信息-->映射关系
+            if(!ava.$selectedTF){
+
+                var aa=_.map(ava.sourceFields,function(item){
+                    if(item.selected==true){
+                        return item;
+                    }
+                });
+
+                _.each(aa,function(item){
+                    if(item){
+                        var a = _.find(ava.transformationList,{fieldName:item.fieldName});
+                        if(a){
+                            alert(item.fieldName+"已存在.");
+                        }else{
+                            ava.transformationList.push({fieldName:item.fieldName,fieldlableName:item.fieldlableName,
+                                fieldType:item.fieldType,fieldTypeName:item.fieldTypeName,fieldFormat:item.fieldFormat});
+                        }
+                    }
+                });
+
+            }else{
+
+                var aa=_.map(ava.sourceFields,function(item){
+                    if(item.selected==true){
+                        return item.fieldlableName;
+                    }
+                });
+                var bb=_.filter(aa,function(item){
+                    if(item){
+                        return item;
+                    }
+
+                }).toString();
+
+
+                var a = _.find(ava.transformationList,{fieldName:bb,transforMode:ava.$selectedTF.id});
+                if(a){
+                    alert(bb+"_"+avalon.filters.trans_filter(ava.$selectedTF.id)+"已存在.");
+                }else{
+                    ava.transformationList.push({fieldName:bb,transforMode:ava.$selectedTF.id,fieldlableName:"",fieldType:"",fieldFormat:"",fieldTypeName:""});
+                }
+
+
+            }
+
+            _.each(ava.sourceFields,function(item){
+                item.selected=false;
+            });
+            ava.$selectedTF=null;
+            removeCheck();
+
+
+        }
+
+        function removeMap() {
+            var ava = wfdata.swapValue.avaWf;
+            var mapF=ava.$selectedMap;
+            if (!mapF) {
+                return;
+            }
+            var index1 = -1;
+            if(mapF.transforMode){
+                index1 = _.findIndex(ava.transformationList.$model, {fieldName: mapF.fieldName,transforMode:mapF.transforMode});
+            }else{
+                index1 = _.findIndex(ava.transformationList.$model, {fieldName: mapF.fieldName});
+            }
+            if (index1 > -1) {
+                ava.transformationList.removeAt(index1);
+                //el.selected=$event.currentTarget.checked;
+            }
+            ava.$selectedMap = null;
+
+            mapF = null;
+            ava = null;
+        }
+
+        //获取源字段
+        function getInputList(inVar) {
+            var relaNodes = window.parent.nodeUtil.getRelationshipSourceNodeByInVar(inVar);
+            if (!relaNodes || !relaNodes.jsonInfo) {
+                return;
+            }
+            var sourceNodeId = relaNodes.jsonInfo.activitiNodeId;
+            if (!sourceNodeId) {
+                return;
+            }
+            var ava = wfdata.swapValue.avaWf;
+            ava.$nodeSelectId = sourceNodeId;
+
+            var originalSourceList = relaNodes.jsonInfo.columnList;
+
+
+            var newArr = [];
+            _.each(originalSourceList, function (value) {
+                if (value.fieldlableName) {
+                    newArr.push(jsonFieldMapping.createDataColumn("", value.fieldName, value.fieldType, value.fieldTypeName, value.fieldLength, "",value.fieldFormat));
+                }
+            });
+            newArr.length > 0 && (ava.sourceFields = newArr);
+            ava = null;
+            newArr = null;
+            relaNodes = null;
+        }
+
+        function alert(text){
+            noty({
+                layout: "center",
+                timeout: 3000,
+                type: "warning",
+                text: text
+            });
+        }
+        function removeCheck(){
+
+            $("#targetDiv").find(".active").removeClass("active");
+
+            $("[class=items]:checkbox").attr("checked", false);
+        }
+
+        window.CustomizeInitFormValue = function () {
+
+        };
+        window.avalonCustomizeConfigInit = avalonCustomizeConfigInit;
+        window.vmCustomizeDefineDoneCallback = vmCustomizeDefineDoneCallback;
+
+        function filter_TransTypeList(a){
+            //debugger;
+            var target_val='2,3';  //求和.求平均值
+            var b=[];
+
+            if(!_.isArray(a)){
+                return b;
+            }
+            _.each(a,function(obj){
+                if(target_val.indexOf(obj.id)!=-1){
+                    b.push(obj);
+                }
+            });
+            return b;
+        }
+
+        window.preloadInit = function () {
+            wfdata.dataProxy.getTransType().done(function (data) {
+                if (!data.content) {
+                    return;
+                }
+                var dfs = JSON.parse(data.content);
+                wfdata.swapValue.avaWf.dataTransTypeList=filter_TransTypeList(dfs);
+
+            });
+            wfdata.dataProxy.getDataType().done(function (data) {
+                if (!data.content) {
+                        return;
+                    }
+
+                var dfs = JSON.parse(data.content);
+                wfdata.swapValue.avaWf.dataTypeList = (_.isArray(dfs) ? dfs : []);
+            });
+            wfdata.dataProxy.getFormatItemsAsync().done(function (data) {
+                if (!data.content) {
+                    return;
+                }
+
+                var dfs = JSON.parse(data.content);
+                wfdata.swapValue.avaWf.dataFormatList = (_.isArray(dfs.rule) ? dfs.rule : []);
+            })
+
+        };
+
+        window.customizeFormValid = function () {
+            var ava=wfdata.swapValue.avaWf;
+            var aa=[];
+
+            _.each(ava.transformationList.$model,function(item){
+
+                if(item.transforMode){
+
+                    var fieldTypeName= _.find(ava.dataTypeList.$model,{id:item.fieldType}).format;
+                    item.fieldTypeName=fieldTypeName;
+                    item.fieldName=item.fieldlableName;
+                    aa.push(item);
+                }else{
+
+                    var bb=_.find(ava.sourceFields.$model,{fieldName:item.fieldName});
+                    var cc="";
+                    if(!bb.fieldFormat){
+                        cc=_.find(ava.transformationList.$model,{fieldName:item.fieldName}).fieldFormat;
+                        bb.fieldFormat=cc;
+                    }
+
+                    aa.push(bb);
+                }
+            });
+            wfdata.swapValue.avaWf.$fieldColumns=[];
+            wfdata.swapValue.avaWf.$fieldColumns=aa;
+
+            return true;
+        }
+        window.initAvalon();
+    })
+</script>

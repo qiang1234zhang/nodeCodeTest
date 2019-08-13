@@ -1,0 +1,25 @@
+#serviceManager .iovModal .modal-input .modal-column{
+    width:100%;
+}
+
+#serviceManager .drag{
+    width: 400px;
+}
+
+#serviceManager #rolePermission .drag{
+    width: 400px;
+    margin-left:-200px;
+    top:90px;
+    bottom:90px;
+}
+#serviceManager #rolePermission .drag .modal-body{
+    padding:20px 0 20px 110px;
+}
+#serviceManager #rolePermission .drag .modal-body>div{
+    height:100%;
+    width:100%;
+}
+
+#serviceManager .iovModal .modal-submit{
+    text-align: center;
+}

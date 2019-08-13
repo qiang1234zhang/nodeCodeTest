@@ -1,0 +1,10 @@
+#serviceApplication .itemBtn {
+    width: 89.58px;
+    height: 33px;
+    background-color: rgb(48, 175, 174);
+    color: #FFF;
+    font: 400 16px 'microsoft yahei';
+}
+#serviceApplication .itemBtn span {
+    margin-right: 4px
+}

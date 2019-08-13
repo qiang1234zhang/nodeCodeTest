@@ -1,0 +1,209 @@
+select{-webkit-appearance:none;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);   }
+
+#themeDataApplication .iovModal .modal-input .modal-column {
+    width: 100%;
+    padding: 0;
+}
+
+#themeDataApplication #compareRuleCreate .drag {
+    width: 500px;
+    height: 400px;
+
+}
+
+#themeDataApplication .drag .modal-body {
+    /*height:560px;*/
+    overflow-y: auto;
+}
+
+/*#themeDataApplication .iovModal .modal-input .modal-column .pickList h3 {
+    margin-bottom: 8px;
+}
+
+#themeDataApplication .iovModal .modal-input .modal-column .pickList select {
+    height: 185px;
+    border-radius: 2px;
+    width: 99%;
+    border: 1px solid #3C763D;
+}*/
+
+#themeDataApplication .leftMenuBar {
+    width: 230px;
+    height: 100%;
+    padding: 22px 15px 15px 15px;
+    border-right: 1.5px #C9C9C9 solid;
+    position: relative;
+    border-top: 5px solid #30AFAE;
+}
+
+#themeDataApplication .menuContentMain {
+    position: absolute;
+    top: 50px;
+    bottom: 0;
+    left: 250px;
+    right: 0;
+    padding: 25px 25px 25px 0;
+
+}
+
+#themeDataApplication .MenuBarContent {
+    width: 100%;
+    position: relative;
+    top: 46px;
+    bottom: 0;
+}
+
+.treeBtn {
+    margin-bottom: 15px;
+    margin-left: 10px;
+}
+
+#themeDataApplication .treeIovModal .modal-input .modal-column {
+    width: 100%;
+}
+
+#themeDataApplication .treeIovModal .drag {
+    width: 500px;
+}
+
+#themeDataApplication #kinshipsConfig .drag {
+    width: 800px;
+}
+
+#themeDataApplication #compareRuleCreate .drag {
+    width: 800px;
+}
+
+#themeDataApplication #compareRuleEdit .drag {
+    width: 800px;
+}
+
+
+#themeDataApplication .KinshipsOrgTree {
+    height: 100px;
+    width: 100%;
+    overflow: auto;
+}
+
+#themeDataApplication .fieldList .scroll ul li:hover {
+    background-color: #DFE0E0;
+    cursor: pointer;
+}
+
+#themeDataApplication .fieldList .scroll ul li.active {
+    background-color: #DFE0E0;
+}
+
+#themeDataApplication .fieldList .bloodTable {
+    margin-left: 454px;
+    position: relative;
+    margin-top: -196px;
+}
+
+#themeDataApplication .fieldList .bloodTable .extra {
+    position: absolute;
+    left: 48px;
+    top: -48px;
+    width: 150px;
+    background: #F5F7F7;
+}
+
+#themeDataApplication .fieldList .bloodTable .extra input {
+    height: 30px;
+}
+
+#themeDataApplication .treeOverflow {
+    height: 148px;
+    overflow: auto;
+}
+#themeDataApplication fieldset {
+    padding: .15em .625em .75em;
+    /*margin:0 2px;*/
+    border: 1px solid #3C763D;
+}
+
+#themeDataApplication .fieldList {
+    position: relative;
+}
+
+#themeDataApplication .fieldBtn {
+    padding-top: 80px;
+    width: 35px;
+    float: left;
+}
+
+#themeDataApplication .fieldList .fieldBtnAdd {
+    padding-top: 68px;
+    padding-left: 31px;
+
+}
+
+#themeDataApplication .fieldBtnDel {
+    margin-top: 5px;
+    text-align: left;
+}
+
+#themeDataApplication .fieldList fieldset {
+    float: left;
+    width: 41%;
+    height: 196px;
+}
+#themeDataApplication .fieldList .conditions {
+    position: absolute;
+    top: 25px;
+    left: 11px;
+}
+#themeDataApplication .fieldList .conditionsBtn {
+    position: absolute;
+    top: 116px;
+    left: 13px;
+}
+#themeDataApplication fieldset legend {
+    padding: .5em .5em 0 .5em;
+    border: 0;
+    width: auto;
+    font-size: 14px;
+}
+
+#themeDataApplication .scroll {
+    height: 165px;
+    width:300px;
+}
+
+#themeDataApplication #details .drag {
+    width: 800px;
+}
+
+#themeDataApplication .tab-content .leftMenuBar_tab {
+    width: 150px;
+    height: 100%;
+    padding: 22px 15px 15px 0;
+    border-right: 1.5px #C9C9C9 solid;
+    border-bottom: 1.5px #C9C9C9 solid;
+    border-top: 5px solid #30AFAE;
+    overflow-x: auto;
+}
+/*不可点击按钮css*/
+#themeDataApplication .disabledBtn {
+    width: 121.58px;
+    height: 33px;
+    background-color: rgb(48, 175, 174);
+    color: #FFF;
+    font: 400 16px 'microsoft yahei';
+}
+#themeDataApplication .disabledBtn span {
+    margin-right: 4px
+}
+
+
+#themeDataApplication #treeCompareTable {
+    background-color: #F5F7F7;
+}
+#themeDataApplication #treeCompareTable_ {
+    background-color: #F5F7F7;
+}
+/*不可点击按钮css*/
+
+
+

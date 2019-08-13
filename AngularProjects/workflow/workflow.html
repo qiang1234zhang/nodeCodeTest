@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta name="google" value="notranslate"/>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel="stylesheet" type="text/css" href="css/iov-workflow.css"/>
+    <script type="text/javascript">
+
+        var restPath="",contextPath="";
+
+        if(window.parent.restHref){
+
+            restPath=window.parent.restHref;
+
+            contextPath= getURLParameter("contextPath")||"/dg";//接受页面过来的流程参数id;(/dg为流程设计器单独使用时contextPath地址)
+
+        }else{
+            alert("获取根Url出错，请检查服务器。");
+        }
+
+        function getURLParameter(name) {
+            return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search) || [, ""])[1].replace(/\+/g, '%20')) || null;
+        }
+    </script>
+    <script type="text/javascript" src="flex/swfobject.js"></script>
+    <script type="text/javascript">
+        function loadSwf() {
+            var swfVersionStr = "10.0.0";
+            var xiSwfUrlStr = "playerProductInstall.swf";
+            var flashvars = {};
+            var params = {};
+            params.quality = "high";
+            params.bgcolor = "#ffffff";
+            params.allowscriptaccess = "sameDomain";
+            params.allowfullscreen = "true";
+            params.wmode = "transparent";
+            var attributes = {};
+            attributes.id = "workflow";
+            attributes.name = "workflow";
+            attributes.align = "middle";
+            swfobject.embedSWF(
+                    "flex/workflow.swf", "flashContent",
+                    "100%", "100%",
+                    swfVersionStr, xiSwfUrlStr,
+                    flashvars, params, attributes);
+            swfobject.createCSS("#flashContent", "display:block;text-align:left;");
+        }
+    </script>
+
+    <style>
+        /*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/
+        ::-webkit-scrollbar
+        {
+            width: 9px;
+            height: 9px;
+            background-color: #667386;
+        }
+
+        /*定义滚动条轨道 内阴影+圆角*/
+        ::-webkit-scrollbar-track
+        {
+            -webkit-box-shadow: inset 0 0 4px rgba(241, 241, 241, 0.30);
+            border-radius: 10px;
+            background-color: #F1F1F1;
+        }
+        /*定义滑块 内阴影+圆角*/
+        ::-webkit-scrollbar-thumb
+        {
+            border-radius: 10px;
+            -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+            background-color: #667386;
+        }
+
+        /*.nav > li > a:hover, .nav > li > a:focus {
+            background: none;
+        }*/
+
+        #tags > li {
+            float: left;
+            padding: 0px 20px;
+            list-style-type: none;
+            font-size:12px;
+            cursor: pointer;
+        }
+
+        .active {
+            background-color: #e7e7e8;
+        }
+
+        .tags-content {
+            /*background-color: #ffffff;*/
+            height: 90%;
+        }
+
+        .table-hover > tbody > tr:hover {
+            background-color: #D9D9D9;
+        }
+
+        .clickTr {
+            background-color: #ADADAD;
+        }
+
+        .table {
+            margin-bottom: 0px;
+            font-size:12px;
+        }
+
+        .ztree li {
+            line-height: 22px;
+        }
+
+        .ztree li a.curSelectedNode {
+            height: 24px;
+        }
+        #leftTree{
+            position:absolute;
+            margin: 0px 5px 10px 5px;
+            padding-top:6px ;
+            padding-bottom: 6px;
+            width: 240px;
+            height: 96%;
+            top: 5px;
+            z-index: 1;
+            color: #797d85;
+            border: 1px solid #e8eaeb;
+            filter: alpha(opacity=90);
+            background-color: rgb(245, 245, 245);
+            background-color: rgba(245, 245, 245, 0.9);
+            overflow-x: auto;
+            overflow-y: auto;
+
+        }
+        .manageGroup{
+            position:absolute;
+            left: 210px;
+            top: 5px;
+            z-index: 1;
+            width: 400px;
+            height: 40px;
+            border: 1px solid #e8eaeb;
+            filter: alpha(opacity=90);
+            background-color: rgb(245, 245, 245);
+            background-color: rgba(245, 245, 245, 0.9);
+
+
+        }
+        .manageGroup .tool li{
+            margin-right: 27px;
+        }
+        .flexScope{
+            position: absolute;
+            top:0px;
+            bottom:0;
+            left:0;
+            right:0;
+        }
+        .consoleScope{
+            position: absolute;
+            bottom: 20px;
+            left: 210px;
+            right: 6px;
+            height: 280px;
+            display: none;
+            border: 1px solid #e8eaeb;
+            /*filter: alpha(opacity=90);*/
+            background-color: rgb(245, 245, 245);
+            background-color: rgba(245, 245, 245, 1.0);
+        }
+        .console_Toolbar{
+            color: black;
+            height: 40px;
+            line-height: 40px;
+            margin-top: -10px;
+        }
+        .bg{
+           /* filter: alpha(opacity=90);*/
+            background-color: rgb(232, 223, 252);
+            background-color: rgba(232, 223, 252, 1.0);
+        }
+
+        .iconBtn{
+            display: inline-block;
+            width: 15px;
+            height: 32px;
+            vertical-align: middle;
+            text-decoration: none;
+            margin-right: 2px
+        }
+        .logBtn{
+            float:right;
+        }
+        .logBtn a{
+            padding:3px 10px;
+            margin-right:6px;
+        }
+
+        .save1:before{
+            content:url(assets/images/toolManage/save1.png);
+        }
+        .bushu1:before{
+            content:url(assets/images/toolManage/bushu1.png);
+        }
+        .run1:before{
+            content:url(assets/images/toolManage/run1.png);
+        }
+
+        .fullScreen:before{
+            content:url(assets/images/toolManage/fullScreen.png);
+        }
+        .pluglog:before{
+            content:url(assets/images/toolManage/pluglog.png);
+        }
+        .plugtree:before{
+            content:url(assets/images/toolManage/plugtree.png);
+        }
+        .return:before{
+            content:url(assets/images/toolManage/return.png);
+        }
+    </style>
+
+</head>
+<body>
+<div class="workflow" style="height:100%;" id="avalon-id" ms-controller="avalon-flow-log">
+    <div class="nodecontainer">
+        <ul id="leftTree" class="ztree"></ul>
+    </div>
+    <!--管理工具栏 -->
+    <div class="manageGroup">
+        <ul class="tool" ms-if="!@readOnly">
+            <li title="保存" id="saveBtn">
+                <a class="tool-icon">
+                    <em class="iconBtn save1"></em><em class="icon-text">保存</em>
+                </a>
+            </li>
+            <li title="部署" id="initBtn">
+                <a class="tool-icon">
+                    <em class="iconBtn bushu1"></em><em class="icon-text">部署</em>
+                </a>
+            </li>
+            <li title="运行" id="runBtn">
+                <a class="tool-icon">
+                    <em class="iconBtn run1"></em><em class="icon-text">运行</em>
+                </a>
+            </li>
+
+            <li title="日志">
+                <a class="tool-icon">
+                    <em class="iconBtn pluglog" ></em><em class="icon-text" id="pluglog">显示日志</em>
+                </a>
+            </li>
+            <li title="树" >
+                <a class="tool-icon">
+                    <em class="iconBtn plugtree"></em><em class="icon-text" id="plugtree">隐藏树</em>
+                </a>
+            </li>
+            <!-- <li title="全屏">
+                <a class="tool-icon">
+                    <em class="iconBtn fullScreen"></em><em class="icon-text" id="fullScreen">全屏</em>
+                </a>
+            </li>-->
+            <!--<li title="返回主页" >
+                <a class="tool-icon ">
+                    <em class="iconBtn return"></em><em class="icon-text" id="returnBtn">返回主页</em>
+                </a>
+            </li>-->
+        </ul>
+    </div>
+    <!--flex-->
+    <div class="flexScope" >
+        <div id="flashContent"></div>
+    </div>
+    <!--日志-->
+    <div class="consoleScope" id="consoleDiv">
+        <div class="console_Toolbar">
+            <div class="logBtn">
+                <a href="#"  id="updown"  title="向上/向下"><span class="glyphicon glyphicon-sort"></span></a>
+                <a href="#" ms-click="@clickRefresh()" title="刷新"><span class="glyphicon glyphicon-refresh"></span></a>
+                <a href="#" id="consoleID"  title="关闭"><span class="glyphicon glyphicon-remove"></span></a>
+            </div>
+            <ul id="tags" class="tags">
+                <li>流程日志</li>
+                <li>插件日志</li>
+                <li class="active">控制台</li>
+
+            </ul>
+        </div>
+        <div id="tags-content" class="tags-content">
+            <!--流程日志-->
+            <div>
+                <table class="table table-hover" data-pagination="true">
+                    <thead class="bg">
+                    <th>序号</th>
+                    <th>流程名称</th>
+                    <th>运行状态</th>
+                    <th>开始时间</th>
+                    <th>结束时间</th>
+                    </thead>
+                    <tbody class="tager">
+                    <tr ms-for="($index,log) in @tableData_his"
+                        ms-click="@clickThisTr($event,log.workflowRunCode,log.status)">
+                        <td>{{$index+1}}</td>
+                        <td>{{log.workflowName}}</td>
+                        <td>
+                            <span style="color: green" ms-if="log.status==1">正在运行</span>
+                            <span ms-if="log.status==2">运行成功</span>
+                            <span style="color: red" ms-if="log.status==3">异常结束</span>
+
+                        </td>
+                        <td>{{log.startTime}}</td>
+                        <td>{{log.endTime}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!--插件日志-->
+            <div style="overflow: auto;height: 100%;">
+                <table id="avalon-table-modal-operation" class="table table-hover" data-pagination="false">
+                    <thead class="bg">
+                    <th>序号</th>
+                    <th>插件名称</th>
+                    <th>读</th>
+                    <th>写缓存</th>
+                    <th>输出</th>
+                    <th>错误</th>
+                    <th>拒绝</th>
+                    <th>状态</th>
+                    <th>开始时间</th>
+                    <th>结束时间</th>
+
+                    </thead>
+                    <tr ms-for="($index,log) in @tableData_plugIn">
+                        <td>{{$index+1}}</td>
+                        <td>{{log.stepName}}</td>
+                        <td>{{log.readNum}}</td>
+                        <td>{{log.inputNum}}</td>
+                        <td>{{log.outputNum}}</td>
+                        <td>{{log.errorNum}}</td>
+                        <td>{{log.rejectNum}}</td>
+                        <td>
+                            <span style="color: green" ms-if="log.status=='2'">正在运行</span>
+                            <span ms-if="log.status=='1'">运行成功</span>
+                            <span style="color: red" ms-if="log.status=='0'">运行失败</span>
+                        </td>
+                        <td>{{log.runStartTime}}</td>
+                        <td>{{log.runEndTime}}</td>
+
+                    </tr>
+                </table>
+            </div>
+            <!--运行日志-->
+            <div>
+                 <textarea id="logDetail" class="form-control input-sm" rows="22" ms-duplex-string="@logDetail"
+                           placeholder="运行日志" readonly="readonly" style="height: 230px;">
+                 </textarea>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+
+<script type="text/javascript" src="js/Tool_JavaScripts/require.js"
+        data-main="js/IOV_JavaScripts/flashwf_debug.js?v=4"></script>
+
+</body>
+</html>

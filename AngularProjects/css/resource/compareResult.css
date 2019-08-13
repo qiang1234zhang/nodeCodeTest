@@ -1,0 +1,58 @@
+#compareResult .iovModal .modal-input .modal-column{
+    width:100%;
+}
+
+#compareResult .drag{
+    width: 600px;
+}
+
+
+
+
+
+#compareResult .iovModal .modal-input .modal-column .pickList h3{
+    margin-bottom:8px;
+}
+#compareResult .iovModal .modal-input .modal-column .pickList select{
+    height:185px;
+    border-radius:2px;
+    width:99%;
+    border:1px solid #3C763D;
+}
+#compareResult .leftMenuBar{
+    width: 230px;
+    height: 100%;
+    padding: 22px 15px 15px 15px;
+    border-right: 1.5px #C9C9C9 solid;
+    position: relative;
+    border-top: 5px solid #30AFAE;
+}
+
+#compareResult .menuContentMain{
+    position: absolute;
+    top: 50px;
+    bottom: 0;
+    left: 250px;
+    right: 0;
+    padding: 25px;
+
+}
+
+#compareResult .MenuBarContent{
+    width: 100%;
+    position: relative;
+    top:46px;
+    bottom:0;
+}
+
+.treeBtn{
+    margin-bottom:15px;
+    margin-left:10px;
+}
+
+#compareResult .treeIovModal .modal-input .modal-column{
+    width:100%;
+}
+#compareResult .treeIovModal .drag{
+    width: 500px;
+}

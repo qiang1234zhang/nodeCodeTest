@@ -1,0 +1,205 @@
+#compareRule .iovModal .modal-input .modal-column {
+    width: 100%;
+    padding: 0;
+}
+
+#compareRule #compareRuleCreate .drag {
+    width: 500px;
+    height: 400px;
+
+}
+
+#compareRule .drag .modal-body {
+    /*height:560px;*/
+    overflow-y: auto;
+}
+
+/*#compareRule .iovModal .modal-input .modal-column .pickList h3 {
+    margin-bottom: 8px;
+}
+
+#compareRule .iovModal .modal-input .modal-column .pickList select {
+    height: 185px;
+    border-radius: 2px;
+    width: 99%;
+    border: 1px solid #3C763D;
+}*/
+
+#compareRule .leftMenuBar {
+    width: 230px;
+    height: 100%;
+    padding: 22px 15px 15px 15px;
+    border-right: 1.5px #C9C9C9 solid;
+    position: relative;
+    border-top: 5px solid #30AFAE;
+}
+
+#compareRule .menuContentMain {
+    position: absolute;
+    top: 50px;
+    bottom: 0;
+    left: 250px;
+    right: 0;
+    padding: 25px 25px 25px 0;
+
+}
+
+#compareRule .MenuBarContent {
+    width: 100%;
+    position: relative;
+    top: 46px;
+    bottom: 0;
+}
+
+.treeBtn {
+    margin-bottom: 15px;
+    margin-left: 10px;
+}
+
+#compareRule .treeIovModal .modal-input .modal-column {
+    width: 100%;
+}
+
+#compareRule .treeIovModal .drag {
+    width: 500px;
+}
+
+#compareRule #kinshipsConfig .drag {
+    width: 800px;
+}
+
+#compareRule #compareRuleCreate .drag {
+    width: 800px;
+}
+
+#compareRule #compareRuleEdit .drag {
+    width: 800px;
+}
+
+
+#compareRule .KinshipsOrgTree {
+    height: 100px;
+    width: 100%;
+    overflow: auto;
+}
+
+#compareRule .fieldList .scroll ul li:hover {
+    background-color: #DFE0E0;
+    cursor: pointer;
+}
+
+#compareRule .fieldList .scroll ul li.active {
+    background-color: #DFE0E0;
+}
+
+#compareRule .fieldList .bloodTable {
+    margin-left: 137px;
+    position: relative;
+}
+
+#compareRule .fieldList .bloodTable .extra {
+    position: absolute;
+    left: 48px;
+    top: -48px;
+    width: 150px;
+    background: #F5F7F7;
+}
+
+#compareRule .fieldList .bloodTable .extra input {
+    height: 30px;
+}
+
+#compareRule .treeOverflow {
+    height: 141px;
+    overflow: auto;
+}
+#compareRule fieldset {
+    padding: .15em .625em .75em;
+    /*margin:0 2px;*/
+    border: 1px solid #3C763D;
+}
+
+#compareRule .fieldList {
+    position: relative;
+}
+
+#compareRule .fieldBtn {
+    padding-top: 80px;
+    width: 35px;
+    float: left;
+}
+
+#compareRule .fieldList .fieldBtnAdd {
+    padding-top: 100px;
+
+}
+
+#compareRule .fieldBtnDel {
+    margin-top: 5px;
+    text-align: left;
+}
+
+#compareRule .fieldList fieldset {
+    float: left;
+    width: 41%;
+    height: 170px;
+}
+#compareRule .fieldList .conditions {
+    position: absolute;
+    top: 25px;
+    left: 11px;
+}
+#compareRule .fieldList .conditionsBtn {
+    position: absolute;
+    top: 116px;
+    left: 13px;
+}
+#compareRule fieldset legend {
+    padding: .5em .5em 0 .5em;
+    border: 0;
+    width: auto;
+    font-size: 14px;
+}
+
+#compareRule .scroll {
+    height: 140px;
+    width:303px;
+    overflow: auto;
+}
+
+#compareRule #details .drag {
+    width: 800px;
+}
+
+#compareRule .tab-content .leftMenuBar_tab {
+    width: 150px;
+    height: 100%;
+    padding: 22px 15px 15px 0;
+    border-right: 1.5px #C9C9C9 solid;
+    border-bottom: 1.5px #C9C9C9 solid;
+    border-top: 5px solid #30AFAE;
+    overflow-x: auto;
+}
+/*不可点击按钮css*/
+#compareRule .disabledBtn {
+    width: 121.58px;
+    height: 33px;
+    background-color: rgb(48, 175, 174);
+    color: #FFF;
+    font: 400 16px 'microsoft yahei';
+}
+#compareRule .disabledBtn span {
+    margin-right: 4px
+}
+
+
+#compareRule #treeCompareTable {
+    background-color: #F5F7F7;
+}
+#compareRule #treeCompareTable_ {
+    background-color: #F5F7F7;
+}
+/*不可点击按钮css*/
+
+
+

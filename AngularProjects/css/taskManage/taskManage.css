@@ -1,0 +1,167 @@
+
+.clear{
+	clear: both;
+}
+
+#taskManagement .contentMainLeft{
+	width: 265px;
+	height: 100%;
+	padding: 10px 20px 20px 20px;
+	border-right: 1.5px #C9C9C9 solid;
+	position: relative;
+	border-top: 5px solid #F15959;
+}
+
+ 
+
+#taskManagement .createParentBtn{
+	display: inline-block;
+	background-color: #36b084;;
+	padding: 4px 12px;
+	color: #fff;
+	border-radius: 3px;
+	margin-top:6px;
+	font: 400 14px "microsoft yahei";
+	font-family: "microsoft yahei";
+	cursor: pointer;
+	position: relative;
+}
+
+#taskManagement .contentMainLeft .head{
+	width: 100%;
+	padding: 12px 25px;
+	margin-top: 18px;
+	font-size: 14px;
+	text-align: center;
+	color: #fff;
+	background-color: #58C2B2;
+	border-left: 5px solid #58C2B2;
+}
+#taskManagement .contentMainLeft .head .icon-plus{
+	display: inline-block;
+	float: right;
+	margin-right:40px;
+	margin-top:15px;
+}
+#taskManagement .contentMainLeft .treesource{
+	/*position: absolute;
+	top: 90px;*/
+	position: absolute;
+	top: 90px;
+	right: 20px;
+	left: 20px;
+	bottom: 0px;
+	background-color: #F1F0F0;
+}
+
+#taskManagement .zTreeDemoBackground{
+	position: relative;
+	margin-top: 20px;	
+}
+ 
+#taskManagement .contentMain{
+	position: absolute;
+	top: 50px;
+	bottom: 0;
+	left: 270px;
+	right: 0;
+	padding: 21px;
+}
+
+
+#taskManagement .drag{
+	width: 400px;
+}
+
+#taskManagement .iovModal .modal-input .modal-column{
+	width: 100%;
+}
+
+
+
+
+#dispatchManagement .contentMainLeft{
+	width: 230px;
+	height: 100%;
+	padding: 50px 20px 20px 20px;
+	border-right: 1.5px #C9C9C9 solid;
+	position: relative;
+	border-top: 5px solid #F15959;
+}
+#dispatchManagement .zTreeDemoBackground{
+	position: relative;
+	margin-top: 10px;	
+}
+
+#dispatchManagement .contentMain{
+	position: absolute;
+	top: 50px;
+	bottom: 0;
+	left: 240px;
+	right: 0;
+	padding: 21px;
+}
+#dispatchManagement .drag .dragleft{
+	width: 400px;
+}
+
+#dispatchManagement .iovModal .dragleft .modal-input .modal-column{
+	width: 100%;
+}
+
+#dispatchManagement .contentBottom .run{
+    margin-top: 21px;
+    margin-left:15px;
+    height:31px;
+    line-height: 31px;
+    color: #fff;
+    padding:0 15px;
+    font-size: 14px;
+    background-color: #36B084;
+}
+
+#dispatchManagement .contentBottom .run:hover{
+    background-color: #0D865A;
+}
+#dispatchManagement .contentBottom .stop{
+     margin-top: 21px;
+     margin-left:15px;
+     height:31px;
+     line-height: 31px;
+     color: #fff;
+     padding:0 15px;
+     font-size: 14px;
+     background-color: #36B084;
+ }
+#dispatchManagement .contentBottom .stop:hover{
+    background-color: #0D865A;
+}
+
+
+#dispatchLog .contentMainLeft{
+	width: 230px;
+	height: 100%;
+	padding: 50px 20px 20px 20px;
+	border-right: 1.5px #C9C9C9 solid;
+	position: relative;
+	border-top: 5px solid #F15959;
+}
+#dispatchLog .zTreeDemoBackground{
+	position: relative;
+	margin-top: 10px;	
+}
+
+#dispatchLog .contentMain{
+	position: absolute;
+	top: 50px;
+	bottom: 0;
+	left: 240px;
+	right: 0;
+	padding: 21px;
+}
+#dispatchLog .drag{
+	width: 400px;
+}
+#dispatchLog .iovModal .modal-input .modal-column{
+	width: 100%;
+}

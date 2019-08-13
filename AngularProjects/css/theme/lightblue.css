@@ -1,0 +1,204 @@
+/***************************************************全局标题，模态框标题颜色***************************************************/
+.iovModal .modal-header,header.iovTitle{
+	background-color:rgb(14,142,231);
+	color:#FFF
+}
+.iovTitle>ul li.active{
+	background:linear-gradient(to top, rgb(14,142,231), rgb(47,169,232));
+}
+.iovTitle>ul li.active:before{
+	content:"";
+	position:absolute;
+	top:0;
+	left:0;
+	height:85%;
+	width:1px;
+	background:linear-gradient(to top, rgb(14,142,231), rgb(14,144,184));
+	box-shadow: 1px 0px 5px rgb(255,255,255);
+}
+.iovTitle>ul li.active:after{
+	content:"";
+	position:absolute;
+	top:0;
+	right:0;
+	height:85%;
+	width:1px;
+	background:linear-gradient(to top, rgb(14,142,231), rgb(14,144,184));
+	box-shadow: 1px 0px 5px rgb(255,255,255);
+}
+.iovTitle .loginBox .tool>span{
+    color:rgb(131,181,243);
+}
+.iovTitle .loginBox span#username,.iovTitle .loginBox div.off{
+	color:rgb(225,225,228);
+}
+/***************************************************分页颜色***************************************************/
+.contentBottom  ul.pagination li.pagination-first a{
+	border:1px rgb(82,146,226) solid;
+	color:rgb(82,146,226);
+}
+.contentBottom ul.pagination li.pagination-last a{
+	border:1px rgb(82,146,226) solid;
+	color:rgb(82,146,226);
+}
+.contentBottom .pagination > li > a,.contentBottom .pagination > li > span{
+	color:#868686;
+}
+.contentBottom .pagination > .active > a,.contentBottom .pagination > .active > span,.contentBottom .pagination > .active > a:hover,.contentBottom .pagination > .active > span:hover,.contentBottom .pagination > .active > a:focus,.contentBottom .pagination > .active > span:focus{
+	background-color:rgb(82,146,226);
+	border-color:rgb(82,146,226);
+	color:#FFF;
+}
+.contentBottom .pagination  li.pagination-prev a{
+	color:transparent
+}
+.contentBottom .pagination-prev a:after{
+    border-right:6px solid  rgb(82,146,226); 
+}
+.contentBottom .pagination  li.pagination-next a{
+	color:transparent
+}
+.contentBottom .pagination-next a:after{
+    border-left:6px solid  rgb(82,146,226); 
+}
+.contentBottom .pagination-prev.disabled a:after{
+    border-right:6px solid  #868686; 
+}
+.contentBottom .pagination-next.disabled a:after{
+    border-left:6px solid  #868686; 
+}
+
+.iovNavBar{
+	background-color:rgb(42,56,68);
+	color:rgb(109,126,140);
+}
+.iovNavBar>div.head{
+	border-bottom:1px rgb(51,61,72) solid;
+}
+.iovNavBar .leftBar .panel-group .panel-heading{
+	border-bottom:2px rgb(36,46,55) solid;
+	box-shadow: 1px 2px 5px rgb(50,63,75);
+}
+.iovNavBar .leftBar .panel-group .panel-heading:hover,.iovNavBar .leftBar .panel-group .panel-heading.active,.iovNavBar .leftBar .panel-body ul li:hover,.iovNavBar .leftBar .panel-body ul li.active{
+	background-color:rgb(51,73,91);
+	color:#FFF
+}
+.iovNavBar .leftBar .panel-group .panel-heading.active:before,.iovNavBar .leftBar .panel-body ul li.active:before{
+	content:"";
+	position:absolute;
+	top:0;
+	left:0;
+	height:100%;
+	width:5px;
+	background-color:rgb(254,182,97) ;
+}
+.iovNavBar .leftBar .panel-group .panel-heading.active:after,.iovNavBar .leftBar .panel-body ul li.active:after{
+	content:"";
+	position:absolute;
+	top:50%;
+	margin-top:-10px;
+	right:0;
+	width:0;   
+	height:0; 
+	border-top:10px solid transparent;   
+	border-bottom: 10px solid transparent;
+	border-right: 10px solid #fff;
+}
+
+/***************************************************按钮颜色***************************************************/
+/*默认*/
+span.iovButton,ul.iovButtonGroup>li>span{
+	background-color:#C1C3C3 ;
+	color:#000;
+}
+span.iovButton:hover,ul.iovButtonGroup>li>span:hover{
+	background-color:#57ADE6;
+}
+span.iovButton:active,ul.iovButtonGroup>li>span:active{
+	background-color:#5791E6;
+}
+
+/*创建新建导入*/
+span.iovButton.create,ul.iovButtonGroup>li>span.create{
+	background-color:rgb(82,146,226);
+	color:#FFF;
+}
+span.iovButton.create:hover,ul.iovButtonGroup>li>span.create:hover{
+	background-color:rgb(82,146,226);
+}
+span.iovButton.create:active,ul.iovButtonGroup>li>span.create:active{
+	background-color:rgb(82,146,226);
+}
+/*删除*/
+span.iovButton.delete,ul.iovButtonGroup>li>span.delete{
+	background-color:rgb(241,89,89);
+	color:#FFF;
+}
+span.iovButton.delete:hover,ul.iovButtonGroup>li>span.delete:hover{
+	background-color:rgb(241,89,89);
+}
+span.iovButton.delete:active,ul.iovButtonGroup>li>span.delete:active{
+	background-color:rgb(241,89,89);
+}
+/*取消*/
+span.iovButton.cancel,ul.iovButtonGroup>li>span.cancel{
+	background-color:#c5c5c5;
+	color:#FFF;
+}
+span.iovButton.cancel:hover,ul.iovButtonGroup>li>span.cancel:hover{
+	background-color:#aaa;
+}
+span.iovButton.cancel:active,ul.iovButtonGroup>li>span.cancel:active{
+	background-color:#aaa;
+}
+/*表单按钮*/
+/*默认灰色关闭*/
+button.iovFormButton{
+	color:#FFF;
+	background-color:#C1C3C3 ;
+}
+button.iovFormButton:hover{
+	background-color:#AAA ;
+}
+/*确定*/
+button.iovFormButton.confirm{
+	background-color:rgb(82,146,226);
+}
+button.iovFormButton.confirm:hover{
+	background-color:rgb(82,146,226);
+}
+/*重置*/
+button.iovFormButton.reset{
+	background-color:#71B9CD;
+}
+button.iovFormButton.reset:hover{
+	background-color:deepskyblue;		
+}
+
+
+/***************************************************表格***************************************************/
+.contentTable table thead{
+	background-color:rgb(231,231,232);
+	color:#333;
+}
+
+/***************************************************部分页面自主颜色***************************************************/
+/*文件上传下载文字颜色*/
+.color-upload-words{
+	color:#62B9FA
+}
+.color-download-icon{
+	color:#62B9FA
+}
+/*含有角色列表的标题头*/
+.leftUserList{
+	background-color:rgba(82,146,226,0.3);
+	border:2px solid #DCDCDC;
+	border-left:5px solid rgb(82,146,226);
+    color: #000;
+}
+/*菜单管理标题头*/
+#menuManagement .leftMenuBar .head{
+	color: #fff;
+	background-color: #58C2B2;
+}

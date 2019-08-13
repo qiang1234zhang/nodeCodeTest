@@ -1,0 +1,45 @@
+#dataSourceManager .tab-content{
+    height:500px;
+    /*position: relative;*/
+}
+#dataSourceManager .tab-content .leftMenuBar_tab{
+    width: 200px;
+    height:100%;
+    padding: 22px 15px 15px 0;
+    border-right: 1.5px #C9C9C9 solid;
+    border-bottom: 1.5px #C9C9C9 solid;
+    border-top: 5px solid #30AFAE;
+    overflow-x:auto;
+}
+
+
+#selectTableTab .menuContentMain{
+    position: absolute;
+    left:200px;
+    top:42px;
+    padding: 1px;
+    overflow-y:auto;
+}
+
+#dataSourceManager .tabTool{
+    padding:8px 0 8px 5px;
+}
+
+#dataSourceManager .tabTool div{
+    display: inline-block;
+}
+
+#dataSourceManager .MenuBarContent{
+    width: 100%;
+    position: relative;
+    top:46px;
+    bottom:0;
+}
+
+#dataSourceManager .treeIovModal .drag{
+    width: 800px;
+}
+
+
+
+

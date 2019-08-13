@@ -1,0 +1,139 @@
+#primaryData .iovModal .modal-input .modal-column {
+    width: 100%;
+    padding: 0;
+}
+
+#primaryData .drag .modal-body {
+    /*height:560px;*/
+    overflow-y: auto;
+}
+#primaryData .leftMenuBar {
+    width: 230px;
+    height: 100%;
+    padding: 22px 15px 15px 15px;
+    border-right: 1.5px #C9C9C9 solid;
+    position: relative;
+    border-top: 5px solid #30AFAE;
+}
+
+#primaryData .menuContentMain {
+    position: absolute;
+    top: 50px;
+    bottom: 0;
+    left: 250px;
+    right: 0;
+    padding: 25px 25px 25px 0;
+
+}
+
+#primaryData .fieldList .scroll ul li:hover {
+    background-color: #DFE0E0;
+    cursor: pointer;
+}
+
+#primaryData .fieldList .scroll ul li.active {
+    background-color: #DFE0E0;
+}
+
+#primaryData fieldset {
+    padding: .15em .625em .75em;
+    border: 1px solid #3C763D;
+}
+
+#primaryData .fieldList {
+    position: relative;
+}
+
+#primaryData .fieldList fieldset {
+    float: left;
+    width: 49%;
+    height: 220px;
+}
+
+#primaryData fieldset legend {
+    padding: .5em .5em 0 .5em;
+    border: 0;
+    width: auto;
+    font-size: 14px;
+}
+
+#primaryData .scroll {
+    height: 190px;
+    overflow: auto;
+}
+
+#primaryData #details .drag {
+    width: 500px;
+}
+
+#primaryData .tab-content .leftMenuBar_tab {
+    width: 150px;
+    height: 100%;
+    padding: 22px 15px 15px 0;
+    border-right: 1.5px #C9C9C9 solid;
+    border-bottom: 1.5px #C9C9C9 solid;
+    border-top: 5px solid #30AFAE;
+    overflow-x: auto;
+}
+/*不可点击按钮css*/
+#primaryData .disabledBtn {
+    width: 121.58px;
+    height: 33px;
+    background-color: rgb(48, 175, 174);
+    color: #FFF;
+    font: 400 16px 'microsoft yahei';
+}
+#primaryData .disabledBtn span {
+    margin-right: 4px
+}
+/*不可点击按钮css*/
+#primaryData #treeKinshipsOrg {
+    background-color: #F5F7F7;
+}
+#primaryData #menuContent .ztree {
+    height: 195px;
+}
+#primaryData #relationContent .ztree {
+    height: 195px;
+}
+#primaryData #treeRelationshipsOrg {
+    background-color: #F5F7F7;
+}
+#primaryData fieldset {
+    padding: .15em .625em .75em;
+    border: 1px solid #3C763D;
+}
+
+#primaryData fieldset legend {
+    padding: .5em .5em 0 .5em;
+    border: 0;
+    width: auto;
+    font-size: 14px;
+}
+
+/*#primaryData .fieldList fieldset {
+    float: left;
+    width: 45%;
+    height: 220px;
+}*/
+#primaryData .publishEdit fieldset {
+    /*float: left;*/
+    width: 100%;
+    height: 220px;
+}
+#primaryData .fieldList .fieldBtnAdd {
+    padding-top: 100px;
+    float: left;
+    margin: 0 26px;
+}
+
+#primaryData .iovModal .modal-input .modal-column .form-group {
+    margin: 6px 0;
+}
+
+#primaryData .scroll {
+    height: 190px;
+    overflow: auto;
+}
+
+

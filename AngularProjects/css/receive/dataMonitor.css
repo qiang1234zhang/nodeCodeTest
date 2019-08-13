@@ -1,0 +1,307 @@
+#dataMonitor .content{
+    position:absolute;
+    top:50px;
+    left:0;
+    right:0;
+    bottom:0;
+}
+#dataMonitor .content .user{
+    width: 230px;
+    height: 100%;
+    border-right: 1.5px #C9C9C9 solid;
+    position: relative;
+    border-top: 5px solid #F15959;
+}
+
+#dataMonitor .content .user .head{
+    width: 100%;
+    padding: 4px 25px;
+    font-size: 14px;
+}
+
+#dataMonitor .content .contentMain{
+    top:0;
+    left:230px;
+    padding:25px 40px;
+}
+#dataMonitor .iovModal#create .modal-input .modal-column,#dataMonitor .iovModal#import .modal-input .modal-column{
+    width:100%
+}
+#dataMonitor .iovModal#edit .modal-input .modal-column,#dataMonitor .iovModal#import .modal-input .modal-column{
+    width:100%
+}
+#dataMonitor .iovModal#create .drag,#dataMonitor .iovModal#import .drag{
+    width:400px;
+    margin-top:100px;
+}
+#dataMonitor .iovModal#edit .drag,#dataMonitor .iovModal#import .drag{
+    width:400px;
+    margin-top:100px;
+}
+#dataMonitor .iovModal#property .modal-submit{
+    padding:40px 55px;
+    height:auto
+}
+#dataMonitor .iovModal#property .modal-submit button{
+    margin-left:40px;
+}
+#dataMonitor .iovModal#property .drag{
+    width:1000px;
+    margin-top:100px;
+}
+#dataMonitor .iovModal#property .contentMain{
+    position: static;
+    padding:0;
+}
+#dataMonitor .iovModal#property .contentMain .contentTool{
+    height:75px;
+    padding:20px 25px;
+}
+#dataMonitor .iovModal#property .contentMain .contentTool .iovButtonGroup li span{
+    background-color:#6BC3DB ;
+    font-size:14px;
+    color:#FFF;
+    letter-spacing:1px ;
+
+}
+
+#dataMonitor .iovModal#property .contentMain table{
+    background-color:#F5F7F7 ;
+}
+#dataMonitor .iovModal#property .contentTable table thead{
+    background-color:inherit;
+    color:#000
+}
+#dataMonitor .iovModal#property .contentTable .table > thead > tr > th{
+    border:none;
+}
+#dataMonitor .iovModal#property .contentTable table tbody tr{
+    border-top:1px #E6E8E7 solid;
+}
+#dataMonitor .iovModal#property .contentMain tbody tr td input,#dataMonitor .iovModal#property .contentMain tbody tr td select{
+    height:30px;
+    border:2px #c9c9c9 solid;
+}
+#dataMonitor .iovModal#property .contentMain tbody tr td input:focus,#dataMonitor .iovModal#property .contentMain tbody tr td select:focus{
+    border-color: #66afe9;
+    outline: 0;
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, .6);
+}
+#dataMonitor .iovModal#property .contentMain tbody tr td:nth-of-type(1){
+    font:bold 12px "microsoft yahei"
+}
+#dataMonitor .iovModal#property .contentMain tbody tr td:nth-of-type(2){
+    width:150px;
+}
+#dataMonitor .iovModal#property .contentMain tbody tr td:nth-of-type(3){
+    width:140px;
+}
+#dataMonitor .iovModal#property .contentMain tbody tr td:nth-of-type(4){
+    width:100px;
+}
+#dataMonitor .iovModal#property .contentMain tbody tr td:nth-of-type(5){
+    width:100px;
+}
+#dataMonitor .iovModal#property .contentMain tbody tr td:nth-of-type(8){
+    width:60px;
+}
+
+#dataMonitor .content .user .searchbox{
+    position: relative;
+    width: 189px;
+    margin-top: 20px;
+    margin-left: 20px
+}
+#dataMonitor .content .user .searchbox input{
+    border-radius:3px ;
+    border:2px solid #DCDCDC;
+}
+#dataMonitor .content .user .searchbox input:focus{
+    border:1px solid #66afe9
+}
+#dataMonitor .content .user .searchbox span{
+    position: absolute;
+    top:7px;
+    right:12px;
+    font-size:18px;
+    color:#C9C9C9;
+}
+
+#dataMonitor  .checkBox{
+    width:190px;
+    margin-top:20px;
+    margin-left:20px;
+    color:#fff;
+    border-radius:3px ;
+    z-index:5;
+}
+#dataMonitor .allocate .sidebar-menu{
+    position: absolute;
+    width:190px;
+    top:106px;
+    bottom:20px;
+    padding-top: 8px;
+    background-color: #F1F0F0;
+}
+
+#dataMonitor .allocate>span{
+    display: block;
+    height:35px;
+    width:100%;
+    background-color:#424357 ;
+    font-size:16px;
+    line-height:35px;
+    vertical-align: middle;
+    padding-left:20px;
+}
+#dataMonitor .allocate>span button.close{
+    margin:5px;
+    color:#62656E;
+}
+#dataMonitor .allocate .checkBoxContainer>ul{
+    max-height:500px;
+}
+/*一级菜单*/
+#dataMonitor .menu-first{
+    height:40px;
+    width:100%;
+    font-family: "microsoft yahei";
+    line-height:32px;
+    padding-left:14px;
+
+}
+#dataMonitor .menu-first>input{
+    float:left;
+    margin:15px 5px 0 0;
+}
+#dataMonitor .menu-first a{
+    display: block;
+    padding: 0;
+    /*color:#fff;*/
+    font:14px "microsoft yahei";
+    line-height:40px;
+    vertical-align: middle;
+}
+#dataMonitor .menu-first a .icon-user{
+    margin:10px;
+}
+#dataMonitor .menu-first a>span.icon-sort-up{
+    margin-top:15px;
+}
+/*一级菜单鼠标划过状态*/
+#dataMonitor .menu-first:hover{
+    background-color: #d6d4d5;
+}
+/*二级菜单*/
+#dataMonitor .menu-second li{
+    height:40px;
+    width:190px;
+    display:inline-block;
+    padding-left:60px;
+    color:#7C7B79;
+    font-size:14px;
+    line-height:40px;
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+#dataMonitor  .menu-second li:hover{
+    background-color: #d6d4d5;
+    color: #66afe9;
+}
+#dataMonitor  .menu-second li.active{
+    background-color: #d6d4d5;
+}
+#dataMonitor .menu-second li div{
+    height:100%;
+    width:100%;
+}
+#dataMonitor .menu-second li:last-of-type div{
+    border-bottom:none;
+}
+#dataMonitor .menu-second li div>input{
+    float:left;
+    margin:15px 5px 0 0;
+}
+#dataMonitor  .menu-first a .icon-user{
+    float: left;
+    display: inline-block;
+    height: 20px;
+    width: 20px;
+    background-color: #DCDADA;
+    color: #FFF;
+    text-align: center;
+    line-height: 20px;
+    vertical-align: middle;
+    margin-right: 12px;
+}
+#dataMonitor .checkBoxContainer{
+    margin-bottom:0;
+    background-color:transparent;
+    border:none;
+    box-shadow:none;
+    border-radius:none;
+}
+#dataMonitor .checkBoxContainer.panel{
+    width:100%;
+}
+
+#dataMonitor .contentBottom .run{
+    margin-top: 21px;
+    margin-left:15px;
+    height:31px;
+    line-height: 31px;
+    color: #fff;
+    padding:0 15px;
+    font-size: 14px;
+    background-color: #36B084;
+}
+
+#dataMonitor .contentBottom .run:hover{
+    background-color: #0D865A;
+}
+#dataMonitor .contentBottom .stop{
+    margin-top: 21px;
+    margin-left:15px;
+    height:31px;
+    line-height: 31px;
+    color: #fff;
+    padding:0 15px;
+    font-size: 14px;
+    background-color: #36B084;
+}
+#dataMonitor .contentBottom .stop:hover{
+    background-color: #0D865A;
+}
+#dataMonitor .onMessageTip{
+    display: inline-block;
+    float: right;
+    margin-right:20px;
+}
+#dataMonitor .menu-first .onUserTip{
+    display: inline-block;
+    float: right;
+    margin:0;
+    padding-right:20px;
+}
+
+#dataMonitor .iovModal .errorTips{
+    z-index: 99;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

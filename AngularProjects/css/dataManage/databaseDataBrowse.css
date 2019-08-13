@@ -1,0 +1,323 @@
+#databaseDataBrowse .content{
+    position:absolute;
+    top:50px;
+    left:0;
+    right:0;
+    bottom:0;
+}
+#databaseDataBrowse .content .user{
+    width:230px;
+    height:100%;
+    padding:20px;
+    border-right:1.5px #C9C9C9 solid;
+    position: relative;
+    border-top:5px solid #F15959
+}
+#databaseDataBrowse .content .user .searchbox{
+    position: relative;
+}
+#databaseDataBrowse .content .user .searchbox input{
+    border-radius:3px ;
+    border:2px solid #DCDCDC;
+}
+#databaseDataBrowse .content .user .searchbox input:focus{
+    border:1px solid #66afe9
+}
+#databaseDataBrowse .content .user .searchbox span{
+    position: absolute;
+    top:7px;
+    right:12px;
+    font-size:18px;
+    color:#C9C9C9;
+}
+#databaseDataBrowse .content .user .head{
+    width:100%;
+    padding:4px 25px;
+    /*margin-top:20px;*/
+    font-size:14px;
+}
+#databaseDataBrowse .content .user ul{
+    position: absolute;
+    top:98px;
+    right:20px;
+    left:20px;
+    bottom:0;
+    background-color:#F1F0F0;
+    padding-top:8px;
+}
+#databaseDataBrowse .content .user ul li{
+    padding:8px 25px;
+    cursor:pointer;
+}
+#databaseDataBrowse .content .user ul li:hover{
+    background-color:#DFE0E0;
+}
+#databaseDataBrowse .content .user ul li.active{
+    background-color:#DFE0E0;
+}
+#databaseDataBrowse .content .user ul li span{
+    display: inline-block;
+    height:20px;
+    width:20px;
+    background-color:#DCDADA;
+    color:#FFF;
+    text-align: center;
+    line-height:20px;
+    vertical-align: middle;
+    margin-right:12px;
+}
+#databaseDataBrowse .content .menuContentMain{
+    top:0;
+    left:230px;
+    padding:25px 25px;
+}
+#databaseDataBrowse .iovModal#create .modal-input .modal-column,#databaseDataBrowse .iovModal#import .modal-input .modal-column{
+    width:100%
+}
+#databaseDataBrowse .iovModal#create .drag,#databaseDataBrowse .iovModal#import .drag{
+    width:400px;
+    top:100px;
+}
+#databaseDataBrowse .iovModal.property .menuContentMain .contentTable{
+    position:absolute;
+    top:75px;
+    bottom:113px;
+    width:100%;
+    overflow: auto;
+}
+#databaseDataBrowse .iovModal.property#propertyCheck .menuContentMain .contentTable{
+    top:0px;
+}
+#databaseDataBrowse .iovModal.property .modal-submit{
+    padding:40px 55px;
+    height:auto;
+    position: absolute;
+    bottom:0;
+}
+#databaseDataBrowse .iovModal.property .modal-submit button{
+    margin-left:40px;
+}
+#databaseDataBrowse .iovModal.property .menuContentMain{
+    position: static;
+    padding:0;
+}
+#databaseDataBrowse .iovModal.property .menuContentMain .contentTool{
+    height:75px;
+    padding:20px 25px;
+}
+#databaseDataBrowse .iovModal.property .menuContentMain .contentTool .iovButtonGroup li span{
+    background-color:#6BC3DB ;
+    font-size:14px;
+    color:#FFF;
+    letter-spacing:1px ;
+
+}
+
+#databaseDataBrowse .iovModal.property .menuContentMain table{
+    background-color:#F5F7F7 ;
+}
+#databaseDataBrowse .iovModal.property .contentTable table thead{
+    background-color:inherit;
+    color:#000
+}
+#databaseDataBrowse .iovModal.property .contentTable .table > thead > tr > th{
+    border:none;
+}
+#databaseDataBrowse .iovModal.property .contentTable table tbody tr{
+    border-top:1px #E6E8E7 solid;
+}
+#databaseDataBrowse .iovModal.property .menuContentMain tbody tr td input,#databaseDataBrowse .iovModal.property .menuContentMain tbody tr td select{
+    height:30px;
+    border:2px #c9c9c9 solid;
+    padding:0 12px;
+}
+#databaseDataBrowse .iovModal.property .menuContentMain tbody tr td input:focus,#databaseDataBrowse .iovModal.property .menuContentMain tbody tr td select:focus{
+    border-color: #66afe9;
+    outline: 0;
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, .6);
+}
+#databaseDataBrowse .iovModal.property .menuContentMain thead tr th:nth-of-type(1){
+    width:70px;
+}
+#databaseDataBrowse .iovModal.property .menuContentMain thead tr th:nth-of-type(4){
+    width:142px;
+}
+#databaseDataBrowse .iovModal.property .menuContentMain thead tr th:nth-of-type(5){
+    width:100px;
+}
+#databaseDataBrowse .iovModal.property .menuContentMain thead tr th:nth-of-type(6){
+    width:70px;
+}
+#databaseDataBrowse .iovModal.property .menuContentMain thead tr th:nth-of-type(7){
+    width:100px;
+}
+#databaseDataBrowse .iovModal.property .menuContentMain thead tr th:nth-of-type(8){
+    width:100px;
+}
+#databaseDataBrowse .iovModal.property .menuContentMain thead tr th:nth-of-type(9){
+    width:70px;
+}
+#databaseDataBrowse .iovModal.property .menuContentMain tbody tr td:nth-of-type(1){
+    font:400 14px "microsoft yahei";
+    line-height:30px;
+    vertical-align:middle ;
+}
+
+#databaseDataBrowse .iovModal.property .menuContentMain tbody tr td:nth-of-type(9)>span{
+    cursor:pointer;
+    font-size:18px;
+    vertical-align:middle;
+}
+#databaseDataBrowse .iovModal.property .form-group{
+    margin-bottom:0;
+}
+#databaseDataBrowse .iovModal.property .errorTips{
+    top:36px;
+}
+
+/*新加样式*/
+#databaseDataBrowse .content .user .treeBtn{
+    margin-left:5px;
+}
+
+#databaseDataBrowse .OneLVtreeIovModal .modal-input .modal-column{
+    width:100%;
+}
+#databaseDataBrowse .OneLVtreeIovModal .drag{
+    width: 500px;
+}
+
+#databaseDataBrowse .contentTable{
+	position: relative;
+}
+
+#databaseDataBrowse .contentTable>span{
+	/*position: absolute;*/
+	/*right: 10px;*/
+	margin-top:16px;
+    float: right;
+	font-size: 16px;
+	color:#000;
+	z-index: 2;
+	cursor:pointer;
+}
+#databaseDataBrowse .menuContentMain>.checkBoxList{
+	transition: all linear 0.3s;
+	position: absolute;
+	top:120px;
+	height:400px;
+	width:200px;
+	background-color:#fff;
+	border-radius: 3px;
+	box-shadow: 0 0 20px rgb(205,205,205);
+	z-index: 3;
+	opacity:0;
+	right:-200px;
+}
+
+#databaseDataBrowse .menuContentMain > .checkBoxList.listShow{
+    opacity:1;
+    height:400px;
+    right: 40px;
+}
+#databaseDataBrowse .menuContentMain>.checkBoxList.ng-enter{
+    opacity:0;
+}
+#databaseDataBrowse .menuContentMain>.checkBoxList.ng-enter-active{
+    opacity:1;
+}
+#databaseDataBrowse .menuContentMain>.checkBoxList.ng-leave-active{
+    height:0px;
+    opacity:0;
+}
+#databaseDataBrowse .menuContentMain>.checkBoxList>.head{
+    height:40px;
+    width:100%;
+    font-size:14px;
+    line-height: 40px;
+    vertical-align: middle;
+    text-align: center;
+    border-bottom:1px solid rgb(233,233,233)
+}
+#databaseDataBrowse .menuContentMain>.checkBoxList>.middle{
+    position: absolute;
+    top:40px;
+    bottom:50px;
+    left: 0;
+    right: 0;
+}
+#dataChdatabaseDataBrowseeck .menuContentMain>.checkBoxList>.middle ul{
+    height: 100%;
+    width: 100%;
+}
+#databaseDataBrowse .menuContentMain>.checkBoxList>.middle ul li{
+    height: 40px;
+    width: 100%;
+    padding:15px;
+}
+#databaseDataBrowse .menuContentMain>.checkBoxList>.middle ul li>span{
+    display: inline-block;
+    width: 140px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+#databaseDataBrowse .menuContentMain>.checkBoxList>.middle ul li .fieldsFilter ~ label{
+    font-size:16px;
+    width:24px;
+    position: relative;
+    top:-2px;
+}
+#databaseDataBrowse .menuContentMain>.checkBoxList>.middle ul li .fieldsFilter:checked ~ label.icon-check,#databaseDataBrowse .menuContentMain>.checkBoxList>.middle ul li .fieldsFilter ~ label.icon-check-empty{
+    display: inline-block;
+}
+#databaseDataBrowse .menuContentMain>.checkBoxList>.middle ul li .fieldsFilter:checked ~ label.icon-check-empty,#databaseDataBrowse .menuContentMain>.checkBoxList>.middle ul li .fieldsFilter ~ label.icon-check{
+    display: none;
+}
+
+#databaseDataBrowse .menuContentMain>.checkBoxList>.foot{
+    position: absolute;
+    bottom:0;
+    left: 0;
+    height:50px;
+    width:100%;
+    border-top:1px solid rgb(233,233,233);
+    text-align: center;
+    padding:11px 0;
+}
+#databaseDataBrowse .menuContentMain>.checkBoxList>.foot .iovFormButton{
+    padding:5px 20px;
+}
+#databaseDataBrowse .menuContentMain>.checkBoxList>.foot .iovFormButton.confirm{
+    margin-right:10px
+}
+#databaseDataBrowse .ngscroll-content-container{
+    min-width: 100%;
+}
+#databaseDataBrowse .contentBottom{
+    border-top: 1px #e9e9e9 solid;
+}
+#databaseDataBrowse .table-bordered{
+    border:none
+}
+#databaseDataBrowse .columnName{
+    width: 200px
+}
+#databaseDataBrowse .contentTable .tableindex{
+    width: 50px
+}
+/*动态设置表格中过长的的内容只显示部分====START====*/
+#databaseDataBrowse .table {
+    table-layout: fixed;
+}
+#databaseDataBrowse .table td {
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow: ellipsis;
+}
+/*动态设置表格中过长的的内容只显示部分====END====*/
+
+
+#databaseDataBrowse .leftMenuBar .iovoption {
+    width: 90%
+}

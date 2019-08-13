@@ -1,0 +1,887 @@
+<ul class="nav nav-tabs">
+    <li class="active"><a href="javascript:void(0)">基础配置</a></li>
+    <li><a href="javascript:void(0)">映射配置</a></li>
+</ul>
+<div class="tab-content">
+    <div id="baseConfig" class="active">
+        ${component | componentFormat('CommonTextInputComponent', 'label:步骤名称,mappingProp:pluginName,required:required')}
+        ${component | componentFormat('SingleInVarComponent', 'required: required')}
+
+        <div class="form-group">
+            <label class="col-sm-3 control-label">目标模式:<span class="necessary"> *</span></label>
+
+            <div class="col-sm-9">
+                <select class="form-control" ms-duplex-string="@actionType" required>
+                    <option ms-attr="{value: 'insert',selected: @actionType == 'insert'}">插入</option>
+                    <option ms-attr="{value: 'update',selected: @actionType == 'update'}">更新</option>
+                    <option ms-attr="{value: 'upinsert',selected: @actionType == 'upinsert'}">插入更新</option>
+                </select>
+            </div>
+        </div>
+        ${component | componentFormat('DataSourceComponent')}
+        <div class="form-group">
+            <label class="col-sm-3 control-label">目标表:<span class="necessary"> *</span></label>
+
+            <div class="col-sm-9">
+                <select class="form-control" ms-duplex-string="@tableName" required>
+                    <option value="">请选择</option>
+                    <option ms-attr="{value: el.name,selected: @tableName == el.name}" ms-for="el in @tableNameArr">
+                        {{el.name}}
+                    </option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div id="mapConfig">
+        <div class="form-group config-Fieldset" id="_div_mapf1">
+            <div>
+                <div class="col-xs-3">
+                    <fieldset>
+                        <legend>源字段</legend>
+                        <div style="height: 300px;overflow-y: auto;">
+                            <div class="list-group" id="sourceDiv">
+                                <div class="list-group-item" ms-for="el in @sourceFields"
+                                     ms-click="@selectItem($event, 's', el)"
+                                     ms-attr="{title:el.fieldlableName}">
+                                    {{el.fieldlableName}}
+                                </div>
+                            </div>
+
+                        </div>
+                    </fieldset>
+                </div>
+                <div class="col-xs-3" style="height: 300px;">
+                    <fieldset>
+                        <legend>目标字段</legend>
+                        <div style="height: 300px;overflow-y: auto;">
+                            <div class="list-group" id="targetDiv">
+                                <a class="list-group-item" ms-for="el in @targetFields"
+                                   ms-click="@selectItem($event, 't', el)"
+                                   ms-attr="{title:el.fieldlableName}">
+                                    {{el.fieldlableName}}
+                                </a>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+                <div class="col-xs-6" style="height: 300px;padding-left: 5px;font-size: 12px">
+                    <div style="width: 75px;float: left;height: 100%;">
+                        <div style="height: 100%;display: table">
+                            <div style="display: table-cell;vertical-align: middle;">
+                                <button type="button" class="btn btn-primary btn-sm" style="margin-bottom: 10px"
+                                        ms-click="@autoMapp('auto')">自动关联
+                                </button>
+                                <button type="button" class="btn btn-primary btn-sm" style="margin-bottom: 10px"
+                                        ms-click="@autoMapp()">增加关联
+                                </button>
+                                <button type="button" class="btn btn-primary btn-sm"
+                                        style="margin-bottom: 10px;margin-top: 30px"
+                                        ms-click="@removeMap()">
+                                    移出关联
+                                </button>
+                                <button type="button" class="btn btn-primary btn-sm" style="width:70px;"
+                                        ms-click="@resetMapp()">重置
+                                </button>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div style="float: none;">
+                        <fieldset>
+                            <legend>映射</legend>
+                            <div style="height: 300px;overflow-y: auto ;overflow-x:hidden;font-size: 14px">
+
+                                <table style="width:100%;table-layout: fixed; ">
+                                    <tr style="height: 23px" ms-for="el in @fieldMapList"
+                                        ms-click="@selectItem($event, 'map', el)"
+                                        ms-attr="{title:el.sourceTypeName.toLowerCase()==el.destTypeName.toLowerCase()?'':'源字段类型：'+el.sourceTypeName+'->目标字段类型：'+el.destTypeName+',可能存在类型强制转换,请注意。'}"
+                                    >
+                                        <td ms-class="el.sourceTypeName.toLowerCase()!=el.destTypeName.toLowerCase()?'warn_tr':''" style="width: 100px;overflow: hidden;white-space: nowrap;text-overflow:ellipsis;">
+                                            {{el.sourceName}}
+                                        </td>
+                                        <td style="width: 30px;white-space:nowrap">
+                                            <em ms-if="el.sourceTypeName.toLowerCase()!=el.destTypeName.toLowerCase()" ms-class="'warn_tr'" style="margin-left: 5px;margin-right: 5px">
+                                                ≠>
+                                            </em>
+                                            <em ms-if="el.sourceTypeName.toLowerCase()==el.destTypeName.toLowerCase()" style="margin-left: 5px;margin-right: 5px">
+                                                -->
+                                            </em>
+                                        </td>
+                                        <td ms-class="el.sourceTypeName.toLowerCase()!=el.destTypeName.toLowerCase()?'warn_tr':''" style="width: 100px;overflow: hidden;white-space: nowrap;text-overflow:ellipsis;">
+                                            {{el.destName}}
+                                        </td>
+                                        <td style="width: 53px;white-space:nowrap;margin-right: 3px">
+                                            <select ms-duplex-string="el.formateCode" style="width: 53px;"
+                                                    ms-attr="{title:el.formateCode}">
+                                                <option value="">默认</option>
+                                                <option ms-for="el2 in @dataFormatList"
+                                                        ms-attr="{title: el2.describe, value: el2.regex, selected: el2.regex == el.formateCode}">
+                                                    {{el2.describe}}
+                                                </option>
+                                            </select>
+                                        </td>
+
+                                    </tr>
+
+                                </table>
+                            </div>
+
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <fieldset style="padding-left: 6px;height: 33px;border: 0px">
+                <div style="height: 100%;">
+                    <label style="padding-top: 1px;float: left;margin-left: 20px" class="control-label">主键:<span
+                            class="necessary"> *</span></label>
+
+                    <div style="float: left ;margin-left: 7px">
+
+                        <select ms-duplex-string="@pkField" style="width: 130px;" required>
+                            <option value="">请选择</option>
+                            <option ms-for="el1 in @targetNames"
+                                    ms-attr="{value: el1.fieldlableName,selected: el1.fieldlableName == @pkField}">
+                                {{el1.fieldlableName}}
+                            </option>
+                        </select>
+                    </div>
+
+                    <label style="padding-top: 1px;float: left;margin-left: 30px" class="control-label">生成方式:<span
+                            class="necessary"> *</span></label>
+
+                    <div style="float: left;margin-left: 7px">
+                        <select ms-duplex-string="@pkMethod" style="width: 130px;">
+                            <option value="">默认</option>
+                            <option value="uuid">uuid</option>
+                            <option value="autoincrement">数据库自增长</option>
+
+                        </select>
+                    </div>
+
+                </div>
+            </fieldset>
+            <fieldset style="padding-left: 6px;">
+
+
+                <legend style="margin:10px;font-weight: bold;font-size: 14px">更新条件
+                    <button style="margin-left: 15px;" class="btn btn-primary btn-xs" ms-click="@addCon()">增加条件</button>
+                    <button class="btn btn-primary btn-xs" style="margin-left: 15px;" ms-click="@testCondition()">测试条件</button>
+                </legend>
+                <div>
+
+                    <table class="table table-bordered table-striped table-hover table-condensed term-table-zdl">
+                        <thead style="background-color: #d3d8e6;">
+                        <tr>
+                            <th style="width: 60px;">括弧</th>
+                            <th style="width: 140px;">字段名</th>
+                            <th style="width: 82px;">比较符</th>
+                            <th style="width: 60px;">值类型</th>
+                            <th style="width: 140px;">值</th>
+                            <th style="width: 60px;">括弧</th>
+                            <th style="width: 80px;" style="">与-或</th>
+                            <th style="width: 100px;">操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ms-for="el in @sqlConditionList">
+                            <td>
+                                <span ms-if="!el.conditionEditFlag">{{el.firstBracket}}</span>
+                                <select ms-duplex-string="el.firstBracket" ms-if="el.conditionEditFlag">
+                                    <option value="">默认</option>
+                                    <option value="(">(</option>
+
+                                </select>
+                            </td>
+                            <td style="overflow: hidden;white-space: nowrap;text-overflow:ellipsis;"
+                                ms-attr="{title:el.fieldName}">
+                                <span ms-if="!el.conditionEditFlag">{{el.fieldName}}</span>
+                                <select ms-duplex-string="el.fieldName" ms-if="el.conditionEditFlag"
+                                        style="width: 135px">
+                                    <option value="">请选择</option>
+                                    <option ms-for="el1 in @targetNames" ms-attr="{value: el1.fieldlableName,selected: el1.fieldlableName == el.fieldName}">
+                                        {{el1.fieldlableName}}
+                                    </option>
+                                </select>
+                            </td>
+                            <td>
+                                <span ms-if="!el.conditionEditFlag">{{el.condition | conditionTrans}}</span>
+                                <select ms-duplex-string="el.condition" ms-if="el.conditionEditFlag"
+                                        style="width: 79px">
+                                    <option value=''>请选择</option>
+                                    <option value='greaterequal'>大于等于</option>
+                                    <option value="greater">大于</option>
+                                    <option value='lessequal'>小于等于</option>
+                                    <option value="less">小于</option>
+                                    <option value="equal">等于</option>
+
+                                </select>
+                            </td>
+                            <td>
+                                <span ms-if="!el.conditionEditFlag">{{el.isConstant | isConstantFilter}}</span>
+                                <select ms-duplex-boolean="el.isConstant" ms-if="el.conditionEditFlag"
+                                        style="width: 50px">
+                                    <option value="true">常量</option>
+                                    <option value="false">变量</option>
+                                </select>
+                            </td>
+                            <td style="overflow: hidden;white-space: nowrap;text-overflow:ellipsis;"
+                                ms-attr="{title:el.value}">
+                                <span ms-if="!el.conditionEditFlag">{{el.value}}</span>
+                                <input type="text" ms-duplex-string="el.value"
+                                       ms-if="el.conditionEditFlag && el.isConstant" style="width: 135px;height: 20px;">
+                                <select ms-duplex-string="el.value" ms-if="el.conditionEditFlag && !el.isConstant"
+                                        style="width: 135px;">
+                                    <option value="">请选择</option>
+                                    <option ms-for="el1 in @sourceConstConList"
+                                            ms-attr="{value: el1.fieldlableName, selected: el1.fieldlableName == el.value}">
+                                        {{el1.fieldlableName}}
+                                    </option>
+                                </select>
+                            </td>
+                            <td>
+                                <span ms-if="!el.conditionEditFlag">{{el.sencondBracket}}</span>
+                                <select ms-duplex-string="el.sencondBracket" ms-if="el.conditionEditFlag">
+                                    <option value="">默认</option>
+
+                                    <option value=")">)</option>
+                                </select>
+                            </td>
+                            <td>
+                                <span ms-if="!el.conditionEditFlag">{{el.andOr}}</span>
+                                <select ms-duplex-string="el.andOr" ms-if="el.conditionEditFlag">
+                                    <option value="">请选择</option>
+                                    <option value="and">and</option>
+                                    <option value="or">or</option>
+                                </select>
+                            </td>
+                            <td>
+                                <button class="btn btn-primary btn-xs" ms-click="@conditionUpdate($event, 'update', el)"
+                                        style="margin-right: 10px">
+                                    <span ms-if="!el.conditionEditFlag">修改</span>
+                                    <span ms-if="el.conditionEditFlag">保存</span>
+                                </button>
+                                <button class="btn btn-primary btn-xs"
+                                        ms-click="@conditionUpdate($event, 'delete', el)">删除
+                                </button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </fieldset>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    require(["component", "wfdata", "jsonFieldMapping", "avalon", "underscore","base"], function (component, wfdata, jsonFieldMapping, avalon, _,base) {
+
+        avalon.filters.isConstantFilter = function (str) {
+            if (str) {
+                return "常量";
+            } else {
+                return "变量";
+            }
+        };
+
+        var mappingField = [
+            "actionType", "dbType", "dataSourceId", "tableName", "queryBuilderList", "fieldMapList", "pkInfo", "inValue", "outValue"
+        ];
+        jsonFieldMapping.setNodeSaveField(mappingField);
+
+        var tab = new component.Tab({
+            callback_tabChange: function ($li, index) {
+
+                if (index == 1) {
+
+                    var ava = wfdata.swapValue.avaWf;
+                    if (!ava) {
+                        throw new Error("tab 切换时候，avalon对象为空");
+                    }
+                    var tarObj = _.findWhere(ava.tableNameArr.$model, {name: ava.tableName});
+                    if (!tarObj) {
+                        avalon.error("getColumnsByTableId 查询发生错误");
+                        return;
+                    }
+                    wfdata.dataProxy.getColumnsByTableId(tarObj.id).done(function (data) {
+                        if (!data) {
+                            throw new Error("根据" + ava.tableName + "表名未查询获取到列信息");
+                            return;
+                        }
+                        data = JSON.parse(data.content);
+                        var arr = [],
+                                arr1 = [];
+                        ava.$fieldColumns.length = 0;
+                        _.each(data, function (value) {
+                            ava.$fieldColumns.push(jsonFieldMapping.createDataColumn("", value.fieldName, value.fieldType, value.fieldTypeName, value.fieldLength, ""));
+                            arr.push(jsonFieldMapping.createDataColumn("", value.fieldName, value.fieldType, value.fieldTypeName, value.fieldLength, ""));
+                            arr1.push(jsonFieldMapping.createDataColumn("", value.fieldName, value.fieldType, value.fieldTypeName, value.fieldLength, ""));
+                        });
+                        ava.targetFields = FilterTarget(arr);
+                        ava.targetNames = arr1;
+                    });
+                    tarObj = null;
+                    getInputList(ava.inValue);
+
+                }//end if
+
+            }
+        });
+
+        function FilterTarget(tarArr) {
+            var newArr = [];
+            _.each(tarArr, function (value) {
+                if (!TargetFilter(value.fieldlableName)) {
+                    newArr.push(jsonFieldMapping.createDataColumn("", value.fieldName, value.fieldType, value.fieldTypeName, value.fieldLength, ""));
+                }
+            });
+            return newArr;
+        }
+
+
+        var originalSourceList = null;//原始的源字段集合,用于删除映射时候，恢复使用
+        function getInputList(inVar) {
+            var relaNodes = window.parent.nodeUtil.getRelationshipSourceNodeByInVar(inVar);
+            if (!relaNodes || !relaNodes.jsonInfo) {
+                return;
+            }
+            var sourceNodeId = relaNodes.jsonInfo.activitiNodeId;
+            if (!sourceNodeId) {
+                return;
+            }
+            var ava = wfdata.swapValue.avaWf;
+            ava.$nodeSelectId = sourceNodeId;
+
+            originalSourceList = relaNodes.jsonInfo.columnList;
+            ava.sourceConstConList = originalSourceList;
+
+            var newArr = [];
+            _.each(originalSourceList, function (value) {
+                if (!SourceFilter(value.fieldlableName)) {
+                    newArr.push(jsonFieldMapping.createDataColumn("", value.fieldName, value.fieldType, value.fieldTypeName, value.fieldLength, ""));
+                }
+            });
+            newArr.length > 0 && (ava.sourceFields = newArr);
+            ava = null;
+            newArr = null;
+            relaNodes = null;
+        }
+
+        var allSymbol = ["=", "<>", "<", ">"];
+
+        /**
+         * model自定义属性定义
+         * @param avaConfig
+         */
+        function avalonCustomizeConfigInit(avaConfig) {
+            avaConfig.actionType = "insert";//目标模式
+            avaConfig.tableName = "";//目标表,双向绑定
+            avaConfig.tableNameArr = [];//目标表集合,select数据源
+
+            avaConfig.$nodeSelectId = "";//根据本配置页面的输入变量得到的源节点的节点id
+
+            avaConfig.sourceFields = [];//源节点字段集合
+            avaConfig.targetFields = [];//目标节点的表字段集合
+
+            avaConfig.$selectedSF = null;//选中的源字段
+            avaConfig.$selectedTF = null;//选中的目标字段
+            avaConfig.$selectedMap = null;//选中的映射
+
+            avaConfig.dataFormatList = [];//数据格式化
+
+            avaConfig.allSymbol = allSymbol;
+            avaConfig.sourceConstConList = [];//当为变量时候select
+            avaConfig.targetNames = [];//查询条件组合用
+            avaConfig.sqlConditionList = [];//查询条件集合
+            avaConfig.fieldMapList = [];//保存到后台的映射
+            avaConfig.pkInfo = {};
+            avaConfig.pkField = "";
+            avaConfig.pkMethod = "";
+            avaConfig.resetMapp = function () {
+
+                if (wfdata.swapValue.avaWf.fieldMapList.length === 0) {
+                    return;
+                }
+                $.confirm({
+                    text: "您确定要重置映射关系吗?", confirm: function () {
+                        wfdata.swapValue.avaWf.fieldMapList = [];
+                        var arr = [];
+                        _.each(wfdata.swapValue.avaWf.$fieldColumns, function (value) {
+                            arr.push(jsonFieldMapping.createDataColumn("", value.fieldName, value.fieldType, value.fieldTypeName, value.fieldLength, ""));
+                        });
+                        wfdata.swapValue.avaWf.targetFields = arr;
+
+                        var arr1 = [];
+                        _.each(originalSourceList, function (value) {
+                            arr1.push(jsonFieldMapping.createDataColumn("", value.fieldName, value.fieldType, value.fieldTypeName, value.fieldLength, ""));
+                        });
+                        wfdata.swapValue.avaWf.sourceFields = arr1;
+                        arr = arr1 = null;
+                    }
+                });
+
+            };
+            avaConfig.testCondition=function () {
+                test_ondition();
+            };
+            avaConfig.autoMapp = function () {
+                var ava = wfdata.swapValue.avaWf;
+
+                if (arguments.length > 0) {
+                    autoMapp();
+                } else {
+                    addMapp();
+                }
+                if (ava.pkField) {
+                    if (_.find(ava.fieldMapList.$model, {destName: ava.pkField})) {
+                        removePkMethod();
+                    }
+                    ;
+                }
+            };
+            avaConfig.removeMap = function () {
+                removeMap()
+            };
+            avaConfig.selectItem = function (event, type, item) {
+                var ava = wfdata.swapValue.avaWf;
+
+                if (type == "s") {
+                    $("#sourceDiv").find(".active").removeClass("active");
+                    $("#_div_mapf1").find(".test_tr").removeClass("test_tr");
+                    $(event.target).addClass("active");
+                    ava.$selectedSF = item;
+                } else if (type == "t") {
+                    $("#targetDiv").find(".active").removeClass("active");
+                    $("#_div_mapf1").find(".test_tr").removeClass("test_tr");
+                    $(event.target).addClass("active");
+                    ava.$selectedTF = item;
+                } else {
+                    $("#_div_mapf1").find(".active").removeClass("active");
+                    $("#_div_mapf1").find(".test_tr").removeClass("test_tr");
+                    $(event.currentTarget).addClass("test_tr");
+                    ava.$selectedMap = item;
+                }
+                ava = null;
+            };
+            //增加查询条件
+            avaConfig.addCon = function () {
+                wfdata.swapValue.avaWf.sqlConditionList.push({
+                    firstBracket: "",
+                    fieldName: "",
+                    fieldType: 0,
+                    condition: "equal",
+                    isConstant: false,
+                    value: "",
+                    sencondBracket: "",
+                    andOr: "",
+                    conditionEditFlag: true//是否为修改模式
+                })
+            };
+
+
+            //查询条件操作(包括修改与删除)
+            avaConfig.conditionUpdate = function (eve, type, item) {
+                if (type == "update") {
+                    if (item.conditionEditFlag) {
+                        //执行的是保存操作
+                        item.conditionEditFlag = false;
+                        if (item.fieldName) {
+                            var f1 = _.findWhere(wfdata.swapValue.avaWf.$fieldColumns, {fieldlableName: item.fieldName});
+                            f1 && (item.fieldType = parseInt(f1.fieldType));
+                            f1 = null;
+                        }
+                    } else {
+                        item.conditionEditFlag = true;
+                    }
+                } else {
+                    wfdata.swapValue.avaWf.sqlConditionList.remove(item);
+                }
+
+            }
+        }
+
+        /**
+         * 当avalon.define之后，可以进行model属性监控,$watch方法
+         */
+        function vmCustomizeDefineDoneCallback() {
+            var ava= wfdata.swapValue.avaWf;
+            // dsTypeId  dsId tableName  sourceFields targetFields fieldMapList
+            // pkField pkInfo pkMethod  sqlConditionList
+            // inValue
+            ava.$watch("dsTypeId",function (newValue,oldValue) {
+                if((newValue!=oldValue)&&oldValue){
+                    ava.dsId="";
+                }
+            });
+            ava.$watch("dsId", function (newValue,oldValue) {
+
+                if (newValue) {
+                    wfdata.dataProxy.getDataSourceTables(ava.dsId).done(function (data) {
+                        if (data.content) {
+                            ava.tableNameArr = JSON.parse(data.content);
+                        } else {
+                            ava.tableNameArr = [];
+                        }
+                    }).fail(function () {
+                        ava.tableNameArr = [];
+                    })
+                } else {
+                    ava.tableNameArr = [];
+                }
+                if((newValue!=oldValue)&&oldValue){
+                    ava.tableName="";
+                }
+            });
+            ava.$watch("tableName",function (newValue,oldValue) {
+
+                if((newValue!=oldValue)&&oldValue){
+                    resetMappManual();
+                    ava.targetFields=[];
+                    ava.sqlConditionList=[]
+                    ava.pkField="";
+                    ava.pkMethod="";
+                }
+            });
+            ava.$watch("inValue",function (newValue,oldValue) {
+                if((newValue!=oldValue)&&oldValue){
+                    resetMappManual();
+                    ava.sourceFields=[];
+                    ava.sqlConditionList=[];
+                }
+            });
+
+            ava.$watch("pkInfo", function (newValue) {
+                if (ava.pkInfo) {
+                    ava.pkField = ava.pkInfo.destName;
+                    ava.pkMethod = ava.pkInfo.pkMethod;
+                }
+            });
+            ava.$watch("pkField", function (newValue) {
+                ava.pkMethod = "";
+            });
+            ava.$watch("pkMethod", function (newValue) {
+
+                var obj=_.find(ava.fieldMapList.$model, {destName: ava.pkField});
+                if (obj&&ava.pkMethod) {
+                    removeMap(obj);
+                }
+            });
+            ava.$watch("sqlConditionList.*.fieldName",function (newValue,oldValue) {
+
+                if (newValue) {
+                    var item = _.findWhere(wfdata.swapValue.avaWf.sqlConditionList, {fieldName: newValue});
+                    var f1 = _.findWhere(wfdata.swapValue.avaWf.$fieldColumns, {fieldlableName: item.fieldName});
+                    f1 && (item.fieldType = parseInt(f1.fieldType));
+                    f1 = null;
+                    item=null;
+                }
+
+            });
+
+        }
+
+        function resetMappManual() {
+            wfdata.swapValue.avaWf.fieldMapList = [];
+            var arr = [];
+            _.each(wfdata.swapValue.avaWf.$fieldColumns, function (value) {
+                arr.push(jsonFieldMapping.createDataColumn("", value.fieldName, value.fieldType, value.fieldTypeName, value.fieldLength, ""));
+            });
+            wfdata.swapValue.avaWf.targetFields = arr;
+
+            var arr1 = [];
+            _.each(originalSourceList, function (value) {
+                arr1.push(jsonFieldMapping.createDataColumn("", value.fieldName, value.fieldType, value.fieldTypeName, value.fieldLength, ""));
+            });
+            wfdata.swapValue.avaWf.sourceFields = arr1;
+            arr = arr1 = null;
+        }
+        //自动关联
+        function autoMapp() {
+            var ava = wfdata.swapValue.avaWf,
+                    i = 0,
+                    j = 0,
+                    autoMapList = [];
+
+            ava.$selectedSF=null;
+            ava.$selectedTF=null;
+            $("#sourceDiv").find(".active").removeClass("active");
+            $("#targetDiv").find(".active").removeClass("active");
+            for (; i < ava.sourceFields.length; i++) {
+                for (; j < ava.targetFields.length; j++) {
+                    if (ava.sourceFields[i].fieldlableName.toUpperCase() == ava.targetFields[j].fieldlableName.toUpperCase()) {
+                        autoMapList.push({
+                            sf: _.clone(ava.sourceFields[i].$model),
+                            tf: _.clone(ava.targetFields[j].$model)
+                        });
+                        break;
+                    }
+                }
+                j = 0;
+            }//end for
+
+            i = 0;
+            for (; i < autoMapList.length; i++) {
+                ava.$selectedSF = autoMapList[i].sf;
+                ava.$selectedTF = autoMapList[i].tf;
+                addMapp();
+            }
+        }
+
+        function addMapp() {
+            var ava = wfdata.swapValue.avaWf;
+            if (!ava.$selectedTF || !ava.$selectedSF) {
+                return;
+            }
+            addField();
+            /*if(ava.$selectedSF.fieldType!=ava.$selectedTF.fieldType){
+                $.confirm({
+                    text: '源字段：'+ava.$selectedSF.fieldlableName+
+                    '['+ava.$selectedSF.fieldTypeName+']->目标字段：'+ava.$selectedTF.fieldlableName+
+                    '['+ava.$selectedTF.fieldTypeName+'],存在类型强制转换,确认继续关联映射吗？。',
+                    confirm: function () {
+                        addField();
+                    }
+                });
+            }else{
+                addField();
+            }*/
+        }
+        function addField(){
+            var ava = wfdata.swapValue.avaWf;
+            ava.fieldMapList.push({
+                sourceNodeId: ava.$nodeSelectId,
+                sourceName: ava.$selectedSF.fieldlableName,
+                sourceType: ava.$selectedSF.fieldType,
+                sourceTypeName: ava.$selectedSF.fieldTypeName,
+                sourceLength: ava.$selectedSF.fieldLength,
+
+                destName: ava.$selectedTF.fieldlableName,
+                destType: ava.$selectedTF.fieldType,
+                destTypeName: ava.$selectedTF.fieldTypeName,
+                destLength: ava.$selectedTF.fieldLength,
+                formateCode: ""
+            });
+            var sourceArr = ava.sourceFields;
+            var targetArr = ava.targetFields;
+
+            var index = _.findIndex(sourceArr, {fieldlableName: ava.$selectedSF.fieldlableName});
+            sourceArr.removeAt(index);
+            index = _.findIndex(targetArr, {fieldlableName: ava.$selectedTF.fieldlableName});
+            targetArr.removeAt(index);
+
+            ava.$selectedTF = null;
+            ava.$selectedSF = null;
+            sourceArr = null;
+            targetArr = null;
+            $("#sourceDiv").find(".active").removeClass("active");
+            $("#targetDiv").find(".active").removeClass("active");
+        }
+
+        function removePkMethod() {
+            if (wfdata.swapValue.avaWf.pkMethod) {
+                wfdata.swapValue.avaWf.pkMethod = "";
+            }
+        }
+
+        function removeMap() {
+
+            var ava = wfdata.swapValue.avaWf;
+            var mapF;
+            if (arguments.length == 1) {
+                mapF = arguments[0];
+            } else if (arguments.length == 0) {
+                mapF = ava.$selectedMap;
+            }
+
+            if (!mapF) {
+                return;
+            }
+            //删除显示映射字段
+            var index1 = -1;
+            //删除保存到后台的映射字段
+            index1 = _.findIndex(ava.fieldMapList.$model, {sourceName: mapF.sourceName, destName: mapF.destName});
+            if (index1 > -1) {
+                ava.fieldMapList.removeAt(index1);
+            }
+            //恢复目标字段
+            var tarF = _.findWhere(ava.$fieldColumns, {fieldlableName: mapF.destName});
+            if (tarF) {
+                ava.targetFields.push(jsonFieldMapping.createDataColumn("", tarF.fieldName,
+                        tarF.fieldType, tarF.fieldTypeName, tarF.fieldLength, ""));
+                tarF = null;
+            }
+            //恢复源字段
+            var arr1 = originalSourceList;
+            if (_.isArray(arr1)) {
+                var sF1 = _.findWhere(arr1, {fieldlableName: mapF.sourceName});
+                if (sF1) {
+                    ava.sourceFields.push(jsonFieldMapping.createDataColumn("", sF1.fieldName,
+                            sF1.fieldType, sF1.fieldTypeName, sF1.fieldLength, ""));
+                }
+                sF1 = null;
+                arr1 = null;
+            }
+            ava.$selectedMap = null;
+            mapF = null;
+            ava = null;
+        }
+        function test_ondition() {
+            var  ava=wfdata.swapValue.avaWf;
+            var obj={};
+
+            obj.queryBuilderList =ava.sqlConditionList ;
+            obj.dbType= ava.dsTypeId;
+            obj.dataSourceId= ava.dsId;
+            obj.tableName=ava.tableName;
+
+            var url = window.parent.restPath+window.parent.contextPath+"/etlSqlCheckRestServer/checkSql";
+            base.doPostData(url, JSON.stringify(obj)).done(function (data) {
+
+                var content=JSON.parse(data.content);
+                if(content){
+                    noty({
+                        layout: "center",
+                        timeout: 3000,
+                        type: "warning",
+                        text: data.message
+                    });
+                }else {
+                    noty({
+                        layout: "center",
+                        timeout: 3000,
+                        type: "warning",
+                        text: data.message
+                    });
+                }
+
+            });
+        }
+
+        var i1 = 0;
+
+        /**
+         * 根据节点id和字段名称判断是否存在于映射列表中
+         * @param fName 字段名称
+         * @returns {boolean} true or false
+         * @constructor
+         */
+        function SourceFilter(fName) {
+            i1 = 0;
+            var mapArr = wfdata.swapValue.avaWf.fieldMapList.$model,
+                    len = mapArr.length;
+            for (; i1 < len; i1++) {
+                if (mapArr[i1].sourceName === fName) {
+                    mapArr = null;
+                    return true;
+                }
+            }
+            mapArr = null;
+            return false;
+        }
+
+        function TargetFilter(fName) {
+            i1 = 0;
+            var mapArr = wfdata.swapValue.avaWf.fieldMapList.$model,
+                    len = mapArr.length;
+            for (; i1 < len; i1++) {
+                if (mapArr[i1].destName === fName) {
+                    mapArr = null;
+                    return true;
+                }
+            }
+            mapArr = null;
+            return false;
+        }
+
+        window.CustomizeInitFormValue = function () {
+
+        };
+        window.avalonCustomizeConfigInit = avalonCustomizeConfigInit;
+        window.vmCustomizeDefineDoneCallback = vmCustomizeDefineDoneCallback;
+        window.preloadInit = function () {
+            wfdata.dataProxy.getFormatItemsAsync().done(function (data) {
+                if (!data.content) {
+                    return;
+                }
+                var dfs = JSON.parse(data.content);
+                wfdata.swapValue.avaWf.dataFormatList = (_.isArray(dfs.rule) ? dfs.rule : []);
+            })
+        };
+        window.customizeFormValid = function () {
+
+            if (wfdata.swapValue.avaWf.sqlConditionList.length == 0 &&
+                    (wfdata.swapValue.avaWf.actionType == "update" || wfdata.swapValue.avaWf.actionType == "upinsert")) {
+                noty({
+                    layout: "center",
+                    timeout: 3000,
+                    type: "warning",
+                    text: "请至少在映射配置里新增一项更新条件!"
+                });
+                return false;
+            }
+            if (wfdata.swapValue.avaWf.fieldMapList.length == 0) {
+                noty({
+                    layout: "center",
+                    timeout: 3000,
+                    type: "warning",
+                    text: "请至少在映射配置里存在至少一项字段映射!"
+                });
+                return false;
+            }
+
+            function savePkInfo() {
+
+                var ava = wfdata.swapValue.avaWf;
+                var pkField = ava.pkField;
+                var pkObj = {};
+
+                var fieldMapObj = _.find(ava.fieldMapList, {destName: pkField});
+                var flag=fieldMapObj&&fieldMapObj.sourceName;
+
+                if (!flag&&!ava.pkMethod) {
+                    noty({
+                        layout: "center",
+                        timeout: 3000,
+                        type: "warning",
+                        text: "请指定主键生成方式!"
+                    });
+                    return false;
+                }
+
+                if (fieldMapObj) {
+                    pkObj = _.clone(fieldMapObj);
+                    pkObj.pkFlag = true;
+                    pkObj.pkMethod = ava.pkMethod;
+                } else {
+                    var destObj = _.find(ava.targetNames, {fieldlableName: pkField});
+                    if(!destObj){
+                        return true;
+                    }
+                    pkObj = {
+                        sourceNodeId: "",
+                        sourceName: "",
+                        sourceType: "",
+                        sourceTypeName: "",
+                        sourceLength: "",
+
+                        destName: destObj.fieldlableName,
+                        destType: destObj.fieldType,
+                        destTypeName: destObj.fieldTypeName,
+                        destLength: destObj.fieldLength,
+                        formateCode: "",
+                        pkFlag: true,
+                        pkMethod: ava.pkMethod
+                    };
+
+                }
+
+                ava.pkInfo = pkObj;
+                return true;
+            };
+            return savePkInfo()&&true;
+        }
+        window.initAvalon();
+    })
+</script>

@@ -1,0 +1,14 @@
+#databaseConfig .itemBtn {
+    width: 89.58px;
+    height: 33px;
+    background-color: rgb(48, 175, 174);
+    color: #FFF;
+    font: 400 16px 'microsoft yahei';
+}
+#databaseConfig .itemBtn span {
+    margin-right: 4px
+}
+#databaseConfig .iovModal .modal-body{
+	max-height: 600px;
+	overflow-y: auto;
+}

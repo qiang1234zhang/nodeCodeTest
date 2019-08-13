@@ -1,0 +1,13 @@
+#clusterManager .MenuBarContent{
+    width: 100%;
+    position: relative;
+    top:46px;
+    bottom:0;
+}
+
+#clusterManager .treeIovModal .modal-input .modal-column{
+    width:100%;
+}
+#clusterManager .treeIovModal .drag{
+    width: 500px;
+}

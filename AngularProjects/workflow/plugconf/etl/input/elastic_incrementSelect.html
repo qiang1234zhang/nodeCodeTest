@@ -1,0 +1,424 @@
+<div class="tab-content">
+    <div id="baseConfig" class="active">
+        ${component | componentFormat('CommonTextInputComponent', 'label:步骤名称,mappingProp:pluginName,required:required')}
+        ${component | componentFormat('DataSourceComponent_ES')}
+        <div class="form-group">
+            <label class="col-sm-3 control-label">数据文档名称:<span class="necessary"> *</span></label>
+            <div class="col-sm-9">
+                <select class="form-control" ms-duplex-string="@docType" required >
+                    <option value="">请选择</option>
+                    <option ms-attr="{value: el.name,selected: @docType == el.name}" ms-for="el in @tableNameArr">
+                        {{el.name}}
+                    </option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-3 control-label">增量字段:<span class="necessary"> *</span></label>
+            <div class="col-sm-5">
+                <select class="form-control" ms-duplex-string="@incrementField" required >
+                    <option value="">默认</option>
+                    <option ms-for="el in @incrementFieldList" ms-attr="{value: el.fieldlableName,selected: @incrementField == el.fieldlableName}" >{{el.fieldlableName}}</option>
+                </select>
+            </div>
+            <label class="col-sm-2 control-label">字段类型:<span class="necessary"> *</span></label>
+            <div class="col-sm-2">
+                <select class="form-control" ms-duplex-boolean="@incrementFieldType" disabled>
+                    <option value="">默认</option>
+                    <option ms-for="el in @incrementFieldTypeList" ms-attr="{value: el.value}" >{{el.name}}</option>
+                </select>
+            </div>
+        </div>
+
+        <fieldset style="margin-bottom: 10px;">
+            <legend style="margin:10px;font-weight: bold;">查询条件
+                <button class="btn btn-primary btn-xs" style="margin-left: 15px;" ms-click="@addCon()">新增条件</button>
+                <button class="btn btn-primary btn-xs" style="margin-left: 15px;" ms-click="@testCondition()">测试条件</button>
+            </legend>
+            <div class="col-sm-12">
+                <table class="table table-bordered table-striped table-hover table-condensed">
+                    <thead>
+                    <tr>
+                        <th style="">括弧</th>
+                        <th style="">字段名</th>
+                        <th>比较符</th>
+                        <th>值</th>
+                        <th style="">括弧</th>
+                        <th style="">与-或</th>
+                        <th style="width: 100px;">操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ms-for="el in @sqlConditionList">
+                        <td>
+
+                            <select ms-duplex-string="el.firstBracket">
+                                <option value="">请选择</option>
+                                <option value="(">(</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select ms-duplex-string="el.fieldName"  required>
+                                <option value="">请选择</option>
+                                <option ms-for="el1 in @allColumns" ms-attr="{selected: el1.fieldlableName == el.fieldName ,value: el1.fieldlableName}">
+                                    {{el1.fieldlableName}}
+                                </option>
+                            </select>
+                        </td>
+                        <td>
+
+                            <select ms-duplex-string="el.condition"  required>
+                                <option value=''>请选择</option>
+                                <option value='term'>等于</option>
+                                <option value='prefix'>%like</option>
+
+                            </select>
+                        </td>
+                        <td>
+
+                            <input type="text" ms-duplex-string="el.value"  required>
+                        </td>
+                        <td>
+
+                            <select ms-duplex-string="el.sencondBracket" >
+                                <option value="">请选择</option>
+
+                                <option value=")">)</option>
+                            </select>
+                        </td>
+                        <td>
+
+                            <select ms-duplex-string="el.andOr" >
+                                <option value="">请选择</option>
+                                <option value="and">and</option>
+                                <option value="or">or</option>
+                            </select>
+                        </td>
+                        <td>
+
+                            <button class="btn btn-primary btn-xs" ms-click="@conditionUpdate($event, 'delete', el)">删除
+                            </button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </fieldset>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">分包策略:</label>
+            <div class="col-sm-9">
+                <select class="form-control" ms-duplex-boolean="@isCustomizePack">
+                    <option value="false">默认</option>
+                    <option value="true">自定义</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group" ms-if="@isCustomizePack">
+            <label class="col-sm-3 control-label">分页大小:</label>
+            <div class="col-sm-9">
+                <select class="form-control" ms-duplex-number="@pageSize">
+                    <option value="0">请选择</option>
+                    <option value="1000">1000</option>
+                    <option value="2000">2000</option>
+                    <option value="3000">3000</option>
+                    <option value="4000">4000</option>
+                    <option value="5000">5000(推荐使用)</option>
+                    <option value="6000">6000</option>
+                    <option value="7000">7000</option>
+                    <option value="8000">8000</option>
+                    <option value="9000">9000</option>
+                    <option value="10000">10000</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group" ms-if="@isCustomizePack">
+            <label class="col-sm-3 control-label">分包大小:</label>
+            <div class="col-sm-9">
+                <select class="form-control" ms-duplex-number="@packageSize">
+                    <option value="0">请选择</option>
+                    <option value="10000">10000</option>
+                    <option value="20000">20000</option>
+                    <option value="30000">30000</option>
+                    <option value="40000">40000(推荐使用)</option>
+                    <option value="50000">50000</option>
+                    <option value="60000">60000</option>
+                    <option value="70000">70000</option>
+                    <option value="80000">80000</option>
+                </select>
+            </div>
+        </div>
+
+        ${component | componentFormat('CommonTextInputComponent', 'label:输出变量,mappingProp:outValue,required:required')}
+
+    </div>
+</div>
+<script type="text/javascript">
+    require(["component", "wfdata", "jsonFieldMapping","base"], function (component, wfdata, jsonFieldMapping,base) {
+        var mappingField = [
+            "dbType", "dataSourceId", "docType", "pageSize", "packageSize", "inValue", "outValue","queryBuilderList","incrementField","incrementFieldType"
+        ];
+        jsonFieldMapping.setNodeSaveField(mappingField);
+
+        var allSymbol = ["=", "<>", "<", ">"];
+
+        /**
+         * model自定义属性定义
+         * @param avaConfig
+         */
+
+        function avalonCustomizeConfigInit(avaConfig) {
+            avaConfig.isCustomizePack = false;//分包策略
+            avaConfig.pageSize = 0;
+            avaConfig.packageSize = 0;
+            avaConfig.sqlFieldList = [];//填写的sql执行字段列表
+            avaConfig.dsTypeId=0;  //数据源类型
+            avaConfig.docType = "";//数据文档名称
+            avaConfig.tableNameArr = [];//目标表集合,select数据源
+            avaConfig.allSymbol = allSymbol;
+            avaConfig.sqlConditionList = [];//查询条件集合
+            avaConfig.allColumns=[]; //查询表所有字段集合
+
+            avaConfig.incrementFieldList=[]; //增量字段
+            avaConfig.incrementFieldTypeList=[{name:"时间",value:"time"},{name:"数值",value:"long"}];//增量类型
+            avaConfig.incrementField="";
+            avaConfig.incrementFieldType="";
+
+            //增加查询条件
+            avaConfig.addCon = function () {
+                wfdata.swapValue.avaWf.sqlConditionList.push({
+                    firstBracket: "",
+                    fieldName: "",
+                    fieldType: 0,
+                    condition: "",
+                    value: "",
+                    sencondBracket: "",
+                    andOr: ""
+                })
+            };
+            avaConfig.testCondition = function () {
+
+                test_ondition();
+            };
+
+            //查询条件操作(包括修改与删除)
+            avaConfig.conditionUpdate = function (eve, type, item) {
+
+                if (type == "update") {
+                    if (item.fieldName) {
+                        var f1 = _.findWhere(wfdata.swapValue.avaWf.$fieldColumns, {fieldlableName: item.fieldName});
+                        f1 && (item.fieldType = parseInt(f1.fieldType));
+                        f1 = null;
+                    }
+
+                } else {
+                    wfdata.swapValue.avaWf.sqlConditionList.remove(item);
+                }
+
+            }
+        }
+
+        function test_ondition() {
+
+            var  ava=wfdata.swapValue.avaWf;
+            var obj={};
+
+            obj.queryBuilderList=ava.sqlConditionList;
+            obj.dbType= ava.dsTypeId;
+            obj.dataSourceId= ava.dsId;
+            obj.docType=ava.docType;
+
+            var url = window.parent.restPath+window.parent.contextPath+"/etlEsCheckRestServer/checkEs";
+            base.doPostData(url, JSON.stringify(obj)).done(function (data) {
+
+                var content=JSON.parse(data.content);
+                if(content){
+                    noty({
+                        layout: "center",
+                        timeout: 3000,
+                        type: "warning",
+                        text: data.message
+                    });
+                }else {
+                    noty({
+                        layout: "center",
+                        timeout: 3000,
+                        type: "warning",
+                        text: data.message
+                    });
+                }
+
+            });
+
+        }
+
+        window.saveTableTitle = function (items) {
+
+            wfdata.swapValue.avaWf.$fieldColumns = items;
+            dialog1.close();
+        }
+
+        /**
+         *页面打开时候初始化页面信息
+         * @constructor
+         */
+        function CustomizeInitFormValue() {
+            wfdata.swapValue.avaWf.dsTypeId="00000200";  //数据源类型
+            if (wfdata.swapValue.avaWf.pageSize) {
+                wfdata.swapValue.avaWf.isCustomizePack = true;
+            }
+            wfdata.swapValue.avaWf.showSqlBtn = false;
+        }
+
+
+        /**
+         * 当avalon.define之后，可以进行model属性监控,$watch方法
+         */
+        function vmCustomizeDefineDoneCallback() {
+            wfdata.swapValue.avaWf.$watch("isCustomizePack", function (newValue) {
+                if (newValue&&wfdata.swapValue.avaWf.pageSize==0) {
+                    wfdata.swapValue.avaWf.pageSize = 5000;
+                    wfdata.swapValue.avaWf.packageSize = 40000;
+                }
+                if(!newValue) {
+                    wfdata.swapValue.avaWf.pageSize = 0;
+                    wfdata.swapValue.avaWf.packageSize = 0;
+                }
+            });
+            wfdata.swapValue.avaWf.$watch("allColumns", function (newValue) {
+
+                if(newValue){
+                    initIncrementFieldInfo();
+                }
+            });
+
+            wfdata.swapValue.avaWf.$watch("dsTypeId",function (newValue,oldValue) {
+                if((newValue!=oldValue)&&oldValue){
+                    ava.dsId="";
+                }
+            })
+            wfdata.swapValue.avaWf.$watch("dsId", function (newValue,oldValue) {
+                if (newValue) {
+                    wfdata.dataProxy.getDataSourceTables(wfdata.swapValue.avaWf.dsId).done(function (data) {
+                        if (data.content) {
+                            wfdata.swapValue.avaWf.tableNameArr = JSON.parse(data.content);
+
+                        } else {
+                            wfdata.swapValue.avaWf.tableNameArr = [];
+                        }
+                    }).fail(function () {
+                        wfdata.swapValue.avaWf.tableNameArr = [];
+                    })
+                } else {
+                    wfdata.swapValue.avaWf.tableNameArr = [];
+                }
+
+                if((newValue!=oldValue)&&oldValue){
+                    ava.docType="";
+                }
+            });
+
+            wfdata.swapValue.avaWf.$watch("docType", function (newValue,oldValue) {
+
+                if (newValue) {
+                    requestColumns();
+                } else {
+
+                }
+                if((newValue!=oldValue)&&oldValue){
+                    ava.sqlConditionList=[];
+                }
+            });
+
+            wfdata.swapValue.avaWf.$watch("incrementField", function (newValue) {
+
+                /*if(ava.$fieldColumns.length!=0){
+                    initIncrementFieldInfo();
+                }*/
+
+                var longType=['integer','bigint','numeric'];
+                var timeType=['date','timestamp'];
+                if(newValue){
+                    var a= _.find(ava.incrementFieldList,{fieldName:newValue});
+                    if(timeType.indexOf(a.fieldTypeName.toLowerCase())!=-1){
+                        ava.incrementFieldType="time";
+                    }else if(longType.indexOf(a.fieldTypeName.toLowerCase())!=-1){
+                        ava.incrementFieldType="long";
+                    }else {
+                        ava.incrementFieldType="";
+                    }
+                }
+            });
+
+            var ava = wfdata.swapValue.avaWf;
+            //获取列字段信息
+            function requestColumns(){
+
+                if(ava.tableNameArr.length==0){
+                    wfdata.dataProxy.getDataSourceTables(wfdata.swapValue.avaWf.dsId).done(function (data) {
+                        if (data.content) {
+                            wfdata.swapValue.avaWf.tableNameArr = JSON.parse(data.content);
+                            findColumnsByDocType();
+                        } else {
+                            wfdata.swapValue.avaWf.tableNameArr = [];
+                        }
+                    }).fail(function () {
+                        wfdata.swapValue.avaWf.tableNameArr = [];
+                    })
+
+                }else{
+                    findColumnsByDocType();
+                }
+            }
+
+            function findColumnsByDocType(){
+
+                var tarObj = _.findWhere(ava.tableNameArr.$model, {name: ava.docType});
+                if (!tarObj) {
+                    avalon.error("getColumnsByTableId 查询发生错误1");
+                    return;
+                }
+                wfdata.dataProxy.getColumnsByTableId(tarObj.id).done(function (data) {
+                    if (!data) {
+                        throw new Error("根据" + ava.docType + "表名未查询获取到列信息1");
+                        return;
+                    }
+                    data = JSON.parse(data.content);
+                    var arr = [];
+
+                    _.each(data, function (value) {
+                        arr.push(jsonFieldMapping.createDataColumn("", value.fieldName, value.fieldType, value.fieldTypeName, value.fieldLength, ""));
+                    });
+
+                    ava.allColumns = arr;
+                    ava.$fieldColumns=arr;
+
+                });
+                tarObj = null;
+            };
+
+
+        }
+
+        function  initIncrementFieldInfo(){
+
+            wfdata.swapValue.avaWf.incrementFieldList.length=0;
+            var discernField=['integer','bigint','numeric','date','timestamp']; // INTEGER BIGINT FLOAT DOUBLE NUMERIC DECIMAL DATE TIMESTAMP
+            var a=_.clone(wfdata.swapValue.avaWf.allColumns);
+            _.each(a,function(obj){
+                if(obj.fieldTypeName&&discernField.indexOf(obj.fieldTypeName.toLowerCase())!=-1){
+                    wfdata.swapValue.avaWf.incrementFieldList.push(obj);
+                }
+            });
+        }
+        //页面里的avalon model定义接口，需要暴露出来到window对象
+        window.avalonCustomizeConfigInit = avalonCustomizeConfigInit;
+        window.CustomizeInitFormValue = CustomizeInitFormValue;
+        window.vmCustomizeDefineDoneCallback = vmCustomizeDefineDoneCallback;
+        //window
+
+        //开始初始化avalon对象
+        window.initAvalon();
+
+    })
+</script>

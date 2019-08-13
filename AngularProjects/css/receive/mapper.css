@@ -1,0 +1,193 @@
+#mapper .iovModal .modal-input .modal-column{
+    width: 50%;
+}
+#mapper .content{
+    position:absolute;
+    top:50px;
+    left:0;
+    right:0;
+    bottom:0;
+}
+#mapper .content .user{
+    width:230px;
+    height:100%;
+    padding:20px;
+    border-right:1.5px #C9C9C9 solid;
+    position: relative;
+    border-top:5px solid #F15959
+}
+#mapper .content .user .head{
+    width:100%;
+    padding:4px 25px;
+    font-size:14px;
+    margin-top: 20px;
+}
+#mapper .content .user ul{
+    position: absolute;
+    top:106px;
+    right:20px;
+    left:20px;
+    bottom:0;
+    background-color:#F1F0F0;
+    padding-top:8px;
+}
+#mapper .content .user ul li{
+    padding:8px 25px;
+    cursor:pointer;
+}
+#mapper .content .user ul li:hover{
+    background-color:#DFE0E0;
+}
+#mapper .content .user ul li.active{
+    background-color:#DFE0E0;
+}
+#mapper .content .user ul li span{
+    display: inline-block;
+    height:20px;
+    width:20px;
+    background-color:#DCDADA;
+    color:#FFF;
+    text-align: center;
+    line-height:20px;
+    vertical-align: middle;
+    margin-right:12px;
+}
+
+#mapper .content .user .searchbox{
+    position: relative;
+}
+#mapper .content .user .searchbox input{
+    border-radius:3px ;
+    border:2px solid #DCDCDC;
+}
+#mapper .content .user .searchbox input:focus{
+    border:1px solid #66afe9
+}
+#mapper .content .user .searchbox span{
+    position: absolute;
+    top:7px;
+    right:12px;
+    font-size:18px;
+    color:#C9C9C9;
+}
+
+#mapper .content .contentMain{
+    top:0;
+    left:230px;
+    padding:25px 40px;
+}
+#mapper .line{
+    height:45px;
+    width:100%;
+}
+#mapper .column{
+    height:43px;
+    width:50%;
+    float: left;
+}
+#mapper .columnRight .form-group{
+    margin-right:50px;
+}
+#mapper  .nameTip{
+    display: inline-block;
+    float: right;
+    margin-top:7px;
+    margin-right: 20px;
+    height:35px;
+    line-height: 35px;
+    color: #54B993;
+}
+#mapper .error{
+    width:50%;
+}
+#mapper .form-group{
+    float: right;
+    width:250px;
+    margin-top:10px;
+    margin-right:50px;
+}
+
+#mapper .iovModal .modal-input{
+    background-color: #fff;
+    padding-bottom: 10px;
+}
+#mapper .background{
+    margin-top:10px;
+    background-color: #EEEFEF;
+    height:54px;
+    padding-left:-4px;
+}
+#mapper .iovModal .errorTips{
+    left:80px;
+    top: 24px;
+}
+#mapper .iovModal.fixed .drag{
+    bottom:90px;
+}
+#mapper .tabContent{
+    width:100%;
+    position: absolute;
+    top: 200px;
+    bottom: 70px;
+    left:0;
+}
+#mapper .tabContent .ngscroll-content-container>div{
+    float:left;
+}
+#mapper .tabContentLeft{
+    position: absolute;
+    width:50%;
+}
+#mapper .tabContentRight{
+    width:798px;
+}
+#mapper .tabContentRight tr{
+    height:51px;
+}
+#mapper .tabContentRight select{
+    width:250px;
+    float: right;
+    margin-right:58px;
+}
+#mapper #create .drag,#mapper #edit .drag{
+    width:800px;
+    margin-left:-400px;
+}
+#mapper .ztree{padding:0;padding-left: 80px}
+#mapper .ztree * {font-size: 10pt;font-family:"Microsoft Yahei",Verdana,Simsun,"Segoe UI Web Light","Segoe UI Light","Segoe UI Web Regular","Segoe UI","Segoe UI Symbol","Helvetica Neue",Arial}
+#mapper .ztree li ul{ margin:0; padding:0}
+#mapper .ztree li {line-height:50px;}
+#mapper .ztree li a {width:200px;height:51px;padding-top: 0px;position: relative;top:1px}
+#mapper .ztree li a:hover {text-decoration:none; background-color: #E7E7E7;}
+#mapper .ztree li a span.button.switch {visibility:hidden}
+#mapper .ztree.showIcon li a span.button.switch {visibility:visible}
+#mapper .ztree li a.curSelectedNode {background-color:#D4D4D4;border:0;height:51px;}
+#mapper .ztree li span {line-height:50px;}
+#mapper .ztree li span.button {margin-top: -7px;}
+#mapper .ztree li span.button.switch {width: 16px;height: 16px;}
+
+#mapper .ztree li a.level0 span {font-size: 150%;font-weight: bold;}
+/*#mapper .ztree li span.button {background-image:url("./left_menuForOutLook.png"); *background-image:url("./left_menuForOutLook.gif")}*/
+#mapper .ztree li span.button.switch.level0 {width: 20px; height:20px}
+#mapper .ztree li span.button.switch.level1 {width: 20px; height:20px}
+#mapper .ztree li span.button.noline_open {background-position: 0 0;}
+#mapper .ztree li span.button.noline_close {background-position: -18px 0;}
+#mapper .ztree li span.button.noline_open.level0 {background-position: 0 -18px;}
+#mapper .ztree li span.button.noline_close.level0 {background-position: -18px -18px;}
+
+#mapper .tabContentRight ul li{
+    margin-top:10px;
+    width:250px;
+    float: left;
+    margin-left:84px;
+}
+
+
+
+
+
+
+
+
+
+

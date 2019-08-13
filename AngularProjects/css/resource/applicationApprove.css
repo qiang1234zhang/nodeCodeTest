@@ -1,0 +1,20 @@
+#applicationApprove .iovSearchBox {
+     width:auto;
+ }
+
+#applicationApprove .iovSearchBox .form-inline .form-control{
+    width:130px;
+}
+
+#applicationApprove .iovModal .modal-input .modal-column{
+    width:100%;
+}
+#applicationApprove .iovModal .modal-submit{
+    text-align: center;
+    padding: 0px 30px;
+}
+
+
+#applicationApprove .iovModal .modal-input .modal-column .form-group{
+    margin: 10px 0 4px 0;
+}

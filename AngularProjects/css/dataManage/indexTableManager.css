@@ -1,0 +1,16 @@
+#indexTableManage .iovModal#editProperty .drag{
+    width:1200px;
+    left: 80px;
+    top:100px;
+}
+#indexTableManage .iovModal .modal-input .modal-column{
+    width:100%;
+}
+
+#indexTableManage .drag{
+    width: 400px;
+}
+
+#indexTableManage .iovModal .modal-submit{
+    text-align: center;
+}

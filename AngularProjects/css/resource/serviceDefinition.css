@@ -1,0 +1,49 @@
+#serviceDefinition .drag {
+    width: 800px;
+}
+#serviceDefinition .itemBtn {
+    width: 89.58px;
+    height: 33px;
+    background-color: rgb(48, 175, 174);
+    color: #FFF;
+    font: 400 16px 'microsoft yahei';
+}
+#serviceDefinition .itemBtn span {
+    margin-right: 4px
+}
+
+#serviceDefinition .fieldList fieldset {
+    float: left;
+    width: 31%;
+    height: 299px;
+    margin-right: 15px;
+    margin-bottom: 15px;
+}
+#serviceDefinition .fieldList {
+    position: relative;
+}
+
+#serviceDefinition fieldset {
+    padding: .15em .625em .75em;
+    /*margin:0 2px;*/
+    border: 1px solid #3C763D;
+}
+
+#serviceDefinition fieldset legend {
+    padding: .5em .5em 0 .5em;
+    border: 0;
+    width: auto;
+    font-size: 14px;
+}
+
+#serviceDefinition .fieldsetUl {
+    height: 263px;
+    width: 101%;
+    overflow: auto;
+}
+
+#serviceDefinition .modal-body{
+    padding:0;
+    max-height: 600px;
+    overflow-y: auto;
+}

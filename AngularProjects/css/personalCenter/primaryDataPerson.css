@@ -1,0 +1,44 @@
+#primaryDataPerson .drag {
+    width: 800px;
+}
+#primaryDataPerson .itemBtn {
+    width: 89.58px;
+    height: 33px;
+    background-color: rgb(48, 175, 174);
+    color: #FFF;
+    font: 400 16px 'microsoft yahei';
+}
+#primaryDataPerson .itemBtn span {
+    margin-right: 4px
+}
+
+#primaryDataPerson .fieldList fieldset {
+    float: left;
+    width: 31%;
+    height: 299px;
+    margin-right: 15px;
+    margin-bottom: 15px;
+}
+#primaryDataPerson .fieldList {
+    position: relative;
+}
+
+#primaryDataPerson fieldset {
+    padding: .15em .625em .75em;
+    /*margin:0 2px;*/
+    border: 1px solid #3C763D;
+}
+
+#primaryDataPerson fieldset legend {
+    padding: .5em .5em 0 .5em;
+    border: 0;
+    width: auto;
+    font-size: 14px;
+}
+
+#primaryDataPerson .fieldsetUl {
+    height: 263px;
+    width: 101%;
+    overflow: auto;
+}
+

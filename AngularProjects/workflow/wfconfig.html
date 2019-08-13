@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en" style="height: 100%;" xmlns:>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="css/iov-workflow.css">
+    <link rel="stylesheet" type="text/css"
+          href="css/zTreeStyle.css">
+    <style type="text/css">
+        .tab-content {
+            padding: 10px;
+        }
+
+        .tab-content > div {
+            display: none;
+        }
+
+        .tab-content > div.active {
+            display: block;
+        }
+        .sk-rotating-plane {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left:50%;
+            width: 50px;
+            height: 40px;
+            margin-left: -25px;
+            margin-top: -20px;
+            text-align: center;
+            font-size: 10px;
+            z-index: 100;
+        }
+        @keyframes sk-waveStretchDelay {
+            0%, 40%, 100% {
+                transform: scaleY(0.4); }
+            20% {
+                transform: scaleY(1); } }
+        .sk-rotating-plane .sk-rect {
+            background-color: #2196f3;
+            height: 100%;
+            width: 7px;
+            display: inline-block;
+            margin: 0 3px 0 0;
+            animation: sk-waveStretchDelay 1.2s infinite ease-in-out;
+        }
+        .sk-rotating-plane .sk-rect1 {
+            animation-delay: -1.2s;
+        }
+        .sk-rotating-plane .sk-rect2 {
+            animation-delay: -1.1s;
+        }
+        .sk-rotating-plane .sk-rect3 {
+            animation-delay: -1s;
+        }
+        .sk-rotating-plane .sk-rect4 {
+            animation-delay: -0.9s;
+        }
+        .sk-rotating-plane .sk-rect5 {
+            animation-delay: -0.8s;
+        }
+        th{
+            text-align: left;
+        }
+        .list-group{
+            width: 100%;
+        }
+        .config-Fieldset fieldset legend{
+            margin:0px 0px 0px 20px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .config-Fieldset .col-xs-3{
+            padding-left: 10px;
+            padding-right: 0px;
+        }
+        .config-Fieldset .list-group-item{
+            border:0px;
+            height: 23px;
+            padding:2px 5px;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow:ellipsis;
+
+
+        }
+        .term-table-zdl{
+            margin-bottom: 10px;
+            width:100%;
+            table-layout: fixed;
+
+        }
+        .test_tr{
+            background-color: #337ab7;
+        }
+        .warn_tr{
+            color: #fc8a05;
+        }
+        #_div_mapf1{
+            margin-bottom: 8px;
+        }
+        .farLi{
+            float: left;
+        }
+        .sonLi{
+            float: right;
+        }
+        .farLi li{
+            list-style-type:none;
+            margin-top: 3px;
+        }
+        .sonLi li{
+            float: left;
+            margin: 0px 3px 0px 3px;
+            list-style-type:none;
+        }
+    </style>
+
+</head>
+<body style="height: 100%;">
+<form id="form1" class="form-horizontal " ms-controller="avalonWf" onsubmit="return false"
+      style="height: 100%;overflow-y: auto;overflow-x: hidden;position: relative">
+      <div class="sk-rotating-plane"><div class="sk-rect sk-rect1"></div><div class="sk-rect sk-rect2"></div><div class="sk-rect sk-rect3"></div><div class="sk-rect sk-rect4"></div><div class="sk-rect sk-rect5"></div></div>
+</form>
+<script type="text/html" id="template_DataSourceComponent">
+    <div class="form-group">
+        <label class="col-sm-3 control-label">数据源类型: <span class="necessary"> *</span></label>
+
+        <div class="col-sm-9">
+            <select class="form-control disabledSelect" ms-duplex-string="@dsTypeId" required  >
+                <option value="">请选择</option>
+                <option ms-attr="{value: el.id}" ms-for="el in @dsTypeLists">{{el.name}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-3 control-label">数据库名称:<span class="necessary"> *</span></label>
+
+        <div ms-class="@selectClass">
+            <select class="form-control disabledSelect" ms-duplex-string="@dsId" required >
+                <option value="">请选择</option>
+                <option ms-attr="{value: el.id,selected: @dsId == el.id}" ms-for="el in @dsLists">{{el.name}}
+                </option>
+            </select>
+        </div>
+        <div class="col-sm-2" ms-if="@showSqlBtn">
+            <button type="button" class="btn btn-primary" autocomplete="off"
+                    ms-click="@openTableSelect()">获取sql语句
+            </button>
+        </div>
+    </div>
+</script>
+
+<script type="text/html" id="template_DataSourceComponent_ES">
+    <div class="form-group">
+        <label class="col-sm-3 control-label">数据源类型:<span class="necessary"> *</span></label>
+
+        <div class="col-sm-9">
+            <select class="form-control" ms-duplex-string="@dsTypeId"  disabled  required >
+                <option value="">请选择</option>
+                <option ms-attr="{value: el.id,selected: @dsId == el.id}" ms-for="el in @dsTypeLists">{{el.name}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-3 control-label">数据库名称:<span class="necessary"> *</span></label>
+        <div class="col-sm-9">
+            <select class="form-control disabledSelect" ms-duplex-string="@dsId" required {{{disabled}}}>
+                <option value="">请选择</option>
+                <option ms-attr="{value: el.id,selected: @dsId == el.id}" ms-for="el in @dsLists">{{el.name}}
+                </option>
+            </select>
+        </div>
+    </div>
+</script>
+
+<script type="text/html" id="template_SqlInputComponent">
+    <div class="form-group">
+        <label class="col-sm-3 control-label">sql:<span class="necessary"> *</span></label>
+
+        <div class="col-sm-9" >
+            <textarea  style="width: 100%;height: 150px;" class="form-control"
+                      ms-duplex-string="@{{{mappingProp}}}" {{{required}}} {{{readonly}}}></textarea>
+        </div>
+    </div>
+</script>
+<script type="text/html" id="template_CommonTextInputComponent">
+    <div class="form-group">
+        <label class="col-xs-3 control-label">{{{label}}}:
+
+            <!-- if: {{{required}}} -->
+            <span class="necessary"> *</span>
+            <!-- else -->
+
+            <!-- /if -->
+        </label>
+
+        <div class="col-xs-9">
+            <input type="text" class="form-control" ms-duplex-string="@{{{mappingProp}}}" {{{readonly}}} {{{required}}}>
+        </div>
+    </div>
+</script>
+<script type="text/html" id="template_MultiInVarComponent">
+    <div class="form-group">
+        <label class="col-xs-3 control-label">输入变量:</label>
+
+        <div class="col-xs-9" style="position: relative">
+            <input type="text" class="form-control" ms-duplex-string="@inValue" ms-click="@inVarInputClick()">
+
+            <div id="div_inVar123" ms-visible="@isShowInVarSelect"
+                 style="width: 565px;position: absolute;top:35px;left: 15px;z-index: 100;max-height: 200px;overflow-y: auto;">
+                <div class="list-group" ms-click="@inVarSelectClick()">
+                    <a class="list-group-item" ms-for="el in @inVarLists">
+                        {{el.name}}<input type="checkbox" ms-attr="{value: el.name, checked: el.checked}"
+                                          name="inVarChks"
+                                          style="margin-left: 10px;"/>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+<script type="text/html" id="template_SingleInVarComponent">
+    <div class="form-group">
+        <label class="col-xs-3 control-label">输入变量:
+        <!-- if: {{{required}}} -->
+        <span class="necessary"> *</span>
+        <!-- else -->
+
+        <!-- /if -->
+        </label>
+        <div class="col-xs-9">
+            <select class="form-control" ms-duplex-string="@inValue" {{{required}}}>
+                <option value="">请选择</option>
+                <option ms-attr="{value: el.name,selected: @inValue == el.name}" ms-for="el in @inVarLists">
+                    {{el.name}}
+                </option>
+            </select>
+        </div>
+    </div>
+</script>
+<script type="text/html" id="template_TreeComponent">
+    <div style="padding: 5px;">
+        <form role="form">
+            <div class="form-group">
+                <label>选择表</label>
+
+                <div style="height: 300px;overflow: auto;">
+                    <ul class="ztree" id="treeSelectTable">
+
+                    </ul>
+                </div>
+
+            </div>
+        </form>
+    </div>
+</script>
+<script type="text/html" id="template_FileSourceComponent">
+    <div class="form-group">
+        <label class="col-sm-3 control-label">文件系统类型:<span class="necessary"> *</span></label>
+
+        <div class="col-sm-9">
+            <select class="form-control" ms-duplex-string="@fileTypeId" required>
+                <option value="">请选择</option>
+                    <option ms-attr="{value: el.id}" ms-for="el in @fileTypeLists">{{el.name}}</option>
+                </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-3 control-label">文件系统名称:<span class="necessary"> *</span></label>
+
+        <div class="col-sm-9">
+            <select class="form-control" ms-duplex-string="@fileId" required>
+                <option value="">请选择</option>
+                <option ms-attr="{value: el.id,selected: @fileId == el.id}" ms-for="el in @fileLists">{{el.sourceName}}
+                </option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-3 control-label">
+            <!-- if: {{{changeFile_fieldName}}} -->
+            {{{changeFile_fieldName}}}
+            <!-- else -->
+            选择文件
+            <!-- /if -->
+            <span class="necessary"> *</span></label>
+        <div class="col-sm-9">
+            <input type="hidden" ms-duplex-string="@isDir" />
+            <select class="form-control" ms-duplex-string="@filePath" required>
+                <option value="">请选择</option>
+                <option ms-attr="{value: el.id,selected: @filePath == el.id}" ms-for="el in @filePathLists">{{el.name}}
+                </option>
+            </select>
+        </div>
+
+    </div>
+
+</script>
+<script type="text/html" id="template_FileComponent">
+    <div class="form-group">
+        <label class="col-sm-3 control-label">数据源类型:<span class="necessary"> *</span></label>
+
+        <div class="col-sm-9">
+            <select class="form-control" ms-duplex-string="@fileTypeId" required {{{disabled}}}  >
+                <option value="">请选择</option>
+                <option ms-attr="{value: el.id}" ms-for="el in @fileTypeLists">{{el.name}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-3 control-label">文件系统名称:<span class="necessary"> *</span></label>
+
+        <div class="col-sm-9">
+            <select class="form-control" ms-duplex-string="@fileId" required>
+                <option value="">请选择</option>
+                <option ms-attr="{value: el.id,selected: @fileId == el.id}" ms-for="el in @fileLists">{{el.sourceName}}
+                </option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+            <label class="col-sm-3 control-label">文件目录:<span class="necessary"> *</span></label>
+        <div class="col-sm-9">
+            <input type="hidden" ms-duplex-string="@isDir"/>
+            <select class="form-control" ms-duplex-string="@filePath" required>
+                <option value="">请选择</option>
+                <option ms-attr="{value: el.id,selected: @filePath == el.id}" ms-for="el in @filePathLists">{{el.name}}
+                </option>
+            </select>
+        </div>
+
+    </div>
+
+</script>
+<script type="text/html" id="template_FileSourceComponent_EX">
+    <div class="form-group">
+        <label class="col-sm-3 control-label">文件系统类型:<span class="necessary"> *</span></label>
+
+        <div class="col-sm-9">
+            <select class="form-control" ms-duplex-string="@fileTypeId" required>
+                <option value="">请选择</option>
+                <option ms-attr="{value: el.id}" ms-for="el in @fileTypeLists">{{el.name}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-3 control-label">文件系统名称:<span class="necessary"> *</span></label>
+
+        <div class="col-sm-9">
+            <select class="form-control" ms-duplex-string="@fileId" required>
+                <option value="">请选择</option>
+                <option ms-attr="{value: el.id,selected: @fileId == el.id}" ms-for="el in @fileLists">{{el.sourceName}}
+                </option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-3 control-label">
+            <!-- if: {{{changeFile_fieldName}}} -->
+            {{{changeFile_fieldName}}}
+            <!-- else -->
+            选择文件
+            <!-- /if -->
+            :
+            <span class="necessary"> *</span></label>
+        <div class="col-sm-9">
+            <input type="hidden" ms-duplex-string="@isDir"/>
+            <select class="form-control" ms-duplex-string="@filePath" required>
+                <option value="">请选择</option>
+                <option ms-attr="{value: el.id,selected: @filePath == el.id}" ms-for="el in @filePathLists">{{el.name}}
+                </option>
+            </select>
+        </div>
+
+    </div>
+
+</script>
+<script type="text/html" id="template_RuleSourceComponent">
+    <div class="form-group">
+        <label class="col-sm-3 control-label">自定义规则:</label>
+
+        <div class="col-sm-9">
+            <select class="form-control zdl" ms-duplex-string="@rulesScriptId">
+                <option value="">请选择</option>
+                <option ms-attr="{value: el.id,selected: @rulesScriptId == el.id}" ms-for="el in @rulesScriptLists">{{el.name}}</option>
+            </select>
+        </div>
+    </div>
+</script>
+
+<script type="text/javascript" src="js/Tool_JavaScripts/require.js"
+        data-main="js/IOV_JavaScripts/workflow.js?v=5"></script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+.ui-slider-tick {
+  position: absolute;
+  background-color: #aaa;
+  width: 2px;
+  height: 8px;
+  top: 16px;
+}
+
+.ui-slider {
+  position: relative;
+}
+
+.ui-slider-out-of-bounds {
+  position: absolute;
+  background-color: #EEE;
+  height: 100%;
+}
+
+.ui-slider-tip {
+  position: absolute;
+  top: 2px;
+  left: 0px;
+  width: 21px;
+  text-align: center;
+  font-size: 0.8em;
+}

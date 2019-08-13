@@ -1,0 +1,136 @@
+<div id="serviceManager">
+    <div class="contentTitle"><span class="icon-map-marker"></span>平台管理>服务管理</div>
+    <div class="contentMain">
+        <div class="contentTool">
+            <ul class="iovButtonGroup">
+                <li>
+					<span class="create" data-toggle="modal" data-backdrop="static" data-target="#create" ng-click="addForm.$setPristine();getAddPage()">
+					<span class="icon-plus"></span>新建</span>
+                </li>
+            </ul>
+            <div class="iovSearchBox">
+                <div class="input-group">
+                    <input type="text" ng-model="key" class="form-control" ng-change="pageChanged()" ng-keyup="mykey($event)" placeholder="请输入<服务名称>搜索">
+                    <span class="input-group-btn">
+		 		        <button class="btn btn-default" type="button" ng-click="pageChanged()"><span class="icon-search"></span></button>
+					</span>
+                </div>
+            </div>
+        </div>
+        <div class="contentTable">
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered">
+                    <thead>
+                    <tr>
+                        <th><input type="checkbox" ng-click="selectAll=!selectAll" ng-checked="selectAll"/>序号</th>
+                        <th>服务名称</th>
+                       <!-- <th>服务参数</th>-->
+                        <th>服务访问地址</th>
+                        <th>服务数据提交方式</th>
+                       <!-- <th>服务描述</th>-->
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="x in dataItems">
+                        <td><input type="checkbox"  ng-checked="selectAll" class="massDeletion" id="{{x.id}}"/>{{$index + 1}}</td>
+                        <td>{{x.name}}</td>
+                      <!--  <td>{{x.parameter}}</td>-->
+                        <td>{{x.url}}</td>
+                        <td>{{x.mode}}</td>
+                        <!--<td>{{x.depict}}</td>-->
+                        <td class="pointer"><span class="icon-pencil" data-toggle="modal" data-backdrop="static" data-target="#edit" ng-click="editForm.$setPristine();getUpdatePage(x)"></span></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="contentBottom" ng-if="isShowContentBottom">
+            <span class="iovButton delete"  ng-click="massDeletion()">删除</span>
+            <uib-pagination ng-change="selectAll=false;pageChanged()" items-per-page="$parent.pageItemNum" total-items="$parent.pageTotal" ng-model="$parent.pageNum" max-size="5" first-text="首页" previous-text="0" next-text="0" last-text="尾页" boundary-links="true" boundary-link-numbers="true">
+            </uib-pagination>
+        </div>
+    </div>
+
+    <!-----------------------服务新建------------------------------->
+    <div class="modal fade iovModal" id="create">
+        <div class="drag" drag>
+            <div class="modal-content">
+                <div class="modal-header" drag-cursor drag-handle>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">新建</h4>
+                </div>
+                <div class="modal-body">
+                    <form name="addForm" ng-submit="create(addForm.$valid)" novalidate="novalidate">
+                        <div class="modal-input">
+                            <div class="modal-column">
+                                <controls title="服务名称" controls="addForm.serviceName" messages='[{"name":"required","text":"请填写服务名称"},{"name":"maxlength","text":"最大长度32个字符"}]' unique="该服务名称已存在">
+                                    <input type="text" class="form-control" name="serviceName" placeholder="*服务名称" ng-model="create.serviceName" ng-pattern="" ng-focus="create.isChecked=true;addForm.serviceName.$setValidity('unique', true);" ng-blur="removeRepeat(create.serviceName)" ng-maxlength="32" required/>
+                                </controls>
+                                <controls title="服务参数" controls="addForm.parameter" messages='[{"name":"required","text":"请填写服务参数"},{"name":"pattern","text":"请输入正确的服务参数"},{"name":"maxlength","text":"最大长度1000个字符"}]'>
+                                    <input type="text" class="form-control" name="parameter" placeholder="*服务参数" ng-model="create.parameter" ng-maxlength="1000"  ng-pattern="" required/>
+                                </controls>
+                                <controls title="服务访问地址" controls="addForm.url" messages='[{"name":"required","text":"请填写服务访问地址"},{"name":"maxlength","text":"最大长度250个字符"}]'>
+                                    <input type="text" class="form-control" name="url" placeholder="*服务访问地址" ng-model="create.url" ng-maxlength="250" ng-pattern="" required/>
+                                </controls>
+                                <controls title="服务数据提交方式" controls="addForm.mode" messages='[{"name":"required","text":"请填写服务数据提交方式"},{"name":"maxlength","text":"最大长度32个字符"}]'>
+                                    <input type="text" class="form-control" name="mode" placeholder="*服务数据提交方式" ng-model="create.mode" ng-maxlength="32" ng-pattern="" required/>
+                                </controls>
+                                <controls title="服务描述" controls="addForm.depict" messages='[{"name":"required","text":"请填写服务描述"},{"name":"pattern","text":"请输入正确的服务描述"},{"name":"maxlength","text":"最大长度250个字符"}]'>
+                                    <input type="text" class="form-control" name="depict" placeholder="*服务描述" ng-model="create.depict" ng-maxlength="250" ng-pattern="" required/>
+                                </controls>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="modal-submit">
+                            <button type="submit" class="iovFormButton btn confirm" ng-disabled="addForm.$invalid">确定</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-----------------------服务编辑------------------------------->
+    <div class="modal fade iovModal" id="edit">
+        <div class="drag" drag>
+            <div class="modal-content">
+                <div class="modal-header" drag-cursor drag-handle>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">编辑</h4>
+                </div>
+                <div class="modal-body">
+                    <form name="editForm" ng-submit="edit(editForm.$valid)" novalidate="novalidate">
+                        <div class="modal-input">
+                            <div class="modal-column">
+
+                                <controls title="服务名称" controls="editForm.serviceName" messages='[{"name":"required","text":"请填写服务名称"},{"name":"maxlength","text":"最大长度32个字符"}]' unique="该服务名称已存在">
+                                    <input type="text" class="form-control" name="serviceName" placeholder="*服务名称" ng-model="edit.serviceName" ng-maxlength="32"  ng-pattern="" ng-focus="edit.isChecked=true;editForm.serviceName.$setValidity('unique', true);" ng-blur="removeRepeat(edit.serviceName)" required/>
+                                </controls>
+                                <controls title="服务参数" controls="editForm.parameter" messages='[{"name":"required","text":"请填写服务参数"},{"name":"pattern","text":"请输入正确的服务参数"},{"name":"maxlength","text":"最大长度1000个字符"}]'>
+                                    <input type="text" class="form-control" name="parameter" placeholder="*服务参数" ng-model="edit.parameter" ng-maxlength="1000"  ng-pattern="" required/>
+                                </controls>
+                                <controls title="服务访问地址" controls="editForm.url" messages='[{"name":"required","text":"请填写服务访问地址"},{"name":"maxlength","text":"最大长度250个字符"}]'>
+                                    <input type="text" class="form-control" name="url" placeholder="*服务访问地址" ng-model="edit.url" ng-pattern=""ng-maxlength="250"  required/>
+                                </controls>
+                                <controls title="服务数据提交方式" controls="editForm.mode" messages='[{"name":"required","text":"请填写服务数据提交方式"},{"name":"maxlength","text":"最大长度32个字符"}]'>
+                                    <input type="text" class="form-control" name="mode" placeholder="*服务数据提交方式" ng-model="edit.mode" ng-pattern="" ng-maxlength="32" required/>
+                                </controls>
+                                <controls title="服务描述" controls="editForm.depict" messages='[{"name":"required","text":"请填写服务描述"},{"name":"pattern","text":"请输入正确的服务描述"},{"name":"maxlength","text":"最大长度250个字符"}]'>
+                                    <input type="text" class="form-control" name="depict" placeholder="*服务描述" ng-model="edit.depict" ng-maxlength="250"  ng-pattern="" required/>
+                                </controls>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="modal-submit">
+                            <button type="submit" class="iovFormButton confirm" ng-disabled="editForm.$invalid">确定</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <del modal-id="massDeletion" content="您即将删除{{massDeletionArr.length}}条数据。您确定要继续吗？" click="delete()"></del>
+    <tips content=content animate="animate"></tips>
+
+</div>

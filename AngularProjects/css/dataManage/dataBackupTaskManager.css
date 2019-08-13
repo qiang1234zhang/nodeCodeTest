@@ -1,0 +1,11 @@
+#dataBackupTaskManager .iovModal .modal-input .modal-column{
+    width:100%;
+}
+
+#dataBackupTaskManager .drag{
+    width: 420px;
+}
+
+#dataBackupTaskManager .iovModal .modal-submit{
+    text-align: center;
+}

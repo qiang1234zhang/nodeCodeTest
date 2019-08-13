@@ -1,0 +1,34 @@
+#roleManagement .iovModal .modal-input .modal-column{
+    width:100%;
+}
+
+#roleManagement .drag{
+    width: 400px;
+}
+
+#roleManagement #rolePermission .drag{
+    width: 400px;
+    margin-left:-200px;
+    top:90px;
+    bottom:90px;
+}
+#roleManagement #rolePermission .drag .modal-body{
+   /*padding:20px 0 20px 110px;*/
+   padding:20px 0 20px 20px;
+}
+#roleManagement #rolePermission .drag .modal-body>div{
+   height:100%;
+   width:100%;
+}
+
+#roleManagement .iovModal .modal-submit{
+    text-align: center;
+}
+
+#roleManagement #rolePermission .ztree * {
+    font-size: 14px;
+}
+
+#roleManagement .ztree li span.button.ico_open{margin-right:2px; background:url("../../img/console/ztree2.png") 0 0; vertical-align:top; *vertical-align:middle}
+#roleManagement .ztree li span.button.ico_close{margin-right:2px; background:url("../../img/console/ztree2.png") 0 0; vertical-align:top; *vertical-align:middle}
+#roleManagement .ztree li span.button.ico_docu{margin-right:2px; background:url("../../img/console/ztree3.png") 0 0; vertical-align:top; *vertical-align:middle}

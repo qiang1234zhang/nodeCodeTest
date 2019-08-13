@@ -1,0 +1,92 @@
+<div class="tab-content">
+    <div id="baseConfig" class="active">
+        ${component | componentFormat('CommonTextInputComponent','label:步骤名称,mappingProp:pluginName,required:required')}
+
+
+        <div ms-if="@isMultiton">
+            ${component | componentFormat('SingleInVarComponent', 'required: required')}
+        </div>
+
+        <div ms-if="@isMultiton">
+            ${component | componentFormat('CommonTextInputComponent', 'label:迭代变量,mappingProp:outValue,required:required')}
+        </div>
+
+
+        <div class="form-group" ms-visible="false">
+            <label class="col-xs-3 control-label">是否顺序执行:</label>
+            <div class="col-xs-9">
+                <select class="form-control" ms-duplex-number="@orderDo">
+                    <option value="true">是</option>
+                    <option value="false">否</option>
+
+                </select>
+            </div>
+        </div>
+    </div>
+
+</div>
+<script type="text/javascript">
+    require(["component", "wfdata", "jsonFieldMapping", "underscore"], function (component, wfdata, jsonFieldMapping, _) {
+        var mappingField = [
+            "inValue", "outValue"
+        ];
+        jsonFieldMapping.setNodeSaveField(mappingField);
+        /**
+         * model自定义属性定义
+         * @param avaConfig
+         */
+        function avalonCustomizeConfigInit(avaConfig) {
+            avaConfig.isMultiton = false;
+            avaConfig.orderDo = true;
+        }
+
+        /**
+         *页面打开时候初始化页面信息
+         * @constructor
+         */
+        function CustomizeInitFormValue() {
+
+            var a=window.parent.nodeUtil.subFlowItems;
+            var ava = wfdata.swapValue.avaWf;
+            ava.isMultiton=true;
+            if(a.isMultiton){
+                //ava.isMultiton = a.isMultiton;
+                ava.inValue=a.inValue;
+                ava.outValue =a.outValue;
+                ava.orderDo = a.orderDo;
+            }
+        }
+
+        /**
+         * 当avalon.define之后，可以进行model属性监控,$watch方法
+         */
+        function vmCustomizeDefineDoneCallback() {
+
+        }
+        //页面里的avalon model定义接口，需要暴露出来到window对象
+        window.avalonCustomizeConfigInit = avalonCustomizeConfigInit;
+        window.CustomizeInitFormValue = CustomizeInitFormValue;
+        window.vmCustomizeDefineDoneCallback = vmCustomizeDefineDoneCallback;
+
+        window.customizeSave = function (nodeJson) {
+            var ava = wfdata.swapValue.avaWf;
+            if(ava.isMultiton){
+                window.parent.nodeUtil.subFlowItems.isMultiton=ava.isMultiton;
+                window.parent.nodeUtil.subFlowItems.inValue=ava.inValue;
+                window.parent.nodeUtil.subFlowItems.outValue=ava.outValue;
+                window.parent.nodeUtil.subFlowItems.orderDo=ava.orderDo;
+            }else {
+                window.parent.nodeUtil.subFlowItems.isMultiton=ava.isMultiton;
+                window.parent.nodeUtil.subFlowItems.inValue="";
+                window.parent.nodeUtil.subFlowItems.outValue="";
+                window.parent.nodeUtil.subFlowItems.orderDo=true;
+            }
+
+            window.parent.flashapi.closePopup();
+        }
+        //开始初始化avalon对象
+        window.initAvalon();
+
+
+    })
+</script>

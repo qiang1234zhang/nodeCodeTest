@@ -1,0 +1,25 @@
+#fileExportManager .iovModal .modal-input .modal-column{
+    width:100%;
+}
+
+#fileExportManager .drag{
+    width: 400px;
+}
+
+#fileExportManager #rolePermission .drag{
+    width: 400px;
+    margin-left:-200px;
+    top:90px;
+    bottom:90px;
+}
+#fileExportManager #rolePermission .drag .modal-body{
+    padding:20px 0 20px 110px;
+}
+#fileExportManager #rolePermission .drag .modal-body>div{
+    height:100%;
+    width:100%;
+}
+
+#fileExportManager .iovModal .modal-submit{
+    text-align: center;
+}

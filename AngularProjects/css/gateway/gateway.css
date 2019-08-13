@@ -1,0 +1,598 @@
+.clear{
+    clear: both;
+}
+#deviceTypeManage .modal-input .btn{
+    border-radius: 0;
+    border: 1px solid #3c763d;
+}
+#deviceManage #details .drag{
+    position: relative;
+    top:32px;
+    left:30%;
+    width: 600px;
+}
+#deviceManage #createCar .drag,
+#deviceManage #editCar .drag
+{
+    left:30%;
+}
+#carTypeManage #create .drag,
+#carTypeManage #edit .drag
+{
+    left:30%;
+}
+#deviceManage  #details .modal-column{
+    width: 50%;
+}
+/*车辆管理*/
+ #unbind .drag,
+ #bind .drag {
+    width:400px;
+}
+#bind .modal-input .modal-column,
+#unbind .modal-input .modal-column{
+    width: 100%;
+}
+/*覆盖bootstrap样式*/
+#dataFormatDefinition  #Details .drag{
+    width: 1008px;
+    height: 605px;
+    //margin-left: -504px;
+    left:250px;
+
+}
+#dataFormatDefinition #Details .modal-left{
+    float: right;
+    width: 60%;
+    background-color: #FFFFFF;
+    border: 2px solid #E5E5E5;
+    min-height: 415px;
+}
+#dataFormatDefinition #Details .modal-leftTop{
+    width: 100%;
+    height: 35px;
+    padding-left: 30px;
+    background: linear-gradient(to top,#eee,#fff);
+    padding-top: 5px;
+}
+#dataFormatDefinition #Details .modal-leftTop span {
+    color: #899CAD;
+}
+#dataFormatDefinition #Details .modal-leftTop .Search{
+    height: 25px;
+    width: 345px;
+    background-color: #fff;
+    border-radius: 150px;
+    padding-left: 15px;
+    border: 1px solid #eee;
+    outline: none;
+
+}
+.modal-leftTop .icon-search{
+    cursor: pointer;
+}
+#dataFormatDefinition #Details .RemoveActive{
+    background-color: red;
+}
+#dataFormatDefinition #Details .modal-input{
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+#dataFormatDefinition #Details .modal-leftBottom{
+    padding-top: 20px;
+    max-height: 340px;
+
+}
+#dataFormatDefinition #Details .modal-leftBottom table {
+    width: 508px;
+    height: 80%;
+    margin:0 auto;
+    overflow: hidden;
+    position: relative;
+}
+#dataFormatDefinition #Details .modal-input .modal-leftBottom table thead{
+
+    background-color: #F2F0F0;
+}
+#dataFormatDefinition #Details .modal-input .modal-leftBottom table tbody tr td:first-child,
+#dataFormatDefinition #Details .modal-input .modal-leftBottom table thead th:first-child{
+    width: 40px;
+}
+#dataFormatDefinition #Details .modal-input .modal-leftBottom table tbody tr td:last-child,
+#dataFormatDefinition #Details .modal-input .modal-leftBottom table thead th:last-child{
+    width: 80px;
+}
+#dataFormatDefinition #Details .modal-input .modal-leftBottom table thead th{
+    font-size: 12px;
+    text-align: left;
+}
+#dataFormatDefinition #Details .modal-input .modal-leftBottom table tbody{
+    height: 300px;
+    display:block;
+    overflow-y:scroll;
+}
+
+#dataFormatDefinition #Details .modal-input .modal-leftBottom table thead,
+#dataFormatDefinition #Details .modal-input .modal-leftBottom table tbody tr{
+    display:table;
+    width:100%;
+    table-layout:fixed;
+}
+#dataFormatDefinition #Details .modal-input .modal-leftBottom table tbody td{
+    font-size: 12px;
+    text-align: left;
+
+}
+#dataFormatDefinition #Details .modal-leftBottom table  th{
+    border: none;
+}
+#dataFormatDefinition #Details .modal-leftBottom table  td {
+    border: none;
+}
+
+#deviceTypeManage #create  .modal-body .modal-input   .btn-default{
+    background-color: #F5F7F7;
+}
+#deviceTypeManage #create  .modal-body .modal-input   .btn-default:hover{
+    background-color: #F5F7F7;
+}
+#deviceTypeManage #create  .modal-body .modal-input   .btn-default:focus{
+    background-color: #fff;
+}
+
+
+
+/*中间按钮*/
+#dataFormatDefinition #Details .modal-input .modal-middle{
+    width: 10%;
+    float: right;
+    min-height:415px;
+
+}
+#dataFormatDefinition #Details .modal-input .modal-middle .btnBox{
+    height:200px;
+    margin-top: 180px;
+
+}
+#dataFormatDefinition #Details .modal-input .modal-middle .btnBox button{
+    height: 34px;
+    width: 87px;
+    border-radius: 5px;
+    color: #F3FAFC;
+    background-color: #C1C3C3;
+    display: block;
+    margin:0 auto;
+    margin-bottom:33px;
+}
+#dataFormatDefinition #Details .modal-input .modal-middle .btnBox .addBtn{
+    background-color: #48B8D5;
+}
+#dataFormatDefinition #Details .modal-input .modal-right{
+    background-color: #FFFFFF;
+    width: 30%;
+    border: 2px solid #E5E5E5;
+    float :left;
+    height: 415px;
+    position: relative;
+
+}
+/*右边数*/
+#dataFormatDefinition #Details .modal-input .modal-right .modal-rightNav{
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+ }
+#dataFormatDefinition #Details #treeDemo{
+    overflow: scroll;
+    height: 365px;
+}
+#dataFormatDefinition #Details .modal-input .modal-right .modal-rightNav>ul li{
+    display: inline-block;
+    width: 50%;
+    height: 35px;
+    text-align: center;
+    line-height: 35px;
+    border-right: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 15px;
+    cursor: pointer;
+    background-color: #75BCDD;
+}
+#dataFormatDefinition #Details .modal-input .modal-right .modal-rightNav>ul li:hover{
+    border-bottom: 2px solid #ddd;
+}
+#dataFormatDefinition #Details .modal-input .modal-right .modal-rightNav>ul .lastLi{
+    border-right: none;
+}
+#dataFormatDefinition #contentBox .drag {
+    width: 400px;
+}
+#dataFormatDefinition #contentBox .drag .zTreeDemoBackground {
+    width: 397px;
+    height: 400px;
+    margin-top: 15px;
+    overflow-y:scroll;
+}
+
+#dataFormatDefinition #contentBox .drag .ztree{
+    padding-left: 50px;
+
+}
+#dataTransmissionManage .contentMain {
+    position: absolute;
+    top: 50px;
+    bottom: 0;
+    left: 250px;
+    right: 0;
+    padding: 15px;
+}
+/*#dataTransmissionManage .lefContent{*/
+    /*border:1px solid #ddd;*/
+    /*border-top:5px solid #F35755;*/
+    /*width: 235px;*/
+    /*height: 100%;*/
+/*}*/
+/*#dataTransmissionManage #treeBox{*/
+    /*margin-top: 18px;*/
+    /*margin-left: 25px;*/
+    /*width: 188px;*/
+    /*height:80%;*/
+    /*background-color: #F1F0F0;*/
+    /*padding-top:2px;*/
+/*}*/
+/*#dataTransmissionManage #treeBox .treeBoxHeader{*/
+    /*margin: 4px;*/
+    /*height: 26px;*/
+    /*background-color: #EEF7F4;*/
+    /*border:1px solid #F1F0F0;*/
+    /*border-left: 4px solid #53C2B2;*/
+    /*width: 96%;}*/
+
+
+
+/*******************************************************************/
+#dataTransmissionManage .content{
+    position:absolute;
+    top:50px;
+    left:0;
+    right:0;
+    bottom:0;
+}
+#dataTransmissionManage .content .user{
+    position: absolute;
+    width:250px;
+    height:100%;
+    border-right: 1.5px #C9C9C9 solid;
+    position: relative;
+    border-top: 5px solid #F15959;
+}
+#dataTransmissionManage .content .user .searchbox{
+    position: relative;
+}
+#dataTransmissionManage .content .user .searchbox input{
+    border-radius:3px ;
+    border:2px solid #DCDCDC;
+}
+#dataTransmissionManage .content .user .searchbox span{
+    position: absolute;
+    top:7px;
+    right:12px;
+    font-size:18px;
+    color:#C9C9C9;
+}
+#dataTransmissionManage .content .user .head{
+    width:100%;
+    padding:4px 25px;
+    font-size:14px;
+}
+
+#dataTransmissionManage .content .contentMain{
+    top:0;
+    left:230px;
+    padding:25px 40px;
+}
+#dataTransmissionManage .iovModal#create .modal-input .modal-column,#dataMonitor .iovModal#import .modal-input .modal-column{
+    width:100%
+}
+#dataTransmissionManage .iovModal#edit .modal-input .modal-column,#dataMonitor .iovModal#import .modal-input .modal-column{
+    width:100%
+}
+#dataTransmissionManage .iovModal#create .drag,#dataMonitor .iovModal#import .drag{
+    width:400px;
+}
+#dataTransmissionManage .iovModal#edit .drag,#dataMonitor .iovModal#import .drag{
+    width:400px;
+}
+#dataTransmissionManage .iovModal#property .modal-submit{
+    padding:40px 55px;
+    height:auto
+}
+#dataTransmissionManage .iovModal#property .modal-submit button{
+    margin-left:40px;
+}
+#dataTransmissionManage .iovModal#property .drag{
+    width:1000px;
+    margin-top:100px;
+}
+#dataTransmissionManage .iovModal#property .contentMain{
+    position: static;
+    padding:0;
+}
+#dataTransmissionManage .iovModal#property .contentMain .contentTool{
+    height:75px;
+    padding:20px 25px;
+}
+#dataTransmissionManage .iovModal#property .contentMain .contentTool .iovButtonGroup li span{
+    background-color:#6BC3DB ;
+    font-size:14px;
+    color:#FFF;
+    letter-spacing:1px ;
+
+}
+
+#dataTransmissionManage .iovModal#property .contentMain table{
+    background-color:#F5F7F7 ;
+}
+#dataTransmissionManage .iovModal#property .contentTable table thead{
+    background-color:inherit;
+    color:#000
+}
+#dataTransmissionManage .iovModal#property .contentTable .table > thead > tr > th{
+    border:none;
+}
+#dataTransmissionManage .iovModal#property .contentTable table tbody tr{
+    border-top:1px #E6E8E7 solid;
+}
+#dataTransmissionManage .iovModal#property .contentMain tbody tr td input,#dataMonitor .iovModal#property .contentMain tbody tr td select{
+    height:30px;
+    border:2px #c9c9c9 solid;
+}
+#dataTransmissionManage .iovModal#property .contentMain tbody tr td input:focus,#dataMonitor .iovModal#property .contentMain tbody tr td select:focus{
+    border-color: #66afe9;
+    outline: 0;
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, .6);
+}
+#dataTransmissionManage .iovModal#property .contentMain tbody tr td:nth-of-type(1){
+    font:bold 12px "microsoft yahei"
+}
+#dataTransmissionManage .iovModal#property .contentMain tbody tr td:nth-of-type(2){
+    width:150px;
+}
+#dataTransmissionManage .iovModal#property .contentMain tbody tr td:nth-of-type(3){
+    width:140px;
+}
+#dataTransmissionManage .iovModal#property .contentMain tbody tr td:nth-of-type(4){
+    width:100px;
+}
+#dataTransmissionManage .iovModal#property .contentMain tbody tr td:nth-of-type(5){
+    width:100px;
+}
+#dataTransmissionManage .iovModal#property .contentMain tbody tr td:nth-of-type(8){
+    width:60px;
+}
+
+#dataTransmissionManage .content .user .searchbox{
+    position: relative;
+    width: 200px;
+    margin-top: 20px;
+    margin-left: 25px
+}
+#dataTransmissionManage .content .user .searchbox input{
+    border-radius:3px ;
+    border:2px solid #DCDCDC;
+}
+#dataTransmissionManage .content .user .searchbox input:focus{
+    border:1px solid #66afe9
+}
+#dataTransmissionManage .content .user .searchbox span{
+    position: absolute;
+    top:7px;
+    right:12px;
+    font-size:18px;
+    color:#C9C9C9;
+}
+
+#dataTransmissionManage  .checkBox{
+    width:200px;
+    margin-left:25px;
+    margin-top:20px;
+    color:#fff;
+    /*background:#222629;*/
+    /*border:1px #424357 solid;*/
+    border-radius:3px ;
+    z-index:5;
+}
+#dataTransmissionManage .allocate .sidebar-menu{
+    position: absolute;
+    width:200px;
+    top:60px;
+    bottom:20px;
+    background-color: #F1F0F0;
+}
+
+#dataTransmissionManage .allocate>span{
+    display: block;
+    height:35px;
+    width:100%;
+    background-color:#424357 ;
+    font-size:16px;
+    line-height:35px;
+    vertical-align: middle;
+    padding-left:20px;
+}
+#dataTransmissionManage .allocate>span button.close{
+    margin:5px;
+    color:#62656E;
+}
+#dataTransmissionManage .allocate .checkBoxContainer>ul{
+    max-height:500px;
+}
+/*一级菜单*/
+#dataTransmissionManage .menu-first{
+    height:40px;
+    width:100%;
+    font-family: "microsoft yahei";
+    line-height:32px;
+    padding-left:14px;
+
+}
+#dataTransmissionManage .menu-first>input{
+    float:left;
+    margin:15px 5px 0 0;
+}
+#dataTransmissionManage .menu-first a{
+    display: block;
+    padding: 0;
+    /*color:#fff;*/
+    font:14px "microsoft yahei";
+    line-height:40px;
+    vertical-align: middle;
+}
+#dataTransmissionManage .menu-first a .icon-user{
+    margin:10px;
+}
+#dataTransmissionManage .menu-first a>span.icon-sort-up{
+    margin-top:15px;
+}
+/*一级菜单鼠标划过状态*/
+#dataTransmissionManage .menu-first:hover{
+    background-color: #d6d4d5;
+}
+/*二级菜单*/
+#dataTransmissionManage .menu-second li{
+    height:40px;
+    width:190px;
+    display:inline-block;
+    padding-left:60px;
+    color:#7C7B79;
+    font-size:14px;
+    line-height:40px;
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+#dataTransmissionManage  .menu-second li:hover{
+    background-color: #d6d4d5;
+    color: #66afe9;
+}
+#dataTransmissionManage  .menu-second li.active{
+    background-color: #d6d4d5;
+}
+#dataTransmissionManage .menu-second li div{
+    height:100%;
+    width:100%;
+}
+#dataTransmissionManage .menu-second li:last-of-type div{
+    border-bottom:none;
+}
+#dataTransmissionManage .menu-second li div>input{
+    float:left;
+    margin:15px 5px 0 0;
+}
+#dataTransmissionManage  .menu-first a .icon-user{
+    float: left;
+    display: inline-block;
+    height: 20px;
+    width: 20px;
+    background-color: #DCDADA;
+    color: #FFF;
+    text-align: center;
+    line-height: 20px;
+    vertical-align: middle;
+    margin-right: 12px;
+}
+#dataTransmissionManage .checkBoxContainer{
+    margin-bottom:0;
+    background-color:transparent;
+    border:none;
+    box-shadow:none;
+    border-radius:none;
+}
+#dataTransmissionManage .checkBoxContainer.panel{
+    width:100%;
+}
+
+
+#dataTransmissionManage .onMessageTip{
+    display: inline-block;
+    float: right;
+    margin-right:10px;
+
+}
+#dataTransmissionManage .menu-first .onUserTip{
+    display: inline-block;
+    float: right;
+    margin:0;
+    padding-right:20px;
+}
+
+#dataTransmissionManage .iovModal .errorTips{
+    z-index: 99;
+}
+
+/*******************************************************************/
+/*信号格式定义*/
+#signalsDefinition .modal.in .drag{
+    width: 400px;
+}
+#signalsDefinition .iovModal .modal-input{
+    padding-bottom: 20px;
+}
+#signalsDefinition .iovModal .modal-input .modal-column{
+    width:100%;
+}
+#eventsDefinition .modal.in .drag{
+    width: 400px;
+}
+#eventsDefinition .iovModal .modal-input .modal-column{
+    width:100%;
+}
+#dataFormatDefinition .modal.in .drag{
+    width: 400px;
+}
+#dataFormatDefinition .iovModal .modal-input .modal-column{
+    width:100%;
+}
+#dataFormatDefinition #contentBox .drag{
+   height: 600px;
+}
+#dataFormatDefinition #contentBox .modal-content{
+    height: 550px;
+}
+#dataFormatDefinition #contentBox .modal-content .left{
+    height: 400px;
+}
+#dataFormatDefinition .dataButton{
+    margin:21px 3px;
+    color: #fff;
+    border-radius: 3px;
+    background-color: #36B084;
+    font-size: 14px;
+    padding: 6px 15px;
+    line-height: normal;
+    font-family: "microsoft yahei";
+}
+#dataFormatDefinition .Enabled{
+    margin-left: 10px;
+}
+
+#carsManage  #editCar.modal.in .drag,
+#carsManage  #createCar.modal.in .drag {
+    width: 400px;
+}
+#carsManage #editCar.iovModal .modal-input .modal-column,
+#carsManage  #createCar.iovModal .modal-input .modal-column{
+    width:100% ;
+}
+/*适配器*/
+
+#accessAdapter  #edit.modal.in .drag,
+#accessAdapter  #create.modal.in .drag {
+    width: 400px;
+}
+#accessAdapter #edit.iovModal .modal-input .modal-column,
+#accessAdapter  #create.iovModal .modal-input .modal-column{
+    width:100% ;
+}
+
+

@@ -1,0 +1,233 @@
+<div id="deptManager">
+    <div class="contentTitle"><span class="icon-map-marker"></span>平台管理>用户管理</div>
+    <div class="leftMenuBar">
+        <div class="btn-group treeBtn">
+            <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-backdrop="static" data-target="#create" ng-click="addForm.$setPristine();getAddPage()"><span class="icon-plus"></span> 新建</button>
+            <button type="button" class="btn btn-default btn-sm isEdit" data-toggle="modal" data-backdrop="static" data-target="#edit" ng-click="editForm.$setPristine();getUpdatePage()"><span class="icon-pencil" ></span> 修改</button>
+            <button type="button" class="btn btn-default btn-sm isDelete" ng-click="deleteTree()"><span class="icon-remove"></span> 删除</button>
+        </div>
+        <ul iovztree class="ztree" id="deptTree"></ul>
+    </div>
+    <div class="menuContentMain">
+        <div class="contentTool">
+            <ul class="iovButtonGroup">
+                <li>
+					<span class="create" data-toggle="modal" data-backdrop="static" data-target="#userCreate" ng-click="userAddForm.$setPristine();getUserAddPage()">
+					<span class="icon-plus"></span>新建</span>
+                </li>
+            </ul>
+            <div class="iovSearchBox">
+                <div class="input-group">
+                    <input type="text" ng-model="key" class="form-control" ng-change="userPageChanged()" ng-keyup="mykey($event)" placeholder="请输入<用户名称>搜索">
+                    <span class="input-group-btn">
+		 		        <button class="btn btn-default" type="button" ng-click="userPageChanged()"><span class="icon-search"></span></button>
+					</span>
+                </div>
+            </div>
+        </div>
+        <div class="contentTable">
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered">
+                    <thead>
+                    <tr>
+                        <th><input type="checkbox" ng-click="selectAll=!selectAll" ng-checked="selectAll"/>序号</th>
+                        <th>用户名称</th>
+                        <th>手机号</th>
+                        <th>E-Mail</th>
+                        <!--<th>地址</th>-->
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="x in dataItems">
+                        <td><input type="checkbox"  ng-checked="selectAll" class="massDeletion" id="{{x.id}}"/>{{$index + 1}}</td>
+                        <td>{{x.userName}}</td>
+                        <td>{{x.phone}}</td>
+                        <td>{{x.email}}</td>
+                        <!--<td>{{x.address}}</td>-->
+                        <td class="pointer"><span class="icon-pencil" data-toggle="modal" data-backdrop="static" data-target="#userEdit" ng-click="userEditForm.$setPristine();getUserUpdatePage(x)"></span></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="contentBottom" ng-if="isShowContentBottom">
+            <span class="iovButton delete"  ng-click="userMassDeletion()">删除</span>
+            <uib-pagination ng-change="selectAll=false;userPageChanged()" items-per-page="$parent.pageItemNum" total-items="$parent.pageTotal" ng-model="$parent.pageNum" max-size="5" first-text="首页" previous-text="0" next-text="0" last-text="尾页" boundary-links="true" boundary-link-numbers="true">
+            </uib-pagination>
+        </div>
+
+    </div>
+    <!-----------------------用户新建------------------------------->
+    <div class="modal fade iovModal" id="userCreate">
+        <div class="drag" drag>
+            <div class="modal-content">
+                <div class="modal-header" drag-cursor drag-handle>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">新建</h4>
+                </div>
+                <div class="modal-body">
+                    <form name="userAddForm" ng-submit="userCreate(userAddForm.$valid)" novalidate="novalidate">
+                        <div class="modal-input">
+                            <div class="modal-column">
+                                <controls title="用户登录名" controls="userAddForm.loginName" messages='[{"name":"required","text":"请填写用户登录名"},{"name":"pattern","text":"请输入正确格式的用户登录名不能包含中文"},{"name":"maxlength","text":"长度不能超过40位"}]' unique="该用户登录名已存在">
+                                    <input type="text" class="form-control" name="loginName" placeholder="*用户登录名" ng-model="userCreate.loginName" ng-maxlength="40" ng-pattern="/^[^\u4e00-\u9fa5]+$/" ng-focus="userCreate.isChecked=true;userAddForm.loginName.$setValidity('unique', true);" ng-blur="removeLoginNameRepeat(userCreate.loginName)" required/>
+                                </controls>
+                                <controls title="密码" controls="userAddForm.passWord" messages='[{"name":"required","text":"请填写密码"},{"name":"minlength","text":"最少为6位"},{"name":"maxlength","text":"最长为32位"},{"name":"pattern","text":"请输入正确格式的密码"}]'>
+                                    <input type="password" class="form-control" name="passWord" placeholder="*6到32位字符" ng-model="userCreate.passWord" ng-pattern="/^[\w\?%&=\-\._]+$/" ng-maxlength="32" ng-minlength="6"  required/>
+                                </controls>
+                                <controls title="用户名称" controls="userAddForm.userName" messages='[{"name":"required","text":"请填写用户名称"},{"name":"pattern","text":"请输入正确格式的用户名称"},{"name":"maxlength","text":"长度不能超过25位"}]'>
+                                    <input type="text" class="form-control" name="userName" placeholder="*用户名称" ng-model="userCreate.userName" ng-pattern="" ng-maxlength="25" required/>
+                                </controls>
+                                <controls title="手机号" controls="userAddForm.phone" messages='[{"name":"required","text":"请填写手机号"},{"name":"pattern","text":"请输入正确格式的手机号"}]'>
+                                    <input type="text" class="form-control" name="phone" placeholder="*手机号" ng-model="userCreate.phone" ng-pattern="/^1(3|4|5|7|8)\d{9}$/" required/>
+                                </controls>
+                            </div>
+                            <div class="modal-column">
+                                <controls title="角色" controls="userAddForm.parameter" messages='[{"name":"required","text":"请选择用户角色"},{"name":"pattern","text":"请选择用户角色"}]'>
+                                    <select class="iovoption" name="roleId" ng-model="userCreate.roleId" ng-pattern="/^((?!请选择用户角色).)*$/">
+                                        <option disabled="disabled">请选择用户角色</option>
+                                        <option ng-repeat="x in userPermission" value="{{x.id}}">{{x.name}}</option>
+                                    </select>
+                                </controls>
+                                <controls title="邮箱" controls="userAddForm.email" messages='[{"name":"required","text":"请填写邮箱"},{"name":"pattern","text":"请输入正确格式的邮箱"},{"name":"maxlength","text":"邮箱不能超过40位"}]'>
+                                    <input type="text" class="form-control" name="email" placeholder="*邮箱" ng-model="userCreate.email" ng-maxlength="40" ng-pattern="/^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$/" required/>
+                                </controls>
+                                <controls title="用户地址" controls="userAddForm.address" messages='[{"name":"required","text":"请填写用户地址"},{"name":"pattern","text":"请输入正确格式的用户地址"},{"name":"maxlength","text":"用户地址不能超过250位"}]'>
+                                    <input type="text" class="form-control" name="address" placeholder="*用户地址" ng-model="userCreate.address" ng-maxlength="250" ng-pattern="" required/>
+                                </controls>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="modal-submit">
+                            <button type="submit" class="iovFormButton btn confirm" ng-disabled="userAddForm.$invalid">确定</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-----------------------用户编辑------------------------------->
+    <div class="modal fade iovModal" id="userEdit">
+        <div class="drag" drag>
+            <div class="modal-content">
+                <div class="modal-header" drag-cursor drag-handle>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">编辑</h4>
+                </div>
+                <div class="modal-body">
+                    <form name="userEditForm" ng-submit="userEdit(userEditForm.$valid)" novalidate="novalidate">
+                        <div class="modal-input">
+
+
+                            <div class="modal-column">
+
+                                <controls title="用户登录名" controls="userEditForm.loginName" messages='[{"name":"required","text":"请填写登录名称"},{"name":"pattern","text":"请输入正确格式用户登录名不能包含中文"},{"name":"maxlength","text":"长度不能超过40位"}]' unique="该登录名称已存在">
+                                    <input type="text" class="form-control" name="loginName" placeholder="*用户登录名" ng-model="userEdit.loginName" ng-pattern="/^[^\u4e00-\u9fa5]+$/" ng-maxlength="40" ng-focus="userEdit.isChecked=true;userEditForm.loginName.$setValidity('unique', true);" ng-blur="removeLoginNameRepeat(userEdit.loginName)" required/>
+                                </controls>
+
+                                <controls title="密码" controls="userEditForm.passWord" messages='[{"name":"required","text":"请填写密码"},{"name":"minlength","text":"最少为6位"},{"name":"maxlength","text":"最长为32位"},{"name":"pattern","text":"请输入正确格式的密码"}]'>
+                                    <input type="password" class="form-control" name="passWord" placeholder="*6到32位字符" ng-model="userEdit.passWord" ng-pattern="/^[\w\?%&=\-\._]+$/" ng-maxlength="32" ng-minlength="6" required/>
+                                </controls>
+                                <controls title="用户名称" controls="userEditForm.userName" messages='[{"name":"required","text":"请填写用户名称"},{"name":"pattern","text":"请输入正确格式的用户名称"},{"name":"maxlength","text":"长度不能超过25位"}]'>
+                                    <input type="text" class="form-control" name="userName" placeholder="*用户名称" ng-model="userEdit.userName" ng-maxlength="25" ng-pattern=""  required/>
+                                </controls>
+                                <controls title="手机号" controls="userEditForm.phone" messages='[{"name":"required","text":"请填写手机号"},{"name":"pattern","text":"请输入正确格式的手机号"}]'>
+                                    <input type="text" class="form-control" name="phone" placeholder="*手机号" ng-model="userEdit.phone" ng-pattern="/^1(3|4|5|7|8)\d{9}$/" required/>
+                                </controls>
+                            </div>
+                            <div class="modal-column">
+                                <controls title="角色" controls="userEditForm.parameter" messages='[{"name":"required","text":"请选择用户角色"},{"name":"pattern","text":"请选择用户角色"}]'>
+                                    <select class="iovoption" name="roleId" ng-model="userEdit.roleId" ng-pattern="/^((?!请选择用户角色).)*$/">
+                                        <option disabled="disabled">请选择用户角色</option>
+                                        <option ng-repeat="x in userPermission" value="{{x.id}}">{{x.name}}</option>
+                                    </select>
+                                </controls>
+                                <controls title="邮箱" controls="userEditForm.email" messages='[{"name":"required","text":"请填写邮箱"},{"name":"pattern","text":"请输入正确格式的邮箱"},{"name":"maxlength","text":"邮箱不能超过40位"}]'>
+                                    <input type="text" class="form-control" name="email" placeholder="*邮箱" ng-model="userEdit.email" ng-maxlength="40" ng-pattern="/^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$/" required/>
+                                </controls>
+                                <controls title="用户地址" controls="userEditForm.address" messages='[{"name":"required","text":"请填写用户地址"},{"name":"pattern","text":"请输入正确格式的用户地址"},{"name":"maxlength","text":"用户地址不能超过250位"}]'>
+                                    <input type="text" class="form-control" name="address" placeholder="*用户地址" ng-model="userEdit.address" ng-maxlength="250" ng-pattern="" required/>
+                                </controls>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="modal-submit">
+                            <button type="submit" class="iovFormButton confirm" ng-disabled="userEditForm.$invalid">确定</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <del modal-id="massDeletion" content="您即将删除{{massDeletionArr.length}}条数据。您确定要继续吗？" click="userDelete()"></del>
+    <tips content=content animate="animate"></tips>
+    <!-----------------------------部门新建-------------------------->
+    <div class="modal fade iovModal treeIovModal" id="create">
+            <div class="drag" drag>
+                <div class="modal-content">
+                    <div class="modal-header" drag-cursor drag-handle>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">新建</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form name="addForm" ng-submit="create(addForm.$valid)" novalidate="novalidate">
+                            <div class="modal-input">
+                                <div class="modal-column">
+                                    <controls title="上级部门名称" controls="addForm.parentName" messages=''>
+                                        <input type="text" class="form-control" name="parentName"  ng-model="create.parentName"  maxlength="15"  disabled="disabled"/>
+                                        <input type="hidden" class="form-control" name="parentId"  ng-model="create.loginName"  maxlength="15"/>
+                                    </controls>
+                                    <controls title="部门名称" controls="addForm.deptName" messages='[{"name":"required","text":"请填写部门名称"},{"name":"maxlength","text":"最长为15位"}]' unique="该部门名称已存在">
+                                        <input type="text" class="form-control" name="deptName" placeholder="*部门名称" ng-model="create.deptName" ng-pattern="" ng-maxlength="15"  ng-focus="create.isChecked=true;addForm.deptName.$setValidity('unique', true);" ng-blur="removeNameRepeat(create.deptName)"required/>
+                                    </controls>
+                                    <controls title="部门编码" controls="addForm.code" messages='[{"name":"required","text":"请填写部门编码"},{"name":"maxlength","text":"最长为15位"}]' unique="该部门编码已存在">
+                                        <input type="text" class="form-control" name="code" placeholder="*部门编码" ng-model="create.code" ng-pattern="" ng-maxlength="15"  ng-focus="create.isChecked=true;addForm.code.$setValidity('unique', true);" ng-blur="removeCodeRepeat(create.code)"required/>
+                                    </controls>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="modal-submit">
+                                <button type="submit" class="iovFormButton btn confirm" ng-disabled="addForm.$invalid">确定</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <!-----------------------------部门编辑-------------------------->
+    <div class="modal fade iovModal treeIovModal" id="edit">
+            <div class="drag" drag>
+                <div class="modal-content">
+                    <div class="modal-header" drag-cursor drag-handle>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">编辑</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form name="editForm" ng-submit="edit(editForm.$valid)" novalidate="novalidate">
+                            <div class="modal-input">
+                                <div class="modal-column">
+                                    <controls title="上级部门名称" controls="editForm.parentName" messages=''>
+                                        <input type="text" class="form-control" name="parentName"  ng-model="edit.parentName"  maxlength="32"  disabled="disabled"/>
+                                        <input type="hidden" class="form-control" name="parentId"  ng-model="edit.loginName"  maxlength="32"/>
+                                    </controls>
+                                    <controls title="部门名称" controls="editForm.deptName" messages='[{"name":"required","text":"请填写部门名称"},{"name":"maxlength","text":"最长为15位"}]' unique="该部门名称已存在">
+                                        <input type="text" class="form-control" name="deptName" placeholder="*部门名称" ng-model="edit.deptName" ng-pattern="" ng-maxlength="15"  ng-focus="edit.isChecked=true;editForm.deptName.$setValidity('unique', true);" ng-blur="removeNameRepeat(edit.deptName)"required/>
+                                    </controls>
+                                    <controls title="部门编码" controls="editForm.code" messages='[{"name":"required","text":"请填写部门编码"},{"name":"maxlength","text":"最长为15位"}]' unique="该部门编码已存在">
+                                        <input type="text" class="form-control" name="code" placeholder="*部门编码" ng-model="edit.code" ng-pattern="" ng-maxlength="15"  ng-focus="edit.isChecked=true;editForm.code.$setValidity('unique', true);" ng-blur="removeCodeRepeat(edit.code)"required/>
+                                    </controls>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="modal-submit">
+                                <button type="submit" class="iovFormButton confirm" ng-disabled="editForm.$invalid">确定</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+

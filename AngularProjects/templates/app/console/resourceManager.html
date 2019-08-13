@@ -1,0 +1,186 @@
+<div id="resourceManager">
+    <div class="contentTitle"><span class="icon-map-marker"></span>平台管理>资源包管理</div>
+        <div class="contentMain">
+            <div class="contentTool">
+                <ul class="iovButtonGroup">
+                    <li>
+					<span class="create" data-toggle="modal" data-backdrop="static" data-target="#create" ng-click="addForm.$setPristine();getAddPage()">
+                        	<span class="icon-plus"></span>新建</span>
+                    </li>
+                </ul>
+                <div class="iovSearchBox">
+                    <div class="input-group">
+                        <input type="text" ng-model="key" class="form-control" ng-change="pageChanged()" ng-keyup="mykey($event)" placeholder="请输入<资源包名称>搜索"/>
+					<span class="input-group-btn">
+		 		        <button class="btn btn-default" type="button" ng-click="pageChanged()"><span class="icon-search"></span></button>
+					</span>
+                    </div>
+                </div>
+            </div>
+            <div class="contentTable">
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                        <tr>
+                            <th><input type="checkbox" ng-click="selectAll=!selectAll" ng-checked="selectAll"/>序号</th>
+                            <th>资源包名称</th>
+                            <th>应用路径</th>
+                            <th>版本号</th>
+                            <th>资源包大小</th>
+                            <th>状态</th>
+                            <th>创建时间</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="x in dataItems">
+                            <td><input type="checkbox" ng-checked="selectAll" class="massDeletion" id="{{x.id}}"/>{{$index + 1}}</td>
+                            <td>{{x.name}}</td>
+                            <td>{{x.contextPath}}</td>
+                            <td>{{x.resVersion}}</td>
+                            <td>{{x.size}}</td>
+                            <td ng-if="x.respackId == ''||x.respackId ==null">未使用</td>
+                            <td ng-if="x.respackId != ''&&x.respackId !=null">已使用</td>
+                            <td>{{x.createDate}}</td>
+                            <td class="pointer"><span title="编辑" class="icon-pencil" data-toggle="modal" data-backdrop="static" data-target="#edit" ng-click="editForm.$setPristine();getUpdatePage(x)"></span></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="contentBottom" ng-if="isShowContentBottom">
+                <span class="iovButton delete" ng-click="massDeletion()">删除</span>
+                <uib-pagination ng-change="selectAll=false;pageChanged()" items-per-page="$parent.pageItemNum" total-items="$parent.pageTotal" ng-model="$parent.pageNum" max-size="5" first-text="首页" previous-text="0" next-text="0" last-text="尾页" boundary-links="true" boundary-link-numbers="true">
+                </uib-pagination>
+            </div>
+        </div>
+
+    <!-----------------------资源包管理新建------------------------------->
+    <div class="modal fade iovModal" id="create">
+        <div class="drag" drag>
+            <div class="modal-content">
+                <div class="modal-header" drag-cursor drag-handle>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">新建</h4>
+                </div>
+                <div class="modal-body">
+                    <form name="addForm" ng-submit="create(addForm.$valid)" novalidate="novalidate">
+                        <div class="modal-input">
+                            <div class="modal-column">
+
+                                <controls title="资源包名称" controls="addForm.resName" messages='[{"name":"required","text":"请填写资源包名称"},{"name":"maxlength","text":"长度不能超过20个字"}]'>
+                                    <input type="text" class="form-control" name="resName" placeholder="*资源包名称" ng-model="create.resName" ng-maxlength="20" required/>
+                                </controls>
+
+                                <controls title="应用路径" controls="addForm.contextPath" messages='[{"name":"required","text":"请填写应用路径"},{"name":"maxlength","text":"长度不能超过20个字"}]'>
+                                    <input type="text" class="form-control" name="contextPath" placeholder="*应用路径" ng-model="create.contextPath" ng-maxlength="20" required/>
+                                </controls>
+
+                                <controls title="版本号" controls="addForm.resVersion" messages='[{"name":"required","text":"请填写版本号"},{"name":"maxlength","text":"长度不能超过20个字"}]'>
+                                    <input type="text" class="form-control" name="resVersion" placeholder="*版本号" ng-model="create.resVersion" ng-maxlength="20" required/>
+                                </controls>
+
+
+                                <span>文件(*.tar.gz)</span>
+                                <div class="form-group has-feedback" ng-class="{false: 'has-success', true: 'has-error'}[addForm.file.$dirty&&addForm.file.$invalid]">
+                                   <div class="iovFileUpload">
+                                        <input type="text" class="form-control iovFileInput" ng-model="uploader.queue[0].file.name" name="file" disabled/>
+                                        <span  class="iovFileBtn" onclick="upload.click()"><span class="icon-folder-open-alt"></span></span>
+                                        <button type="button" class="uploadBtn" ng-click="addForm.$submitted=false;fileUploadByRes()">上传</button>
+                                        <input type="file" nv-file-select="" uploader="uploader"  id="upload" ng-click="clearItems()" ng-hide="true"/>
+                                   </div>
+                                    <div>
+                                        上传进度:
+                                        <div class="progress" style="">
+                                            <div class="progress-bar" role="progressbar" ng-style="{ 'width': uploader.progress + '%' }"></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="error" ng-if="requireUpload">
+                                    <div class="errorTips">
+                                        <div class="border"><span></span></div>
+                                        <span class="icon-info-sign"></span>请上传文件
+                                    </div>
+                                </div>
+                                <div class="error" ng-if="uploadError">
+                                    <div class="errorTips">
+                                        <div class="border"><span></span></div>
+                                        <span class="icon-info-sign"></span>目标文件不存在或内容为空
+                                    </div>
+                                </div>
+                                <div class="error" ng-if="typeErr">
+                                    <div class="errorTips">
+                                        <div class="border"><span></span></div>
+                                        <span class="icon-info-sign"></span>只能上传tar.gz类型文件
+                                    </div>
+                                </div>
+
+                               <div class="error" ng-if="uploadSuccess">
+                                    <div class="errorTips">
+                                        <div class="border"><span></span></div>
+                                        <span class="icon-info-sign"></span>上传成功
+                                    </div>
+                                </div>
+
+                                <!--<div class="error" ng-if="uploadFail">
+                                   <div class="errorTips">
+                                       <div class="border"><span></span></div>
+                                       <span class="icon-info-sign"></span>上传失败
+                                   </div>
+                               </div>-->
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="modal-submit">
+                            <button type="submit" class="iovFormButton btn confirm" ng-disabled="addForm.$invalid">确定</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-----------------------资源包管理新建------------------------------->
+    <div class="modal fade iovModal" id="edit">
+        <div class="drag" drag>
+            <div class="modal-content">
+                <div class="modal-header" drag-cursor drag-handle>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">编辑</h4>
+                </div>
+                <div class="modal-body">
+                    <form name="editForm" ng-submit="edit(editForm.$valid)" novalidate="novalidate">
+                        <div class="modal-input">
+                            <div class="modal-column">
+
+                                <controls title="资源包名称" controls="editForm.resName" messages='[{"name":"required","text":"请填写资源包名称"},{"name":"maxlength","text":"长度不能超过20个字"}]'>
+                                    <input type="text" class="form-control" name="resName" placeholder="*资源包名称" ng-model="edit.resName" ng-maxlength="20" required/>
+                                </controls>
+
+                                <controls title="应用路径" controls="editForm.contextPath" messages='[{"name":"required","text":"请填写应用路径"},{"name":"maxlength","text":"长度不能超过20个字"}]'>
+                                    <input type="text" class="form-control" name="contextPath" placeholder="*应用路径" ng-model="edit.contextPath" ng-maxlength="20" required/>
+                                </controls>
+
+                                <controls title="版本号" controls="editForm.resVersion" messages='[{"name":"required","text":"请填写版本号"},{"name":"maxlength","text":"长度不能超过20个字"}]'>
+                                    <input type="text" class="form-control" name="resVersion" placeholder="*版本号" ng-model="edit.resVersion" ng-maxlength="20" required/>
+                                </controls>
+
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="modal-submit">
+                            <button type="submit" class="iovFormButton confirm" ng-disabled="editForm.$invalid">确定</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <del modal-id="massDeletion" content="您即将删除{{massDeletionArr.length}}条数据。您确定要继续吗？" click="delete()"></del>
+    <tips content=content animate="animate"></tips>
+
+    </div>

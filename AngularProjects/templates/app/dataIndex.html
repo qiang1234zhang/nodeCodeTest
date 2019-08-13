@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<head-menu></head-menu>
+		<div class="main" ui-view>
+
+		</div>
+		<!------------------用户信息修改------------------------------->
+	<div class="modal fade iovModal" id="globleEditInfo">
+		<div class="drag" drag>
+			<div class="modal-content">
+				<div class="modal-header" drag-cursor drag-handle>
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title">个人信息修改</h4>
+				</div>
+				<div class="modal-body">
+					<form name="editForm" ng-submit="userinfo()" novalidate="novalidate">
+						<div class="modal-input">
+							<div class="modal-column">
+								<controls title="用户名称" controls="editForm.userName" messages='[{"name":"required","text":"请填写用户名称"},{"name":"maxlength","text":"长度不能超过25位"}]' unique="该用户名称已存在">
+									<input type="text" id="userName" class="form-control" ng-trim="true" name="userName" placeholder="*用户名称" ng-model="userinfo.userName" ng-maxlength="25" ng-pattern="" ng-focus="userinfo.isChecked=true;editForm.userName.$setValidity('unique', true);" ng-blur="checkUsernameRepeat(userinfo.userName)" required/>
+								</controls>
+
+								<controls title="用户密码" controls="editForm.passWord" messages='[{"name":"required","text":"请填写密码"},{"name":"minlength","text":"最少为6位"},{"name":"maxlength","text":"最长为32位"},{"name":"pattern","text":"请输入正确格式的密码"}]'>
+									<input type="password" class="form-control" name="passWord" placeholder="*6到32位字符" ng-model="userinfo.passWord" ng-pattern="/^[\w\?%&=\-\._]+$/" ng-maxlength="32" ng-minlength="6" required/>
+								</controls>
+
+								<controls title="手机号" controls="editForm.phone" messages='[{"name":"required","text":"请填写手机号"},{"name":"pattern","text":"请输入正确格式手机号"}]'">
+								<input type="text" class="form-control" name="phone" placeholder="*手机号" ng-model="userinfo.phone" ng-pattern="/^1(3|4|5|7|8)\d{9}$/" required/>
+								</controls>
+
+								<controls title="邮件" controls="editForm.Email" messages='[{"name":"required","text":"请填写邮箱"},{"name":"pattern","text":"您输入正确格式邮箱地址!"},{"name":"maxlength","text":"长度不能超过40位"}]'>
+									<input type="text" class="form-control" ng-trim="true" name="Email" placeholder="*邮箱" ng-model="userinfo.Email" ng-maxlength="40" ng-pattern="/^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$/" required/>
+								</controls>
+
+								<controls title="地址" controls="editForm.address" messages='[{"name":"required","text":"请填写地址"},{"name":"maxlength","text":"长度不能超过250位"}]'">
+								<input type="text" id="address" class="form-control" ng-trim="true" name="address" placeholder="*地址" ng-maxlength="250" ng-model="userinfo.address" required/>
+								</controls>
+							</div>
+
+							<div class="clearfix"></div>
+						</div>
+						<div class="modal-submit">
+							<button type="submit" class="iovFormButton confirm" ng-disabled="editForm.$invalid">确定</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+</div>
+		<!--授权信息-->
+<div class="modal fade iovModal" id="authorizedInfo">
+    <div class="drag" style="width: 460px;" drag>
+        <div class="modal-content">
+            <div class="modal-header" drag-cursor drag-handle>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">平台授权信息</h4>
+            </div>
+            <div class="modal-body">
+                <form name="addForm" novalidate="novalidate">
+                    <div class="modal-input">
+                        <div ng-if="authorizedData.trialVersion == 'NO'">
+                            <ul name="authorized_info">
+                                <li><span><b>机器码:</b></span>&nbsp;&nbsp;<span>{{authorizedData.machineCode}}</span></li>
+                                <li><span><b>版本类型:</b></span>&nbsp;&nbsp;<span>{{authorizedData.trialVersion == 'YES' ? "正式版" : "试用版"}}</span>
+                                </li>
+                                <li><span><b>有效期:</b></span>&nbsp;&nbsp;<span>{{authorizedData.startTime}}/{{authorizedData.endTime}}</span>&nbsp;&nbsp;<span style="color: red"><b>剩余【{{authorizedData.failDay}}】天</b></span>
+                                </li>
+                            </ul>
+                            <p style="color: red">Licence为试用版，请联系管理员升级为正式版！</p>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div ng-if="authorizedData.trialVersion == 'YES'">
+                            <p>正式版！</p>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

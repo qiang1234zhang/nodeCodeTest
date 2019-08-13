@@ -1,0 +1,54 @@
+<div class="tab-content">
+    <div id="baseConfig" class="active">
+        ${component | componentFormat('CommonTextInputComponent', 'label:步骤名称,mappingProp:pluginName,required:required')}
+        ${component | componentFormat('SingleInVarComponent','required:required')}
+
+        ${component | componentFormat('FileComponent','disabled:disabled')}
+    </div>
+</div>
+<script type="text/javascript">
+    require(["component", "wfdata", "jsonFieldMapping"], function (component, wfdata, jsonFieldMapping) {
+        var mappingField = [
+            "fileType", "isDir","fileSourceId", "filePath", "inValue", "outValue"
+        ];
+        jsonFieldMapping.setNodeSaveField(mappingField);
+
+        /**
+         * model自定义属性定义
+         * @param avaConfig
+         */
+        function avalonCustomizeConfigInit(avaConfig) {
+
+        }
+
+        /**
+         *页面打开时候初始化页面信息
+         * @constructor
+         */
+        function CustomizeInitFormValue() {
+
+            if(window.parent.flashapi.config.popupParam.sourceType){
+                wfdata.swapValue.avaWf.fileTypeId =window.parent.flashapi.config.popupParam.sourceType;
+            }
+
+        }
+
+
+        /**
+         * 当avalon.define之后，可以进行model属性监控,$watch方法
+         */
+        function vmCustomizeDefineDoneCallback() {
+
+        }
+
+
+        //页面里的avalon model定义接口，需要暴露出来到window对象
+        window.avalonCustomizeConfigInit = avalonCustomizeConfigInit;
+        window.CustomizeInitFormValue = CustomizeInitFormValue;
+        window.vmCustomizeDefineDoneCallback = vmCustomizeDefineDoneCallback;
+
+        //开始初始化avalon对象
+        window.initAvalon();
+
+    })
+</script>

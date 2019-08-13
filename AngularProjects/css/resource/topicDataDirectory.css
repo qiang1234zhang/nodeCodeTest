@@ -1,0 +1,189 @@
+#topicDataDirectory .iovModal .modal-input .modal-column {
+    width: 100%;
+    padding: 0;
+}
+
+#topicDataDirectory .drag {
+    width: 500px;
+
+}
+
+#topicDataDirectory .drag .modal-body {
+    /*height:560px;*/
+    overflow-y: auto;
+}
+#topicDataDirectory .leftMenuBar {
+    width: 230px;
+    height: 100%;
+    padding: 22px 15px 15px 15px;
+    border-right: 1.5px #C9C9C9 solid;
+    position: relative;
+    border-top: 5px solid #30AFAE;
+}
+
+#topicDataDirectory .menuContentMain {
+    position: absolute;
+    top: 50px;
+    bottom: 0;
+    left: 250px;
+    right: 0;
+    padding: 25px 25px 25px 0;
+
+}
+
+#topicDataDirectory .MenuBarContent {
+    width: 100%;
+    position: relative;
+    top: 46px;
+    bottom: 0;
+}
+
+.treeBtn {
+    margin-bottom: 15px;
+    margin-left: 10px;
+}
+
+#topicDataDirectory .treeIovModal .modal-input .modal-column {
+    width: 100%;
+}
+
+#topicDataDirectory .treeIovModal .drag {
+    width: 500px;
+}
+
+#topicDataDirectory #kinshipsConfig .drag {
+    width: 800px;
+}
+
+#topicDataDirectory #relationshipsConfig .drag {
+    width: 800px;
+}
+
+#topicDataDirectory .KinshipsOrgTree {
+    height: 100px;
+    width: 100%;
+    overflow: auto;
+}
+
+#topicDataDirectory .fieldList .scroll ul li:hover {
+    background-color: #DFE0E0;
+    cursor: pointer;
+}
+
+#topicDataDirectory .fieldList .scroll ul li.active {
+    background-color: #DFE0E0;
+}
+
+#topicDataDirectory .fieldList .bloodTable {
+    margin-left: 12px;
+    position: relative;
+}
+
+#topicDataDirectory .fieldList .bloodTable .extra {
+    position: absolute;
+    left: 48px;
+    top: -48px;
+    width: 150px;
+    background: #F5F7F7;
+}
+
+#topicDataDirectory .fieldList .bloodTable .extra input {
+    height: 30px;
+}
+
+#topicDataDirectory fieldset {
+    padding: .15em .625em .75em;
+    border: 1px solid #3C763D;
+}
+
+#topicDataDirectory .fieldList {
+    position: relative;
+}
+
+#topicDataDirectory .fieldBtn {
+    padding-top: 80px;
+    width: 35px;
+    float: left;
+}
+
+#topicDataDirectory .fieldList .fieldBtnAdd {
+    padding-top: 100px;
+
+}
+
+#topicDataDirectory .fieldBtnDel {
+    margin-top: 5px;
+    text-align: left;
+}
+
+#topicDataDirectory .fieldList fieldset {
+    float: left;
+    width: 49%;
+    height: 220px;
+}
+
+#topicDataDirectory fieldset legend {
+    padding: .5em .5em 0 .5em;
+    border: 0;
+    width: auto;
+    font-size: 14px;
+}
+
+#topicDataDirectory .scroll {
+    height: 190px;
+    overflow: auto;
+}
+
+#topicDataDirectory .treeOverflow {
+    margin-top: 5px;
+    margin-left: 10px;
+    height: 100%;
+    overflow: auto;
+    background-color: #F3F8F8;
+}
+
+#topicDataDirectory #details .drag {
+    width: 800px;
+}
+
+#topicDataDirectory .tab-content .leftMenuBar_tab {
+    width: 150px;
+    height: 100%;
+    padding: 22px 15px 15px 0;
+    border-right: 1.5px #C9C9C9 solid;
+    border-bottom: 1.5px #C9C9C9 solid;
+    border-top: 5px solid #30AFAE;
+    overflow-x: auto;
+}
+/*不可点击按钮css*/
+#topicDataDirectory .disabledBtn {
+    width: 121.58px;
+    height: 33px;
+    background-color: rgb(48, 175, 174);
+    color: #FFF;
+    font: 400 16px 'microsoft yahei';
+}
+#topicDataDirectory .disabledBtn span {
+    margin-right: 4px
+}
+/*不可点击按钮css*/
+#topicDataDirectory .treeInput {
+    width: 200px;
+    margin-left: 10px;
+}
+#topicDataDirectory #treeContent {
+    position: absolute;
+    left: 49px;
+    top: 24px;
+    width: 210px;
+    height: 520px;
+}
+#topicDataDirectory #relationTreeContent {
+    position: absolute;
+    left: 49px;
+    top: 24px;
+    width: 210px;
+    height: 520px;
+}
+
+

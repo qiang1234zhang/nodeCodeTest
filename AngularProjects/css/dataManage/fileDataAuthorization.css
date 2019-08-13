@@ -1,0 +1,550 @@
+#fileDataAuthorization .content{
+	position:absolute;
+	top:50px;
+	left:0;
+	right:0;
+	bottom:0;
+}
+#fileDataAuthorization .content .user{
+	width:200px;
+	height:100%;
+	padding:20px;
+	border-right:1.5px #C9C9C9 solid;
+	position: relative;
+	border-top:5px solid #F15959
+}
+#fileDataAuthorization .content .user .searchbox input{
+	border-radius:3px ;
+	border:2px solid #DCDCDC;
+}
+#fileDataAuthorization .content .user .searchbox input:focus{
+	border:1px solid #66afe9
+}
+#fileDataAuthorization .content .user .searchbox span{
+	position: absolute;
+	top:7px;
+	right:12px;
+	font-size:18px;
+	color:#C9C9C9;
+}
+#fileDataAuthorization .content .user .head{
+	width:100%;
+	padding:4px 25px;
+	/*margin-top:20px;*/
+	font-size:14px;
+}
+#fileDataAuthorization .content .user ul{
+	/*
+    position: absolute;
+    */
+	/*top:98px;*/
+	right:20px;
+	left:20px;
+	bottom:0;
+	background-color:#F1F0F0;
+	padding-top:8px;
+}
+#fileDataAuthorization .content .user ul li{
+	padding:8px 25px;
+	cursor:pointer;
+}
+#fileDataAuthorization .content .user ul li:hover{
+	background-color:#DFE0E0;
+}
+#fileDataAuthorization .content .user ul li.active{
+	background-color:#DFE0E0;
+}
+#fileDataAuthorization .content .user ul li span{
+	display: inline-block;
+	height:20px;
+	width:20px;
+	background-color:#DCDADA;
+	color:#FFF;
+	text-align: center;
+	line-height:20px;
+	vertical-align: middle;
+	margin-right:12px;
+}
+#fileDataAuthorization .content .contentMain{
+	top:0;
+	left:230px;
+	padding:25px 40px;
+}
+#fileDataAuthorization .iovModal#create .modal-input .modal-column,#fileDataAuthorization .iovModal#import .modal-input .modal-column{
+	width:100%
+}
+#fileDataAuthorization .iovModal#create .drag,#fileDataAuthorization .iovModal#import .drag{
+	width:400px;
+	top:100px;
+}
+#fileDataAuthorization .iovModal.property .contentMain .contentTable{
+	position:absolute;
+	top:75px;
+	bottom:113px;
+	width:100%;
+	overflow: auto;
+}
+#fileDataAuthorization .iovModal.property#propertyCheck .contentMain .contentTable{
+	top:0px;
+}
+#fileDataAuthorization .iovModal.property .modal-submit{
+	padding:40px 55px;
+	height:auto;
+	position: absolute;
+	bottom:0;
+}
+#fileDataAuthorization .iovModal.property .modal-submit button{
+	margin-left:40px;
+}
+#fileDataAuthorization .iovModal.property .contentMain{
+	position: static;
+	padding:0;
+}
+#fileDataAuthorization .iovModal.property .contentMain .contentTool{
+	height:75px;
+	padding:20px 25px;
+}
+#fileDataAuthorization .iovModal.property .contentMain .contentTool .iovButtonGroup li span{
+	background-color:#6BC3DB ;
+	font-size:14px;
+	color:#FFF;
+	letter-spacing:1px ;
+
+}
+
+#fileDataAuthorization .iovModal.property .contentMain table{
+	background-color:#F5F7F7 ;
+}
+#fileDataAuthorization .iovModal.property .contentTable table thead{
+	background-color:inherit;
+	color:#000
+}
+#fileDataAuthorization .iovModal.property .contentTable .table > thead > tr > th{
+	border:none;
+}
+#fileDataAuthorization .iovModal.property .contentTable table tbody tr{
+	border-top:1px #E6E8E7 solid;
+}
+#fileDataAuthorization .iovModal.property .contentMain tbody tr td input,#fileDataAuthorization .iovModal.property .contentMain tbody tr td select{
+	height:30px;
+	border:2px #c9c9c9 solid;
+	padding:0 12px;
+}
+#fileDataAuthorization .iovModal.property .contentMain tbody tr td input:focus,#fileDataAuthorization .iovModal.property .contentMain tbody tr td select:focus{
+	border-color: #66afe9;
+	outline: 0;
+	box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, .6);
+}
+#fileDataAuthorization .iovModal.property .contentMain thead tr th:nth-of-type(1){
+	width:70px;
+}
+#fileDataAuthorization .iovModal.property .contentMain thead tr th:nth-of-type(4){
+	width:142px;
+}
+#fileDataAuthorization .iovModal.property .contentMain thead tr th:nth-of-type(5){
+	width:100px;
+}
+#fileDataAuthorization .iovModal.property .contentMain thead tr th:nth-of-type(6){
+	width:70px;
+}
+#fileDataAuthorization .iovModal.property .contentMain thead tr th:nth-of-type(7){
+	width:100px;
+}
+#fileDataAuthorization .iovModal.property .contentMain thead tr th:nth-of-type(8){
+	width:100px;
+}
+#fileDataAuthorization .iovModal.property .contentMain thead tr th:nth-of-type(9){
+	width:70px;
+}
+#fileDataAuthorization .iovModal.property .contentMain tbody tr td:nth-of-type(1){
+	font:400 14px "microsoft yahei";
+	line-height:30px;
+	vertical-align:middle ;
+}
+
+#fileDataAuthorization .iovModal.property .contentMain tbody tr td:nth-of-type(9)>span{
+	cursor:pointer;
+	font-size:18px;
+	vertical-align:middle;
+}
+#fileDataAuthorization .iovModal.property .form-group{
+	margin-bottom:0;
+}
+#fileDataAuthorization .iovModal.property .errorTips{
+	top:36px;
+}
+
+#fileManage .iovModal.fixed .drag{
+	top:100px;
+	bottom:70px;
+}
+#fileManage .iovModal.fixed .modal-content  .modal-body .modal-bodyMain .fileTree{
+	height:100%;
+	width:290px;
+	margin-right:18px;
+	float:left;
+	background-color:#FFF;
+	position: relative;
+	border:1px #E5E5E5 solid;
+}
+#fileManage .iovModal.fixed .modal-content  .modal-body .modal-bodyMain .fileTree .title{
+	height:35px;
+	text-align: center;
+	background-color:#78BCDB;
+	color:#fff;
+	line-height:35px;
+	vertical-align:middle
+}
+#fileManage .iovModal.fixed .modal-content  .modal-body .modal-bodyMain .fileTree #fileTree{
+	position: absolute;
+	top:35px;
+	left:0;
+	bottom:0;
+	right:0;
+	padding:20px 10px;
+}
+#fileManage .ztree *{
+	font-size:16px;
+}
+#fileManage #fileTree.ztree li{
+	padding:2px 0;
+}
+#fileManage #fileTree.ztree li a{
+	height:30px;
+	padding:4px;
+}
+#fileManage #fileTree.ztree li a:hover{
+	background-color:#F2F0F0;
+}
+#fileManage #fileTree.ztree li a.curSelectedNode{
+	background-color:#ECEBEA;
+	border:none;
+}
+#fileManage #fileTree.ztree li a:hover{
+	text-decoration:none;
+}
+#fileManage .ztree li span{
+	line-height:21px
+}
+#fileManage .ztree li span.button{
+	width:24px;
+	height:20px;
+}
+#fileManage .ztree li span.button.ico_close{
+	background-image: url(../basecss/img/diyIcon/off.png);
+	background-position:inherit;
+	margin-right:12px
+}
+#fileManage .ztree li span.button.ico_open{
+	background-image: url(../basecss/img/diyIcon/on.png);
+	background-position:inherit;
+	margin-right:12px
+}
+
+#fileManage .ztree li span.button.noline_close{
+	background-image: url(../basecss/img/diyIcon/zhedie.png);
+	background-position:10px 8px;
+}
+#fileManage .ztree li span.button.noline_open{
+	background-image: url(../basecss/img/diyIcon/zhankai.png);
+	background-position:10px 8px;
+}
+#fileManage .fileTree .buttonTool{
+	position: absolute;
+	bottom:20px;
+	left:0;
+	width:100%;
+	padding:0 15px;
+}
+#fileManage .fileTree .buttonTool>div{
+	height:28px;
+	width:72px;
+	color:#FFF;
+	cursor:pointer;
+	background-color:#5BC39D ;
+	border:1px solid #36B084;
+	font-size:12px;
+	line-height:26px;
+	vertical-align: middle;
+	text-align: center;
+	float:left;
+	margin-right:20px;
+}
+#fileManage .fileTree .buttonTool>div.delete{
+	background-color:#fd856d ;
+	border-color:#df674f;
+}
+#fileManage .fileTree .buttonTool>div.delete:hover{
+	background-color:#df674f;
+}
+#fileManage .fileTree .buttonTool>div:last-of-type{
+	margin-right:0;
+}
+#fileManage .fileTree .buttonTool>div input{
+	display:none ;
+}
+#fileManage .fileTree .buttonTool>div:hover{
+	background-color:#36B084;
+}
+#fileManage .fileTree .buttonTool>div:active{
+	background-color:#36B084;
+	bottom:19px;
+	right: 14px;
+}
+#fileManage .iovModal.fixed .modal-content  .modal-body .modal-bodyMain .fileContent{
+	height:100%;
+	width:640px;
+	float:left;
+	background-color:#FFF;
+	border:1px #E5E5E5 solid;
+	position: relative;
+}
+#fileManage .iovModal.fixed .fileContent .tableHead{
+	height:35px;
+	width:100%;
+}
+#fileManage .iovModal.fixed .fileContent .tableHead div{
+	float:left;
+	height:100%;
+	color:#8A9CAC;
+	line-height:33px;
+	vertical-align: middle;
+	position: relative;
+	border:1px transparent solid;
+	cursor:pointer
+}
+#fileManage .iovModal.fixed .fileContent .tableHead div:hover span:nth-of-type(1){
+	position: absolute;
+	top:11px;
+	right:10px;
+	width: 0;
+	height: 0;
+	border-right: 4px solid transparent;
+	border-bottom: 5px solid #7ABCDB;
+	border-left: 4px solid transparent;
+}
+#fileManage .iovModal.fixed .fileContent .tableHead div:hover span:nth-of-type(2){
+	position: absolute;
+	bottom:11px;
+	right:10px;
+	width: 0;
+	height: 0;
+	border-right: 4px solid transparent;
+	border-top: 5px solid #7ABCDB;
+	border-left: 4px solid transparent;
+}
+#fileManage .iovModal.fixed .fileContent .tableHead div:after{
+	content:"";
+	position: absolute;
+	right:-2px;
+	top:0;
+	width:1px;
+	height:100%;
+	background:linear-gradient(to top, #fff, #B6DBFA);
+}
+#fileManage .iovModal.fixed .fileContent .tableHead div:hover{
+	background:linear-gradient(to top, #EFEFED, #FAFAFA);
+	border-color:#DFE9F5;
+}
+#fileManage .iovModal.fixed .fileContent .tableHead div:hover:active{
+	background:#FFF;
+	border-color:#C0CBD9;
+}
+#fileManage .iovModal.fixed .fileContent .tableHead div:hover:after{
+	width:0;
+}
+#fileManage .iovModal.fixed .fileContent .tableHead div:nth-of-type(1){
+	width:280px;
+	padding-left:37px;
+}
+#fileManage .iovModal.fixed .fileContent .tableHead div:nth-of-type(2){
+	width:130px;
+	padding-left:15px;
+}
+#fileManage .iovModal.fixed .fileContent .tableHead div:nth-of-type(3){
+	width:100px;
+	padding-left:15px;
+}
+#fileManage .iovModal.fixed .fileContent .tableHead div:nth-of-type(4){
+	width:100px;
+	padding-left:15px;
+}
+#fileManage .iovModal.fixed .fileContent .tableBody{
+	position: absolute;
+	top:35px;
+	bottom:0;
+	left:0;
+	right:0;
+}
+#fileManage .iovModal.fixed .fileContent .tableBody .table{
+	width:590px;
+	table-layout:fixed;
+}
+#fileManage .iovModal.fixed .fileContent .table tbody tr{
+	border:1px solid transparent
+}
+#fileManage .iovModal.fixed .fileContent .table tbody tr:hover{
+	border-color:#B8D6FB;
+	background:linear-gradient(to top, #F2F7FE, #FFF);
+}
+#fileManage .iovModal.fixed .fileContent .table tbody tr:hover>td{
+	border-top:1px solid #B8D6FB;
+}
+#fileManage .iovModal.fixed .fileContent .table tbody tr.active{
+	border-color:#7DA2CE;
+	background:linear-gradient(to top, #C1DBFC,#DCEBFC)
+}
+#fileManage .iovModal.fixed .fileContent .table tbody tr.active>td{
+	border-top:1px solid #7DA2CE;
+	background-color: transparent;
+}
+
+#fileManage .iovModal.fixed .fileContent .table tbody tr td{
+	border-top:none;
+	overflow: hidden;
+	white-space:nowrap;
+	text-overflow:ellipsis;
+	padding-right:15px;
+}
+
+#fileManage .iovModal.fixed .fileContent .table tbody tr td span{
+	margin-right:0;
+}
+#fileManage .iovModal.fixed .fileContent .table tbody tr td:nth-of-type(1){
+	width:280px;
+	padding-left:37px;
+	font-weight:bold;
+}
+#fileManage .iovModal.fixed .fileContent .table tbody tr td:nth-of-type(2){
+	width:130px;
+	text-align: right;
+	color:#858E96;
+}
+#fileManage .iovModal.fixed .fileContent .table tbody tr td:nth-of-type(2) span{
+	margin-left:5px;
+}
+#fileManage .iovModal.fixed .fileContent .table tbody tr td:nth-of-type(3){
+	width:100px;
+	text-align: right;
+}
+#fileManage .iovModal.fixed .fileContent .table tbody tr td:nth-of-type(4){
+	width:100px;
+	text-align: right;
+}
+
+#fileManage .upload{
+	height:350px;
+	width:500px;
+	position: absolute;
+	bottom:0;
+	right:20px;
+	background: linear-gradient(to top,#D7E1E0,#FFF);
+	border:1px solid #e2e2e2;
+	box-shadow:0 0 10px #ccc;
+	border-top-left-radius:7px;
+	border-top-right-radius:7px;
+	color:#666666;
+	z-index:1051;
+}
+#fileManage .upload .head{
+	height:40px;
+	width: 100%;
+	text-align: center;
+	font-size:16px;
+	padding:8px 10px;
+	border-bottom:1px solid #E7E7E7;
+}
+#fileManage .upload .head button{
+	margin-left:5px;
+	width:30px;
+}
+#fileManage .upload .body{
+	width:100%;
+	position: absolute;
+	top:40px;
+	left:0;
+	bottom:0;
+}
+#fileManage .upload .body>div:first-of-type>div:first-of-type{
+	width:480px;
+}
+
+
+#fileManage .upload .body ul{
+	height:100%;
+	width:100%
+}
+#fileManage .upload .body ul li{
+	height:60px;
+	width:100%;
+	padding:10px 0 10px 25px;
+	border-bottom:1px solid #E7E7E7;
+}
+#fileManage .upload .body ul li>div{
+	float:left;
+	height:100%;
+}
+#fileManage .upload .body ul li .name{
+	width:55%;
+}
+#fileManage .upload .body ul li .name p:first-of-type{
+	color:#000;
+	white-space:nowrap;
+	overflow:hidden;
+	text-overflow:ellipsis;
+	padding-right:30px;
+}
+#fileManage .upload .body ul li .uploadProgress{
+	width:40%;
+	line-height:42.6px;
+	vertical-align: middle;
+
+}
+#fileManage .progress{
+	margin-top:10px;
+	width:80%;
+}
+#fileManage .uploadProgress .icon-ok-circle{
+	position: relative;
+	right:5px;
+	top:2px;
+	font-size:20px;
+}
+#fileManage .upload .body ul li .operation{
+	width:5%;
+	line-height:42.6px;
+	vertical-align: middle;
+}
+#fileManage .upload .body ul li .operation span{
+	cursor:pointer;
+	font-size:20px;
+	position: relative;
+	right:10px;
+}
+
+#fileManage .iovModal#create .modal-input .modal-column,#fileManage .iovModal#folderName .modal-input .modal-column{
+	width:100%
+}
+#fileManage .iovModal#create .drag{
+	width:400px;
+	top:100px;
+}
+#fileManage .iovModal#folderName .drag{
+	width:400px;
+	top:30%;
+}
+#fileManage .iovModal#folderName .modal-input{
+	padding:35px 40px 30px 40px ;
+}
+
+/*新加样式*/
+#fileDataAuthorization .content .user .treeBtn{
+	margin-left:5px;
+}
+
+#fileDataAuthorization .OneLVtreeIovModal .modal-input .modal-column{
+	width:100%;
+}
+#fileDataAuthorization .OneLVtreeIovModal .drag{
+	width: 500px;
+}

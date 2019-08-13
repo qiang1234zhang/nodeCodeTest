@@ -1,0 +1,531 @@
+[
+  {
+    "pId":0,
+    "id":1,
+    "img":"img/index/2.png",
+    "name":"资源管理",
+    "url":"appIndex.resource",
+    "index":1,
+    "child":[
+
+    ]
+  },
+  {
+    "pId":0,
+    "id":2,
+    "img":"img/index/3.png",
+    "name":"数据采集1",
+    "url":"appIndex.dg",
+    "index":1,
+    "child":[
+      {
+        "pId":2,
+        "id":21,
+        "img":"img/index/menu/dg/1.png",
+        "name":"采集节点",
+        "url":"appIndex.dg.cluster",
+        "index":1,
+        "child":[
+        ]
+      },
+      {
+        "pId":2,
+        "id":22,
+        "img":"img/index/menu/dg/2.png",
+        "name":"指标项管理",
+        "url":"appIndex.dg.item",
+        "index":1,
+        "child":[
+
+        ]
+      },
+      {
+        "pId":2,
+        "id":23,
+        "img":"img/index/menu/dg/3.png",
+        "name":"流程管理",
+        "url":"appIndex.dg.workflow",
+        "index":1,
+        "child":[
+        ]
+      },
+
+      {
+        "pId":2,
+        "id":24,
+        "img":"img/index/menu/dg/4.png",
+        "name":"任务管理",
+        "url":"appIndex.dg.tasks",
+        "index":1,
+        "child":[
+        ]
+      },
+
+      {
+        "pId":2,
+        "id":25,
+        "img":"img/index/menu/dg/5.png",
+        "name":"流程日志",
+        "url":"appIndex.dg.logs",
+        "index":1,
+        "child":[
+        ]
+      },
+      {
+        "pId":2,
+        "id":26,
+        "img":"img/index/menu/dg/6.png",
+        "name":"服务管理",
+        "url":"appIndex.dg.services",
+        "index":1,
+        "child":[
+        ]
+      }
+    ]
+  },
+
+  {
+    "pId":0,
+    "id":3,
+    "img":"img/index/4.png",
+    "name":"数据管理",
+    "url":"appIndex.dataManage",
+    "index":1,
+    "child":[
+      {
+        "pId":3,
+        "id":31,
+        "img":"img/index/menu/dataManage/1.png",
+        "name":"仪表盘",
+        "url":"appIndex.dataManage.cluster",
+        "index":1,
+        "child":[
+        ]
+      },
+      {
+        "pId":3,
+        "id":32,
+        "img":"img/index/menu/dataManage/8.png",
+        "name":"服务器信息管理",
+        "url":"appIndex.dataManage.serverComfing",
+        "index":2,
+        "child":[
+
+        ]
+      },
+      {
+        "pId":3,
+        "id":33,
+        "img":"img/index/menu/dataManage/2.png",
+        "name":"文件管理",
+        "url":"appIndex.dataManage.workflow",
+        "index":3,
+        "child":[
+          {
+            "pId":33,
+            "id":331,
+            "img":"",
+            "name":"存储配置",
+            "url":"appIndex.dataManage.item",
+            "index":1
+          },
+          {
+            "pId":33,
+            "id":332,
+            "img":"",
+            "name":"路径配置",
+            "url":"appIndex.dataManage.item",
+            "index":1
+          },
+          {
+            "pId":33,
+            "id":333,
+            "img":"",
+            "name":"数据浏览",
+            "url":"appIndex.dataManage.item",
+            "index":1
+          }
+        ]
+      },
+      {
+        "pId":3,
+        "id":34,
+        "img":"img/index/menu/dataManage/3.png",
+        "name":"数据库管理",
+        "url":"appIndex.dataManage.item",
+        "index":4,
+        "child":[
+          {
+            "pId":34,
+            "id":341,
+            "img":"",
+            "name":"存储配置",
+            "url":"appIndex.dataManage.tableStructure",
+            "index":1
+          },
+          {
+            "pId":34,
+            "id":342,
+            "img":"",
+            "name":"表管理",
+            "url":"appIndex.dataManage.tableStructure",
+            "index":1
+          },
+          {
+            "pId":34,
+            "id":343,
+            "img":"",
+            "name":"数据浏览",
+            "url":"appIndex.dataManage.item",
+            "index":1
+          }
+
+        ]
+      },
+      {
+        "pId":3,
+        "id":35,
+        "img":"",
+        "name":"数据授权",
+        "index":5,
+        "url":"appIndex.dataManage.tasks",
+        "child":[
+          {
+            "pId":35,
+            "id":351,
+            "img":"",
+            "name":"用户管理",
+            "index":1,
+            "url":"appIndex.dataManage.dataAuthUserManage"
+          },
+          {
+            "pId":35,
+            "id":352,
+            "img":"",
+            "name":"文件授权",
+            "index":1,
+            "url":"appIndex.dataManage.fileDataAuthorization"
+          },
+          {
+            "pId":35,
+            "id":353,
+            "img":"",
+            "name":"数据授权",
+            "index":1,
+            "url":"appIndex.dataManage.tableDataAuthorization"
+          }
+        ]
+      },
+
+      {
+        "pId":3,
+        "id":36,
+        "img":"img/index/menu/dataManage/7.png",
+        "name":"索引管理",
+        "url":"appIndex.dataManage.tasks",
+        "index":6,
+        "child":[
+          {
+            "pId":36,
+            "id":361,
+            "img":"",
+            "name":"索引库管理",
+            "url":"appIndex.dataManage.indexDataBaseManage",
+            "index":1
+          },{
+            "pId":36,
+            "id":362,
+            "img":"",
+            "name":"索引表管理",
+            "url":"appIndex.dataManage.indexTableManage",
+            "index":1
+          },
+          {
+            "pId":36,
+            "id":363,
+            "img":"",
+            "name":"索引规则定制",
+            "index":1,
+            "url":"appIndex.dataManage.item"
+          },
+          {
+            "pId":36,
+            "id":364,
+            "img":"img/index/menu/dataManage/2.png",
+            "name":"数据浏览",
+            "index":1,
+            "url":"appIndex.dataManage.item"
+          }
+        ]
+      },
+
+
+      {
+        "pId":3,
+        "id":37,
+        "img":"img/index/menu/dataManage/5.png",
+        "name":"数据导入导出",
+        "url":"appIndex.dataManage.logs",
+        "index":7,
+        "child":[
+          {
+            "pId":37,
+            "id":371,
+            "img":"",
+            "name":"数据导入",
+            "index":1,
+            "url":"appIndex.dataManage.item"
+          },
+          {
+            "pId":37,
+            "id":372,
+            "img":"",
+            "name":"数据导出",
+            "index":1,
+            "url":"appIndex.dataManage.item"
+          }
+        ]
+      },
+      {
+        "pId":3,
+        "id":38,
+        "img":"img/index/menu/dataManage/5.png",
+        "name":"文件导入导出",
+        "url":"appIndex.dataManage.logs",
+        "index":8,
+        "child":[
+          {
+            "pId":38,
+            "id":381,
+            "img":"",
+            "name":"文件导入",
+            "index":1,
+            "url":"appIndex.dataManage.item"
+          },
+          {
+            "pId":38,
+            "id":382,
+            "img":"",
+            "name":"文件导出",
+            "index":1,
+            "url":"appIndex.dataManage.item"
+          }
+        ]
+      },
+      {
+        "pId":3,
+        "id":39,
+        "img":"img/index/menu/dataManage/5.png",
+        "name":"数据备份",
+        "url":"appIndex.dataManage.logs",
+        "index":9,
+        "child":[
+          {
+            "pId":39,
+            "id":391,
+            "img":"",
+            "name":"备份规则",
+            "index":1,
+            "url":"appIndex.dataManage.item"
+          },
+          {
+            "pId":39,
+            "id":392,
+            "img":"",
+            "name":"备份任务",
+            "index":1,
+            "url":"appIndex.dataManage.item"
+          },
+          {
+            "pId":39,
+            "id":393,
+            "img":"",
+            "name":"备份日志",
+            "index":1,
+            "url":"appIndex.dataManage.item"
+          }
+        ]
+      },
+      {
+        "pId":3,
+        "id": 40,
+        "img": "img/index/menu/dataManage/6.png",
+        "name": "文件备份",
+        "url": "appIndex.dataManage.services",
+        "index":10,
+        "child": [
+          {
+            "pId":40,
+            "id":401,
+            "img":"",
+            "name":"备份规则",
+            "index":1,
+            "url":"appIndex.dataManage.item"
+          },
+          {
+            "pId":40,
+            "id":402,
+            "img":"",
+            "name":"备份任务",
+            "index":1,
+            "url":"appIndex.dataManage.item"
+          },
+          {
+            "pId":40,
+            "id":403,
+            "img":"",
+            "name":"备份日志",
+            "index":1,
+            "url":"appIndex.dataManage.item"
+          }
+        ]
+      }
+    ]
+  },
+
+
+  {
+    "pId":0,
+    "id":4,
+    "img":"img/index/5.png",
+    "name":"数据工厂",
+    "url":"appIndex.etl",
+    "index":1,
+    "child":[
+
+    ]
+  },
+  {
+    "pId":0,
+    "id":5,
+    "img":"img/index/6.png",
+    "name":"任务调度",
+    "url":"appIndex.taskManage",
+    "index":1,
+    "child":[
+      {
+        "pId":5,
+        "id": 51,
+        "img": "img/index/menu/console/9.png",
+        "name": "任务管理",
+        "url": "appIndex.taskManage.taskManager",
+        "index":1,
+        "child": [
+        ]
+      },
+      {
+        "pId":5,
+        "id": 52,
+        "img": "img/index/menu/console/9.png",
+        "name": "任务调度",
+        "url": "appIndex.taskManage.dispatchManager",
+        "index":2,
+        "child": [
+        ]
+      },
+      {
+        "pId":5,
+        "id": 53,
+        "img": "img/index/menu/console/9.png",
+        "name": "任务监控",
+        "url": "appIndex.taskManage.monitorManager",
+        "index":3,
+        "child": [
+        ]
+      }
+    ]
+
+  },
+
+  {
+    "pId":0,
+    "id": 6,
+    "img":"img/index/7.png",
+    "name": "平台管理",
+    "url":"appIndex.console.roleManagement",
+    "index":1,
+    "child":
+    [
+      {
+        "pId":6,
+        "id": 61,
+        "img": "img/index/menu/console/1.png",
+        "name": "租户管理",
+        "url": "appIndex.console.tenantManager",
+        "index":1,
+        "child": [
+        ]
+      },
+      {
+        "pId":6,
+        "id": 62,
+        "img": "img/index/menu/console/2.png",
+        "name": "角色管理",
+        "index":2,
+        "url": "appIndex.console.roleManagement",
+        "child": [
+        ]
+      },
+      {
+        "pId":6,
+        "id": 63,
+        "img": "img/index/menu/console/1.png",
+        "name": "用户管理",
+        "index":3,
+        "url": "appIndex.console.deptManager",
+        "child": [
+        ]
+      },
+      {
+        "pId":6,
+        "id": 64,
+        "img": "img/index/menu/console/4.png",
+        "name": "菜单授权",
+        "index":4,
+        "url": "appIndex.console.permissionManagement",
+        "child": [
+        ]
+      },
+      {
+        "pId":6,
+        "id": 65,
+        "img": "img/index/menu/console/5.png",
+        "name": "服务器管理",
+        "index":5,
+        "url": "appIndex.console.serverManager",
+        "child": [
+        ]
+      },
+      {
+        "pId":6,
+        "id": 66,
+        "img": "img/index/menu/console/6.png",
+        "name": "资源包管理",
+        "index":6,
+        "url": "appIndex.console.resourceManager",
+        "child": [
+        ]
+      },
+      {
+        "pId":6,
+        "id": 67,
+        "img": "img/index/menu/console/7.png",
+        "name": "部署配置",
+        "index":7,
+        "url": "appIndex.console.deployConfigManager",
+        "child": [
+        ]
+      },
+      {
+        "pId":6,
+        "id": 68,
+        "img": "img/index/menu/console/9.png",
+        "name": "服务管理",
+        "index":8,
+        "url": "appIndex.console.serviceManager",
+        "child": [
+        ]
+      }
+    ]
+  }
+]

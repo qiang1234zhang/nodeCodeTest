@@ -1,0 +1,104 @@
+
+#fileStoragePathConfig .iovModal/*#create*/ .modal-input .modal-column,#fileStoragePathConfig .iovModal#import .modal-input .modal-column{
+    width:100%
+}
+#fileStoragePathConfig .iovModal/*#create*/ .drag,#fileStoragePathConfig .iovModal#import .drag{
+    width:400px;
+    top:100px;
+}
+#fileStoragePathConfig .iovModal.property .contentMain .contentTable{
+    position:absolute;
+    top:75px;
+    bottom:113px;
+    width:100%;
+    overflow: auto;
+}
+#fileStoragePathConfig .iovModal.property#propertyCheck .contentMain .contentTable{
+    top:0px;
+}
+#fileStoragePathConfig .iovModal.property .modal-submit{
+    padding:40px 55px;
+    height:auto;
+    position: absolute;
+    bottom:0;
+}
+#fileStoragePathConfig .iovModal.property .modal-submit button{
+    margin-left:40px;
+}
+#fileStoragePathConfig .iovModal.property .contentMain{
+    position: static;
+    padding:0;
+}
+#fileStoragePathConfig .iovModal.property .contentMain .contentTool{
+    height:75px;
+    padding:20px 25px;
+}
+#fileStoragePathConfig .iovModal.property .contentMain .contentTool .iovButtonGroup li span{
+    background-color:#6BC3DB ;
+    font-size:14px;
+    color:#FFF;
+    letter-spacing:1px ;
+
+}
+
+#fileStoragePathConfig .iovModal.property .contentMain table{
+    background-color:#F5F7F7 ;
+}
+#fileStoragePathConfig .iovModal.property .contentTable table thead{
+    background-color:inherit;
+    color:#000
+}
+#fileStoragePathConfig .iovModal.property .contentTable .table > thead > tr > th{
+    border:none;
+}
+#fileStoragePathConfig .iovModal.property .contentTable table tbody tr{
+    border-top:1px #E6E8E7 solid;
+}
+#fileStoragePathConfig .iovModal.property .contentMain tbody tr td input,#fileStoragePathConfig .iovModal.property .contentMain tbody tr td select{
+    height:30px;
+    border:2px #c9c9c9 solid;
+    padding:0 12px;
+}
+#fileStoragePathConfig .iovModal.property .contentMain tbody tr td input:focus,#fileStoragePathConfig .iovModal.property .contentMain tbody tr td select:focus{
+    border-color: #66afe9;
+    outline: 0;
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, .6);
+}
+#fileStoragePathConfig .iovModal.property .contentMain thead tr th:nth-of-type(1){
+    width:70px;
+}
+#fileStoragePathConfig .iovModal.property .contentMain thead tr th:nth-of-type(4){
+    width:142px;
+}
+#fileStoragePathConfig .iovModal.property .contentMain thead tr th:nth-of-type(5){
+    width:100px;
+}
+#fileStoragePathConfig .iovModal.property .contentMain thead tr th:nth-of-type(6){
+    width:70px;
+}
+#fileStoragePathConfig .iovModal.property .contentMain thead tr th:nth-of-type(7){
+    width:100px;
+}
+#fileStoragePathConfig .iovModal.property .contentMain thead tr th:nth-of-type(8){
+    width:100px;
+}
+#fileStoragePathConfig .iovModal.property .contentMain thead tr th:nth-of-type(9){
+    width:70px;
+}
+#fileStoragePathConfig .iovModal.property .contentMain tbody tr td:nth-of-type(1){
+    font:400 14px "microsoft yahei";
+    line-height:30px;
+    vertical-align:middle ;
+}
+
+#fileStoragePathConfig .iovModal.property .contentMain tbody tr td:nth-of-type(9)>span{
+    cursor:pointer;
+    font-size:18px;
+    vertical-align:middle;
+}
+#fileStoragePathConfig .iovModal.property .form-group{
+    margin-bottom:0;
+}
+#fileStoragePathConfig .iovModal.property .errorTips{
+    top:36px;
+}

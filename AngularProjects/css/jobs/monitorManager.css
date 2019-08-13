@@ -1,0 +1,36 @@
+#monitorManager  .leftMenuBar{
+    width: 230px;
+    height: 100%;
+    padding: 22px 15px 15px 15px;
+    border-right: 1.5px #C9C9C9 solid;
+    position: relative;
+    border-top: 5px solid #30AFAE;
+}
+
+#monitorManager  .menuContentMain{
+    position: absolute;
+    top: 50px;
+    bottom: 0;
+    left: 250px;
+    right: 0;
+    padding: 25px;
+
+}
+
+#monitorManager  .MenuBarContent{
+    width: 100%;
+    position: relative;
+    top:46px;
+    bottom:0;
+}
+
+#monitorManager  .treeIovModal .modal-input .modal-column{
+    width:100%;
+}
+#monitorManager  .treeIovModal .drag{
+    width: 500px;
+}
+
+
+
+

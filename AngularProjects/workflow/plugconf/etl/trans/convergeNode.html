@@ -1,0 +1,544 @@
+<div>
+
+    ${component | componentFormat('CommonTextInputComponent', 'label:步骤名称,mappingProp:pluginName,required:required')}
+    ${component | componentFormat('CommonTextInputComponent', 'label:输出变量,mappingProp:outValue,required: required')}
+    
+    <div class="form-group config-Fieldset" id="_div_mapf1" style="padding-left: 30px;">
+            <div class="col-xs-4">
+                <fieldset>
+                    <legend><div>源:
+                        <select class="" ms-duplex-string="@inValue_" >
+                            <option value="">请选择</option>
+                            <option ms-attr="{value: el.name,selected: @inValue_ == el.name}" ms-for="el in @inVarLists">
+                                {{el.name}}
+                            </option>
+                        </select>
+                    </div></legend>
+                    <div style="height: 300px;overflow-y: auto;">
+
+                        <div class="list-group" id="sourceDiv">
+                            <div class="list-group-item" ms-for="el in @sourceFields"
+
+                                 ms-attr="{title:el.fieldlableName}">
+                                <input class="items" type="checkbox" ms-attr="{checked:el.selected?true:false}"  ms-data-index=$index ms-click="@checkOne($event,el)" />
+
+                                {{el.fieldlableName}}
+                            </div>
+                        </div>
+
+                    </div>
+                </fieldset>
+            </div>
+            <div class="col-xs-8" style="height: 300px;padding-left: 5px;font-size: 12px;float: left">
+                <div style="width: 75px;float: left;height: 100%;">
+                    <div style="height: 100%;display: table">
+                        <div style="display: table-cell;vertical-align: middle;">
+                            
+                            <button type="button" class="btn btn-primary btn-sm" style="margin-bottom: 10px;margin-top: 30px;width:60px"
+                                    ms-click="@autoMapp()">增加
+                            </button>
+                            <button type="button" class="btn btn-primary btn-sm"
+                                    style="margin-bottom: 10px;margin-top: 30px;width:60px"
+                                    ms-click="@removeMap()">
+                                移除
+                            </button>
+                            <button type="button" class="btn btn-primary btn-sm" style="margin-bottom: 10px;margin-top: 30px;width:60px;"
+                                    ms-click="@resetMapp()">重置
+                            </button>
+
+                        </div>
+                    </div>
+                </div>
+                <div style="float: none;">
+                    <fieldset>
+                        <legend>映射</legend>
+                        <div style="height: 300px;overflow-y: auto;font-size: 14px">
+
+                            <table style="width:100%;table-layout: fixed;">
+                                <thead>
+                                <th >源</th>
+                                <th >输入字段</th>
+                                <th >输出字段</th>
+                                </thead>
+                                <tr style="height: 23px" ms-for="el in @aggregationsList"
+                                    ms-click="@selectItem($event, 'map', el)">
+                                    <td style="overflow: hidden;white-space: nowrap;text-overflow:ellipsis;"
+                                        ms-attr="{title:el.inValueSource}">{{el.inValueSource}}
+                                    </td>
+                                    <td style="overflow: hidden;white-space: nowrap;text-overflow:ellipsis;"
+                                        ms-attr="{title:el.fieldName}">{{el.fieldName}}
+                                    </td>
+                                    <td style="overflow: hidden;white-space: nowrap;text-overflow:ellipsis;">
+                                        <input style="height: 20px;width: 130px"  ms-attr="{title:el.fieldlableName}" type="text"  ms-duplex-string="el.fieldlableName" />
+
+                                    </td>
+
+                                </tr>
+
+                            </table>
+                        </div>
+
+                    </fieldset>
+                </div>
+            </div>
+
+    </div>
+    <div>
+
+        <fieldset style="padding-left: 6px;">
+            <div>
+                <div style="float: left">
+                    <div  style="float: left;margin-top: 5px;">
+                        <label style="padding-top: 1px;float: left;margin-left: 20px" class="control-label">主表:</label>
+                        <select ms-duplex-string="@inValuePK" style="width: 130px;" >
+                            <option value="">请选择</option>
+                            <option ms-attr="{value: el.name,selected: @inValuePK == el.name}" ms-for="el in @mainTableList">
+                                {{el.name}}
+                            </option>
+                        </select>
+                    </div>
+                    <div  style="float: left;margin-top: 5px;">
+                        <label style="padding-top: 1px;float: left;margin-left: 20px" class="control-label">从表:</label>
+                        <select ms-duplex-string="@inValuePK2" style="width: 130px;">
+                            <option value="">请选择</option>
+                            <option ms-attr="{value: el.name,selected: @inValuePK2 == el.name}" ms-for="el in @subTableList">
+                                {{el.name}}
+                            </option>
+                        </select>
+                    </div>
+
+
+                <button  type="button" style="margin:0px 0px 0px 40px;" class="btn btn-primary btn-sm" ms-click="@addCon()">
+                    增加主从表条件
+                </button>
+                </div>
+                <div>
+                    <ul class="farLi" ms-for="(key,value) in @aggregationConditionList">
+                    <li>从表:{{key}}</li>
+                    <li ms-for="el in value">
+                        <ul class="sonLi">
+                            <li>
+                            <select ms-duplex-string="el.firstBracket" >
+                                <option value="">默认</option>
+                                <option value="(">(</option>
+                            </select>
+                            </li>
+                            <li >
+
+                                <select ms-duplex-string="el.fieldName" style="width: 135px;overflow: hidden;white-space: nowrap;text-overflow:ellipsis;"
+                                        ms-attr="{title:el.fieldName}"
+                                        >
+                                    <option value="">请选择</option>
+                                    <option ms-for="el1 in @mainColumns" ms-attr="{value: el1.fieldName,selected: el.fieldName == el1.fieldName}">
+                                        {{el1.fieldName}}
+                                    </option>
+                                </select>
+                            </li>
+                            <li>
+                                <select ms-duplex-string="el.condition"
+                                        style="width: 79px">
+                                    <option value="">默认</option>
+                                    <option value="equal">等于</option>
+                                </select>
+                            </li>
+                            <li >
+                                <select ms-duplex-string="el.value" style="width: 135px;overflow: hidden;white-space: nowrap;text-overflow:ellipsis;" ms-attr="{title:el.value}"
+                                        >
+                                    <option value="">请选择</option>
+                                    <option ms-for="el1 in @subColumns[key]"
+                                            ms-attr="{value: el1.fieldlableName, selected: el.value ==el1.fieldlableName}">
+                                        {{el1.fieldlableName}}
+                                    </option>
+                                </select>
+                            </li>
+                            <li>
+                                <select ms-duplex-string="el.sencondBracket" >
+                                    <option value="">默认</option>
+                                    <option value=")">)</option>
+                                </select>
+                            </li>
+                            <li>
+
+                                <select ms-duplex-string="el.andOr" >
+                                    <option value="">请选择</option>
+                                    <option value="and">and</option>
+                                    <!--<option value="or">or</option>-->
+                                </select>
+                            </li>
+                            <li>
+                                <button class="btn btn-primary btn-xs"
+                                        ms-click="@deleteWhere($event,el)">删除
+                                </button>
+                            </li>
+
+                        </ul>
+                        </br>
+                    </li>
+                    </ul>
+                </div>
+            </div>
+        </fieldset>
+    </div>
+</div>
+<script type="text/javascript">
+    require(["component", "wfdata", "jsonFieldMapping", "avalon", "underscore"], function (component, wfdata, jsonFieldMapping, avalon, _) {
+
+        var mappingField = [
+            "aggregationConditionList", "aggregationsList","inValuePK", "inValue", "outValue"
+        ];
+        jsonFieldMapping.setNodeSaveField(mappingField);
+
+        var originalSourceList = null;//原始的源字段集合,用于删除映射时候，恢复使用
+
+        //根据变量获取源字段
+        function getInputList(inVar) {
+
+
+            var relaNodes = window.parent.nodeUtil.getRelationshipSourceNodeByInVar(inVar);
+            if (!relaNodes || !relaNodes.jsonInfo) {
+                return;
+            }
+            var sourceNodeId = relaNodes.jsonInfo.activitiNodeId;
+            if (!sourceNodeId) {
+                return;
+            }
+            var ava = wfdata.swapValue.avaWf;
+            ava.$nodeSelectId = sourceNodeId;
+
+            originalSourceList = relaNodes.jsonInfo.columnList;
+            ava.sourceConstConList = originalSourceList;
+
+            var newArr = [];
+            _.each(originalSourceList, function (value) {
+                if (value.fieldlableName) {
+                    newArr.push(jsonFieldMapping.createDataColumn("", value.fieldName,value.fieldType, value.fieldTypeName,"","",value.fieldFormat));
+                }
+            });
+
+            return newArr.length > 0?newArr:[];
+
+        }
+
+        /**
+         * model自定义属性定义
+         * @param avaConfig
+         */
+        function avalonCustomizeConfigInit(avaConfig) {
+            avaConfig.inVarLists=[];
+            avaConfig.inValue_="";  //本页面源数据输入变量.
+            avaConfig.inValue="";   //通用(全局变量)输入变量.
+            avaConfig.$nodeSelectId = "";//根据本配置页面的输入变量得到的源节点的节点id
+            avaConfig.sourceFields = [];//源节点字段集合
+            avaConfig.$selectedMap = null;//选中的映射
+            avaConfig.dataFormatList = [];//数据格式化
+
+            avaConfig.sourceConstConList = [];//当为变量时候select
+
+            avaConfig.aggregationConditionList = {};//聚合条件
+            avaConfig.aggregationsList = [];//聚合字段
+            avaConfig.inValuePK="";      //主表inVal
+            avaConfig.inValuePK2="";     //从表inVal
+            avaConfig.mainTableList=[];  //主表下拉框选项
+            avaConfig.subTableList=[];   //从表下拉框选项
+
+            avaConfig.mainColumns=[];   //主表列集合
+            avaConfig.subColumns={};    //从表列集合
+
+            avaConfig.resetMapp = function () {
+
+                if (wfdata.swapValue.avaWf.aggregationsList.length === 0) {
+                    return;
+                }
+                $.confirm({
+                    text: "您确定要重置映射关系吗?", confirm: function () {
+                        wfdata.swapValue.avaWf.aggregationsList=[];
+                    }
+                });
+
+            };
+            avaConfig.autoMapp = function () {
+                addMapp();
+            };
+            avaConfig.removeMap = function () {
+                removeMap()
+            };
+            avaConfig.selectItem = function (event, type, item) {
+                var ava = wfdata.swapValue.avaWf;
+
+
+                    $("#_div_mapf1").find(".active").removeClass("active");
+                    $("#_div_mapf1").find(".test_tr").removeClass("test_tr");
+                    $(event.currentTarget).addClass("test_tr");
+                    ava.$selectedMap = item;
+
+                ava = null;
+            };
+            //增加查询条件
+            avaConfig.addCon = function () {
+
+                var ava=wfdata.swapValue.avaWf;
+                var obj={};
+                var searchMap={}
+                if(!ava.inValuePK||!ava.inValuePK2){
+                    alert("请选择主表/从表");
+                    return;
+                }
+
+                var map1= _.clone(ava.aggregationConditionList.$model);
+                var list1=[];
+                if(map1[ava.inValuePK2]){
+                    list1=map1[ava.inValuePK2];
+                }
+                obj.inValueStart=ava.inValuePK;
+                obj.inValueEnd=ava.inValuePK2;
+                list1.push(createSearchmodel(obj));
+                map1[ava.inValuePK2]=list1;
+                ava.aggregationConditionList=map1;
+
+            };
+            //查询条件操作(包括修改与删除)
+            avaConfig.deleteWhere = function (eve,item) {
+
+                var ava=wfdata.swapValue.avaWf;
+                ava.aggregationConditionList[item.inValueEnd].remove(item);
+                if(ava.aggregationConditionList[item.inValueEnd].length==0){
+                    delete ava.aggregationConditionList[item.inValueEnd];
+                    ava.aggregationConditionList=ava.aggregationConditionList.$model;
+                }
+            };
+            //勾选需要转换的源字段
+            avaConfig.checkOne=function($event,el){
+                el.selected=$event.currentTarget.checked;
+            }
+        }
+
+        function addMapp() {
+            var ava = wfdata.swapValue.avaWf;
+            if(!_.find(ava.sourceFields,{selected:true})){
+                alert("请勾选需要转换的源字段.");
+            }
+
+            var aa=_.map(ava.sourceFields,function(item){
+                if(item.selected==true){
+                    return item;
+                }
+            });
+
+            _.each(aa,function(item){
+                if(item){
+                    var a = _.find(ava.aggregationsList,{fieldName:item.fieldName,inValueSource:ava.inValue_});
+                    if(a){
+                        alert("源"+ava.inValue_+"的"+item.fieldName+"已存在.");
+                    }else{
+                        item.inValueSource=ava.inValue_;
+                        var obj= createModel(item);
+                        ava.aggregationsList.push(obj);
+                    }
+                }
+            });
+
+            ava.aggregationsList=_.sortBy(ava.aggregationsList.$model, 'inValueSource');
+
+        }
+        function removeMap() {
+
+            var ava = wfdata.swapValue.avaWf;
+            var mapF = ava.$selectedMap;
+            if (!mapF) {
+                return;
+            }
+            //删除显示映射字段
+            var index1 = -1;
+            //删除保存到后台的映射字段
+            index1 = _.findIndex(ava.aggregationsList.$model, {fieldlableName: mapF.fieldlableName,inValueSource:mapF.inValueSource});
+            if (index1 > -1) {
+                ava.aggregationsList.removeAt(index1);
+            }
+            ava.$selectedMap = null;
+            mapF = null;
+            ava = null;
+        }
+        function createModel(obj){
+            var newObj={};
+            newObj.inValueSource=obj.inValueSource;
+            newObj.fieldName=obj.fieldName;
+            newObj.fieldlableName=obj.fieldlableName;
+            newObj.fieldFormat=obj.fieldFormat;
+            newObj.fieldType=obj.fieldType;
+            newObj.fieldTypeName=obj.fieldTypeName;
+            return newObj;
+        }
+        function createSearchmodel(obj){
+            var newObj={};
+            newObj.firstBracket=obj.firstBracket?obj.firstBracket:"";
+            newObj.fieldName=obj.fieldName?obj.fieldName:"";
+            newObj.fieldType=obj.fieldType?obj.fieldType:"";
+            newObj.condition=obj.condition?obj.condition:"";
+            newObj.isConstant=obj.isConstant?obj.isConstant:"";
+            newObj.value=obj.value?obj.value:"";
+            newObj.sencondBracket=obj.sencondBracket?obj.sencondBracket:"";
+            newObj.andOr=obj.andOr?obj.andOr:"";
+            newObj.inValueStart=obj.inValueStart?obj.inValueStart:"";
+            newObj.inValueEnd=obj.inValueEnd?obj.inValueEnd:"";
+            return newObj;
+        }
+        function alert(text){
+            noty({
+                layout: "center",
+                timeout: 2500,
+                type: "warning",
+                text: text
+            });
+        }
+        function initInval(val) {
+
+            var ava = wfdata.swapValue.avaWf;
+            if( ava.mainTableList.length==0){
+                ava.mainTableList= _.clone(ava.inVarLists.$model);
+            }
+            ava.subTableList = _.clone(ava.mainTableList.$model);
+            var index1 = -1;
+            index1 = _.findIndex(ava.mainTableList.$model, {name: val});
+            if (index1 > -1) {
+                ava.subTableList.removeAt(index1);
+            }
+        };
+
+        //初始化输入变量下拉列表
+        function initInvalList(){
+
+            var a = _.values(window.parent.nodeUtil.getAllNodesJson().pluginSetValue);
+            var b =_.map(a, function(obj){ return obj.outValue;});
+            b=_.filter(b,function(obj){
+                if(obj){
+                    return obj;
+                }
+            });
+
+            var c =[];
+            _.each(b,function(obj){
+                if(obj){
+                    c.push({checked:true,name:obj})
+                }
+            });
+            //初始化输入变量下拉列表
+            wfdata.swapValue.avaWf.inVarLists=c;
+            //初始化 从表  列集合
+            initSubColumns(b);
+
+            //初始化 源 默认值
+            wfdata.swapValue.avaWf.inValue_=_.first(b);
+
+
+        }
+
+        function initSubColumns(b){
+
+            var m={};
+            _.each(b,function(obj){
+                if(obj){
+                    var x=getInputList(obj);
+                    m[obj]= x;
+                }
+            });
+
+            wfdata.swapValue.avaWf.subColumns=m;
+
+        }
+
+        function removeCheck(){
+            $("[class=items]:checkbox").attr("checked", false);
+            _.each(wfdata.swapValue.avaWf.sourceFields,function(obj){
+                obj.selected=false;
+            });
+        }
+        window.avalonCustomizeConfigInit = avalonCustomizeConfigInit;
+        window.vmCustomizeDefineDoneCallback = vmCustomizeDefineDoneCallback;
+
+        //数据初始化执行函数
+        window.preloadInit = function () {
+
+        };
+        window.CustomizeInitFormValue = function () {
+
+            //初始化 主表 默认值
+            if(!wfdata.swapValue.avaWf.inValuePK){
+                var a = _.values(window.parent.nodeUtil.getAllNodesJson().pluginSetValue);
+                var b =_.map(a, function(obj){ return obj.outValue;});
+                b=_.filter(b,function(obj){
+                    if(obj){
+                        return obj;
+                    }
+                });
+                wfdata.swapValue.avaWf.inValuePK=_.first(b);
+            }
+        };
+
+        /**
+         * 当avalon.define之后，可以进行model属性监控,$watch方法
+         */
+        function vmCustomizeDefineDoneCallback() {
+
+            var ava= wfdata.swapValue.avaWf;
+
+            ava.$watch("inValue_", function (newValue) {
+                //根据inValue获取源字段
+
+                ava.sourceFields=getInputList(newValue);
+                removeCheck();
+
+            });
+            //主表值切换清空,条件集合
+            var flag=true;
+            ava.$watch("inValuePK", function (newValue) {
+
+                ava.mainColumns=getInputList(newValue);
+                if(flag){
+                    flag=false;
+                }else{
+                    ava.aggregationConditionList={};
+                    ava.inValuePK2="";
+                }
+                initInval(newValue);
+
+            });
+            initInvalList();
+
+
+        }
+
+        //表单提交执行校验函数
+        window.customizeFormValid = function () {
+
+            if (wfdata.swapValue.avaWf.aggregationsList.length == 0) {
+                alert("请至少在映射配置里存在至少一项字段映射!");
+                return false;
+            }
+            wfdata.swapValue.avaWf.$fieldColumns=[];
+
+
+            var aa=wfdata.swapValue.avaWf.aggregationsList;
+            var bb=[]
+            _.each(aa,function(obj){
+                if(bb.length==0){
+                    bb.push(obj.inValueSource);
+                }else{
+                    if(_.indexOf(bb,obj.inValueSource)==-1){
+                        bb.push(obj.inValueSource);
+                    }
+                }
+
+            });
+            wfdata.swapValue.avaWf.inValue=bb.toString();
+
+            //var cc= $.extend(true, {}, wfdata.swapValue.avaWf.aggregationsList.$model);
+            var cc= _.clone(wfdata.swapValue.avaWf.aggregationsList.$model);
+            _.each(cc,function(_obj){
+                _obj.fieldName=_obj.fieldlableName;
+            });
+            wfdata.swapValue.avaWf.$fieldColumns=cc;
+            return true;
+        }
+        window.initAvalon();
+    })
+</script>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           

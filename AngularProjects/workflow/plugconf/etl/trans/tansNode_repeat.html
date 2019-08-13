@@ -1,0 +1,652 @@
+
+<div >
+    <div >
+        ${component | componentFormat('CommonTextInputComponent', 'label:步骤名称,mappingProp:pluginName,required:required')}
+        ${component | componentFormat('SingleInVarComponent', 'required: required')}
+        ${component | componentFormat('CommonTextInputComponent', 'label:输出变量,mappingProp:outValue,required: required')}
+    </div>
+    <div >
+        <div class="form-group config-Fieldset" id="_div_mapf1">
+            <div>
+                <div class="col-xs-3">
+                    <fieldset style="margin-left: 10px">
+                        <legend>源字段</legend>
+                        <div style="height: 300px;overflow-y: auto;">
+                            <div class="list-group" id="sourceDiv">
+                                <div class="list-group-item" ms-for="el in @sourceFields"
+                                     ms-click="@selectItem($event, 's', el)"
+                                     ms-attr="{title:el.fieldlableName}">
+                                    <input class="items" type="checkbox" ms-attr="{checked:el.selected?true:false}"  ms-data-index=$index ms-click="@checkOne($event,el)" />
+                                    {{el.fieldlableName}}
+                                </div>
+                            </div>
+
+                        </div>
+                    </fieldset>
+                </div>
+                <div class="col-xs-9" style="height: 300px;font-size: 12px;margin-left: 0px;">
+                    <div style="width: 75px;float: left;height: 100%;">
+                        <div style="height: 100%;display: table">
+                            <div style="display: table-cell;vertical-align: middle;">
+
+                                <button type="button" class="btn btn-primary btn-sm" style="margin-bottom: 10px;width:70px;"
+                                        ms-click="@defaultMapp()">增加
+                                </button>
+                                <button type="button" class="btn btn-primary btn-sm"
+                                        style="margin-bottom: 10px;margin-top: 30px;width:70px;"
+                                        ms-click="@removeMap()">
+                                    移除
+                                </button>
+                                <button type="button" class="btn btn-primary btn-sm" style="width:70px;"
+                                        ms-click="@resetMapp()">重置
+                                </button>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div style="float: none;">
+                        <fieldset >
+                            <legend>映射</legend>
+                            <div style="height: 300px;overflow: hidden;font-size: 14px">
+
+                                <table style="width:100%;table-layout: fixed; ">
+                                    <thead>
+                                    <th >源</th>
+                                    <th >输出字段</th>
+                                    <th >输出类型</th>
+                                    <th >输出格式</th>
+                                    </thead>
+                                    <tr style="height: 23px" ms-for="el in @rmDuplicateInfoList"
+                                        ms-click="@selectItem($event, 'map', el)">
+                                        <td style="width: 100px;overflow: hidden;white-space: nowrap;text-overflow:ellipsis;"
+                                            ms-attr="{title:el.fieldName}">{{el.fieldName}}
+                                        </td>
+                                        <td style="width: 50px;overflow: hidden;white-space: nowrap;text-overflow:ellipsis;">
+                                            <input style="width: 60px;height: 20px;"  ms-attr="{title:el.fieldlableName}" type="text"  ms-duplex-string="el.fieldlableName"  required/>
+                                        </td>
+
+                                        <td style="width: 60px;white-space:nowrap;">
+                                            <select ms-duplex-string="el.fieldType" style="width: 60px;"
+                                                    ms-attr="{title:@fieldType_filter(el.fieldType)}" required >
+                                                <option value="">默认</option>
+                                                <option ms-for="el2 in @dataTypeList"
+                                                        ms-attr="{title: el2.name, value: el2.id, selected: el2.id == el.fieldType}">
+                                                    {{el2.name}}
+                                                </option>
+                                            </select>
+                                        </td>
+                                        <td style="width: 60px;white-space:nowrap;margin-right: 3px">
+                                            <select ms-duplex-string="el.fieldFormat" style="width: 55px;"
+                                                    ms-attr="{title:@fieldFormat_filter(el.fieldFormat)}">
+                                                <option value="">默认</option>
+                                                <option ms-for="el2 in @dataFormatList"
+                                                        ms-attr="{title: el2.describe, value: el2.regex, selected: el2.regex == el.fieldFormat}">
+                                                    {{el2.describe}}
+                                                </option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <fieldset style="padding-left: 6px;">
+                <legend style="font-weight:bold;font-size: 14px;margin-left: 20px;margin-bottom: 0px">去重条件
+                    <button class="btn btn-primary btn-xs" style="margin:0px 10px 0px 20px;"  type="button" ms-click="@addCon()">
+                        增加
+                    </button>
+                </legend>
+                <div>
+
+                    <table class="table table-bordered table-striped table-hover table-condensed term-table-zdl" style="text-align:center;">
+                        <thead style="background-color: #d3d8e6;">
+                        <tr>
+                            <th style="text-align:center;width: 60px;">括弧</th>
+                            <th style="text-align:center;width: 140px;">字段名</th>
+                            <th style="text-align:center;width: 82px;">比较符</th>
+                            <th style="text-align:center;width: 140px;">字段名</th>
+                            <th style="text-align:center;width: 60px;">括弧</th>
+                            <th style="text-align:center;width: 80px;" style="">与-或</th>
+                            <th style="text-align:center;width: 100px;">操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ms-for="$index,el in @duplicateConditionList">
+                            <td>
+                                <select ms-duplex-string="el.firstBracket" >
+                                    <option value="">默认</option>
+                                    <option value="(">(</option>
+
+                                </select>
+                            </td>
+                            <td style="overflow: hidden;white-space: nowrap;text-overflow:ellipsis;"
+                                ms-attr="{title:el.fieldName}">
+
+                                <select ms-duplex-string="el.fieldName" required
+                                        style="width: 135px">
+                                    <option value="">请选择</option>
+                                    <option ms-for="el1 in @targetNames" ms-attr="{value: el1.fieldlableName,selected: el1.fieldName==el.fieldName}">
+                                        {{el1.fieldName}}
+                                    </option>
+                                </select>
+                            </td>
+                            <td>
+                                <select ms-duplex-string="el.condition"
+                                        style="width: 79px">
+                                    <option value="equal">等于</option>
+
+                                </select>
+                            </td>
+
+                            <td style="overflow: hidden;white-space: nowrap;text-overflow:ellipsis;"
+                                ms-attr="{title:el.fieldName}">
+                                <span>{{el.fieldName}}</span>
+                            </td>
+                            <td>
+                                <select ms-duplex-string="el.sencondBracket" >
+                                    <option value="">默认</option>
+
+                                    <option value=")">)</option>
+                                </select>
+                            </td>
+                            <td>
+
+                                <select ms-duplex-string="el.andOr" >
+                                    <option value="">请选择</option>
+                                    <option value="and">and</option>
+
+                                </select>
+                            </td>
+                            <td>
+
+                                <button ms-if="$index!==0" class="btn btn-primary btn-xs"
+                                        ms-click="@conditionUpdate($event, 'delete', el)">删除
+                                </button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </fieldset>
+
+            <fieldset style="padding-left: 6px;margin-top: 10px">
+                <legend style="font-size: 14px;margin-left: 20px;margin-bottom: 0px">
+                    <p style="float: left;font-weight: bold">保留条件</p>
+                    <button style="margin:0px 20px 0px 25px;float: left" class="btn btn-primary btn-xs" type="button"
+                            ms-click="@addCon_hold()">
+                        增加
+                    </button>
+                    保留方式：
+                    <select style="width: 90px;" ms-duplex-string="@saveType">
+                        <option ms-attr="{value:'row'}" >按行保留</option>
+                        <option ms-attr="{value: 'column'}" >按列保留</option>
+                    </select>
+                </legend>
+                <div>
+
+                    <table class="table table-bordered table-striped table-hover table-condensed term-table-zdl" style="text-align:center;">
+                        <thead style="background-color: #d3d8e6;">
+                        <tr >
+                            <th style="text-align:center;width: 120px;">保留方式</th>
+                            <th style="text-align:center;width: 120px;">字段名</th>
+                            <th style="text-align:center;width: 100px;">处理方式</th>
+                            <th style="text-align:center;width: 100px;">操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ms-for="$index,el in @uiDupRetainConditionList | orderBy('retainMode','-1')">
+                            <td ms-if="el.retainMode=='row'&& $index==0" ms-attr="{rowspan:@sumSpan('row')}" valign="middle" >
+                                按行保留
+                            </td>
+                            <td ms-if="el.retainMode!='row'&& $index==@sumSpan('row')" ms-attr="{rowspan:@sumSpan('column')}" valign="middle" >
+                                按列保留
+                            </td>
+                            <td style="overflow: hidden;white-space: nowrap;text-overflow:ellipsis;"
+                                ms-attr="{title:el.fieldName}">
+
+                                <select ms-duplex-string="el.fieldName" required
+                                        style="width: 120px">
+                                    <option value="">请选择</option>
+                                    <option ms-for="el1 in @targetNames" ms-attr="{value: el1.fieldName}">
+                                        {{el1.fieldName}}
+                                    </option>
+                                </select>
+                            </td>
+                            <td style="overflow: hidden;white-space: nowrap;text-overflow:ellipsis;">
+                                <select ms-duplex-string="el.handleMode" style="width: 90px">
+                                    <option value="random">随机</option>
+                                    <option value="max" ms-attr="{value: 'max',selected: el.handleMode=='max'}">{{ @dispose_filter(el.fieldName,"max")}}</option>
+                                    <option value="min" ms-attr="{value: 'min',selected: el.handleMode=='min'}">{{ @dispose_filter(el.fieldName,"min")}}</option>
+                                </select>
+                            </td>
+                            <td>
+                                <button  class="btn btn-primary btn-xs"
+                                        ms-click="@conditionUpdate_($event, 'delete', el)">删除
+                                </button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </fieldset>
+        </div>
+
+    </div>
+</div>
+<script type="text/javascript">
+    require(["component", "wfdata", "jsonFieldMapping", "avalon", "underscore"], function (component, wfdata, jsonFieldMapping, avalon, _) {
+
+        var mappingField = [
+            "rmDuplicateInfoList", "duplicateConditionList","uiDupRetainConditionList", "inValue", "outValue"
+        ];
+        jsonFieldMapping.setNodeSaveField(mappingField);
+
+        avalon.filters.trans_filter = function(str){
+            if(str){
+                return _.find( wfdata.swapValue.avaWf.dataTransTypeList,{id:str}).name;
+            }else{
+                return "";
+            }
+
+        }
+
+        /**
+         * model自定义属性定义
+         * @param avaConfig
+         */
+        function avalonCustomizeConfigInit(avaConfig) {
+            avaConfig.$nodeSelectId = "";//根据本配置页面的输入变量得到的源节点的节点id
+            avaConfig.sourceFields = [];//源节点字段集合
+            avaConfig.$selectedSF = null;//选中的源字段
+            avaConfig.$selectedMap = null;//选中的映射
+            avaConfig.sourceConstConList = [];//当为变量时候select
+            avaConfig.uiDupRetainConditionList=[];  //保留条件集合
+
+            avaConfig.duplicateConditionList=[];  // 去重条件集合
+            avaConfig.rmDuplicateInfoList = [];//保存到后台的映射
+            avaConfig.dataTransTypeList=[];  //转换方式集合
+            avaConfig.dataTypeList=[];    //数据类型集合
+            avaConfig.dataFormatList=[];    //数据格式类型集合
+            avaConfig.targetNames = [];//查询条件组合用
+            avaConfig.target_val='5';  //赋值
+            avaConfig.saveType="row";
+
+            avaConfig.defaultMapp = function () {
+                defaultMapp();
+            };
+            avaConfig.fieldType_filter = function(str){
+                str=str+"";
+                if(str){
+                    return _.find( wfdata.swapValue.avaWf.dataTypeList,{id:str}).name;
+                }else{
+                    return "";
+                }
+            }
+            avaConfig.fieldFormat_filter = function(str){
+                if(str){
+                    return _.find( wfdata.swapValue.avaWf.dataFormatList,{regex:str}).describe;
+                }else{
+                    return "";
+                }
+            }
+            avaConfig.sumSpan=function(a){
+
+                var n=0;
+                _.each(avaConfig.uiDupRetainConditionList,function(b){
+
+                    if(a== b.retainMode){
+                        n++;
+                    }
+                });
+                return n;
+            }
+            var longType="4,-5,6,8,2,3";
+            var timeType="91,92,93,2013,2014";
+            var charType="-15,-9,12,1";
+
+            avaConfig.dispose_filter = function(fieldName,str){
+                var value;
+               var a=_.find(avaConfig.rmDuplicateInfoList,function(obj){
+                    return obj.fieldlableName==fieldName
+                });
+                if(!a){
+                    if(str=="max"){
+                        value="较长变量"
+                    }else{
+                        value="较短变量";
+                    }
+                    return value;
+                }
+                if(longType.indexOf(a.fieldType)!=-1){
+                    if(str=="max"){
+                        value="较大数值"
+                    }else{
+                        value="较小数值";
+                    }
+                }else if(timeType.indexOf(a.fieldType)!=-1){
+                    if(str=="max"){
+                        value="较近时间"
+                    }else{
+                        value="较远时间";
+                    }
+                }else if(charType.indexOf(a.fieldType)!=-1){
+                    if(str=="max"){
+                        value="较长字符串"
+                    }else{
+                        value="较短字符串";
+                    }
+                }else{
+                    if(str=="max"){
+                        value="较长变量"
+                    }else{
+                        value="较短变量";
+                    }
+                }
+                return value;
+            }
+            //重置
+            avaConfig.resetMapp = function () {
+                if (wfdata.swapValue.avaWf.rmDuplicateInfoList.length === 0) {
+                    return;
+                }
+                $.confirm({
+                    text: "您确定要重置映射关系吗?", confirm: function () {
+                        wfdata.swapValue.avaWf.rmDuplicateInfoList=[];
+                    }
+                });
+            };
+            avaConfig.removeMap = function () {
+                removeMap()
+            };
+            avaConfig.selectItem = function (event, type, item) {
+                var ava = wfdata.swapValue.avaWf;
+                if(type == "s"){
+
+                }else if (type == "t") {
+                    $("#targetDiv").find(".active").removeClass("active");
+                    $("#_div_mapf1").find(".test_tr").removeClass("test_tr");
+                    $(event.target).addClass("active");
+                    ava.$selectedTF = item;
+                } else {
+                    $("#_div_mapf1").find(".active").removeClass("active");
+                    $("#_div_mapf1").find(".test_tr").removeClass("test_tr");
+                    $(event.currentTarget).addClass("test_tr");
+                    ava.$selectedMap = item;
+                }
+                ava = null;
+            };
+            //勾选需要转换的源字段
+            avaConfig.checkOne=function($event,el){
+                el.selected=$event.currentTarget.checked;
+            };
+            //增加去重条件
+            avaConfig.addCon = function () {
+
+                if(wfdata.swapValue.avaWf.duplicateConditionList.length>=wfdata.swapValue.avaWf.rmDuplicateInfoList.length){
+                    alert("去重条件个数不能大于映射字段个数。");
+                    return ;
+                }
+                wfdata.swapValue.avaWf.duplicateConditionList.push({
+                    firstBracket: "",
+                    fieldName: "",
+                    fieldType: 0,
+                    condition: "equal",
+                    isConstant: true,
+                    value: "",
+                    sencondBracket: "",
+                    andOr: "",
+                    conditionEditFlag: true//是否为修改模式
+                })
+            };
+            //增加保留条件
+            avaConfig.addCon_hold = function() {
+                avaConfig.uiDupRetainConditionList.push({
+                    fieldName :"",
+                    retainMode: wfdata.swapValue.avaWf.saveType,
+                    handleMode : "random"
+                })
+            };
+
+            //去重条件-删除
+            avaConfig.conditionUpdate = function (eve, type, item) {
+                    wfdata.swapValue.avaWf.duplicateConditionList.remove(item);
+            };
+            //保留条件-删除
+            avaConfig.conditionUpdate_ = function (eve, type, item) {
+                    wfdata.swapValue.avaWf.uiDupRetainConditionList.remove(item);
+            }
+        }
+
+        /**
+         * 当avalon.define之后，可以进行model属性监控,$watch方法
+         */
+        function vmCustomizeDefineDoneCallback() {
+            var ava= wfdata.swapValue.avaWf;
+            ava.$watch("inValue", function (newValue) {
+                if (newValue) {
+                    ava.sourceFields = [];//源节点字段集合
+                    ava.uiDupRetainConditionList=[];  //保留条件集合
+                    ava.duplicateConditionList=[];  // 去重条件集合
+                    ava.rmDuplicateInfoList = [];//保存到后台的映射
+                    getInputList(newValue);
+                }
+                if(newValue===""){
+                    ava.sourceFields = [];//源节点字段集合
+                    ava.uiDupRetainConditionList=[];  //保留条件集合
+                    ava.duplicateConditionList=[];  // 去重条件集合
+                    ava.rmDuplicateInfoList = [];//保存到后台的映射
+                }
+            });
+
+            ava.$watch("rmDuplicateInfoList.length", function (newValue) {
+
+                if (newValue) {
+                    //avaConfig.targetNames.length=0;
+                    ava.targetNames=ava.rmDuplicateInfoList;
+                }else if(newValue===0){
+                    ava.targetNames.length=0;
+                }
+            });
+
+        }
+        function defaultMapp() {
+
+            var ava = wfdata.swapValue.avaWf;
+            if(!_.find(ava.sourceFields,{selected:true})){
+                alert("请勾选需要转换的源字段.");
+            }
+            var aa=_.map(ava.sourceFields,function(item){
+                if(item.selected==true){
+                    return item;
+                }
+            });
+            _.each(aa,function(item){
+                if(item){
+                    var a = _.find(ava.rmDuplicateInfoList,{fieldName:item.fieldName});
+                    if(a){
+                        alert(item.fieldName+"已存在.");
+                    }else{
+                        ava.rmDuplicateInfoList.push({transforMode:ava.target_val,fieldName:item.fieldName,fieldlableName:item.fieldlableName,
+                            fieldType:item.fieldType,fieldTypeName:item.fieldTypeName,fieldFormat:item.fieldFormat?item.fieldFormat:""});
+
+                    }
+                }
+            });
+
+            _.each(ava.sourceFields,function(item){
+                item.selected=false;
+            });
+            ava.$selectedTF=null;
+            removeCheck();
+
+        }
+        function removeMap() {
+            var ava = wfdata.swapValue.avaWf;
+            var mapF=ava.$selectedMap;
+            if (!mapF) {
+                return;
+            }
+            var index1 = -1;
+            index1 = _.findIndex(ava.rmDuplicateInfoList.$model, {fieldName: mapF.fieldName});
+            if (index1 > -1) {
+
+                syncCriteria_del(ava.rmDuplicateInfoList[index1].fieldName);
+                ava.rmDuplicateInfoList.removeAt(index1);
+                //el.selected=$event.currentTarget.checked;
+            }
+            ava.$selectedMap = null;
+            mapF = null;
+            ava = null;
+        }
+
+        //获取源字段
+        function getInputList(inVar) {
+            var relaNodes = window.parent.nodeUtil.getRelationshipSourceNodeByInVar(inVar);
+            if (!relaNodes || !relaNodes.jsonInfo) {
+                return;
+            }
+            var sourceNodeId = relaNodes.jsonInfo.activitiNodeId;
+            if (!sourceNodeId) {
+                return;
+            }
+            var ava = wfdata.swapValue.avaWf;
+            ava.$nodeSelectId = sourceNodeId;
+            var originalSourceList = relaNodes.jsonInfo.columnList;
+
+            var newArr = [];
+            _.each(originalSourceList, function (value) {
+                if (value.fieldlableName) {
+                    newArr.push(jsonFieldMapping.createDataColumn("", value.fieldName, value.fieldType, value.fieldTypeName, value.fieldLength, "",value.fieldFormat));
+                }
+            });
+            newArr.length > 0 && (ava.sourceFields = newArr);
+            ava = null;
+            newArr = null;
+            relaNodes = null;
+        }
+
+        //当映射字段改变时，清空去重条件和保留条件
+        function clearCriteria() {
+
+            var ava = wfdata.swapValue.avaWf;
+            ava.duplicateConditionList.length = 0;
+            ava.addCon();
+
+        }
+        //映射条件删除时，同步去重条件和保留条件
+        function syncCriteria_del(str){
+            var ava = wfdata.swapValue.avaWf;
+
+            var a=_.find(ava.duplicateConditionList,function(obj){
+                return obj.fieldName==str;
+            });
+            if(a!=undefined){
+                ava.duplicateConditionList.remove(a);
+            }
+            var b=_.find(ava.uiDupRetainConditionList,function(obj){
+                return obj.fieldName==str;
+            });
+            if(b!=undefined){
+                ava.uiDupRetainConditionList.remove(b);
+            }
+        }
+
+        function alert(text){
+            noty({
+                layout: "center",
+                timeout: 3000,
+                type: "warning",
+                text: text
+            });
+        }
+        function removeCheck(){
+
+            $("#targetDiv").find(".active").removeClass("active");
+
+            $("[class=items]:checkbox").attr("checked", false);
+        }
+
+        window.CustomizeInitFormValue = function () {
+
+        };
+        window.avalonCustomizeConfigInit = avalonCustomizeConfigInit;
+        window.vmCustomizeDefineDoneCallback = vmCustomizeDefineDoneCallback;
+
+        function filter_TransTypeList(a){
+            var b=[];
+            if(!_.isArray(a)){
+                return b;
+            }
+            _.each(a,function(obj){
+                if(wfdata.swapValue.avaWf.target_val.indexOf(obj.id)!=-1){
+                    b.push(obj);
+                }
+            });
+            return b;
+        }
+
+        window.preloadInit = function () {
+            wfdata.dataProxy.getTransType().done(function (data) {
+                if (!data.content) {
+                    return;
+                }
+                var dfs = JSON.parse(data.content);
+                wfdata.swapValue.avaWf.dataTransTypeList=filter_TransTypeList(dfs);
+
+            });
+            wfdata.dataProxy.getDataType().done(function (data) {
+                if (!data.content) {
+                        return;
+                    }
+                var dfs = JSON.parse(data.content);
+                wfdata.swapValue.avaWf.dataTypeList = (_.isArray(dfs) ? dfs : []);
+            });
+            wfdata.dataProxy.getFormatItemsAsync().done(function (data) {
+                if (!data.content) {
+                    return;
+                }
+                var dfs = JSON.parse(data.content);
+                wfdata.swapValue.avaWf.dataFormatList = (_.isArray(dfs.rule) ? dfs.rule : []);
+            })
+        };
+
+        window.customizeFormValid = function () {
+            var ava=wfdata.swapValue.avaWf;
+            var dataTypeList= ava.dataTypeList.$model;
+            var aa=[];
+
+            _.each(ava.rmDuplicateInfoList.$model,function(item){
+                var fieldType=item.fieldType+"";
+                var fieldTypeName= _.find(dataTypeList,{id:fieldType}).format;
+                item.fieldTypeName=fieldTypeName;
+                item.fieldName=item.fieldlableName;
+                aa.push(item);
+            });
+
+            if(ava.rmDuplicateInfoList.length==0){
+                alert("映射字段不能为空。");
+                return false;
+            };
+            if(ava.duplicateConditionList.length==0){
+                alert("去重条件不能为空。");
+                return false;
+            };
+            if(ava.uiDupRetainConditionList.length==0){
+                alert("保留条件不能为空。");
+                return false;
+            };
+
+            wfdata.swapValue.avaWf.$fieldColumns=[];
+            wfdata.swapValue.avaWf.$fieldColumns=aa;
+            return true;
+        }
+        window.initAvalon();
+    })
+</script>

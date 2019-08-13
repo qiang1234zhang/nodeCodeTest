@@ -1,0 +1,331 @@
+<div class="tab-content">
+    <div id="baseConfig" class="active">
+        ${component | componentFormat('CommonTextInputComponent', 'label:步骤名称,mappingProp:pluginName,required:required')}
+        ${component | componentFormat('FileSourceComponent_EX','changeFile_fieldName:选择目录')}
+        <div class="form-group">
+            <label class="col-sm-3 control-label">文件类型:</label>
+            <div class="col-sm-9">
+                <select class="form-control" ms-duplex-string="@fileFormat" required>
+                    <option value="xls">xls</option>
+                    <option value="xlsx">xlsx</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-3 control-label">数据所在sheet页:</label>
+            <div class="col-sm-9">
+                <select class="form-control" ms-duplex-string="@sheetIndex" required>
+                    <option ms-for="el in [1,2,3,4,5,6]" ms-attr="{value: el,selected: @sheetIndex == el}" >{{el}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">表头所在行:</label>
+            <div class="col-sm-7">
+                <select class="form-control" ms-duplex-string="@rowIndex" required>
+                    <option ms-for="el in [1,2,3,4,5,6]"  ms-attr="{value: el,selected: @rowIndex == el}">{{el}}</option>
+                </select>
+            </div>
+            <div class="col-sm-2">
+                <button type="button" class="btn btn-primary" autocomplete="off"
+                        ms-click="@openTitle()">获取表头
+                </button>
+            </div>
+
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">分包策略:</label>
+            <div class="col-sm-9">
+                <select class="form-control" ms-duplex-boolean="@isCustomizePack">
+                    <option value="false">默认</option>
+                    <option value="true">自定义</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group" ms-if="@isCustomizePack">
+            <label class="col-sm-3 control-label">分包大小:</label>
+            <div class="col-sm-9">
+                <select class="form-control" ms-duplex-number="@packageSize">
+                    <option value="0">请选择</option>
+                    <option value="1000">1000</option>
+                    <option value="3000">3000</option>
+                    <option value="5000">5000</option>
+                </select>
+            </div>
+        </div>
+
+        ${component | componentFormat('CommonTextInputComponent', 'label:输出变量,mappingProp:outValue,required:required')}
+    </div>
+</div>
+<style>
+    .dropTree{
+        position:absolute;
+        z-index: 30;
+        border:2px solid #66AFE9;
+        height:160px;
+        overflow:auto;
+    }
+</style>
+<script type="text/javascript">
+    require(["component", "wfdata", "jsonFieldMapping", "dialog-plus"], function (component, wfdata, jsonFieldMapping,dialog) {
+        var mappingField = [
+            "fileType", "isDir","fileSourceId","filePath","fileFormat","sheetIndex","rowIndex","packageSize", "inValue", "outValue"
+        ];
+        //把当前节点的要保存的属性全部放到currentNodeSaveFields对象中
+        jsonFieldMapping.setNodeSaveField(mappingField);
+
+        /**
+         * model自定义属性定义 初始化的时候js脚本中已经初始化好了公用的属性，页面上自有的属性可以在这定义
+         * @param avaConfig
+         */
+        function avalonCustomizeConfigInit(avaConfig) {
+            avaConfig.isCustomizePack = false;//分包策略
+            avaConfig.packageSize = 0;
+            avaConfig.sheetIndex=1;
+            avaConfig.rowIndex=1;
+            avaConfig.fileFormat="xls";
+            avaConfig.fileNameParmName="zdl";
+
+            avaConfig.tableTitleitems = [];  //属性table的值
+            avaConfig.openTitle=function(){
+                openFileTitle();
+            }
+            avaConfig.showServiceMenu = function(){
+                showMenu();
+            };
+        }
+
+
+        //文件下拉树开始
+        function showMenu() {
+            wfdata.swapValue.avaWf.filePath = "";
+            fileTree();
+            $("#menuContent").show();
+            if($("#treeDemo").parent().getNiceScroll().length > 0){
+                $("#treeDemo").parent().getNiceScroll().resize();
+            }
+            $("#menuContent").addClass("dropTree");
+            $("body").bind("mousedown", onBodyDown);
+        }
+        function hideMenu() {
+            $("#menuContent").hide();
+            $("body").unbind("mousedown", onBodyDown);
+        }
+        function onBodyDown(event) {
+            if (!(event.target.id == "fileName" || event.target.id == "menuContent" || $(event.target).parents("#menuContent").length>0)) {
+                hideMenu();
+            }
+        }
+        var setting = {
+            async: {
+                enable: true,
+                type : "get",
+                url:getUrlByNodeId
+            },
+            view: {
+                selectedMulti: false
+            },
+            check:{
+                enable:true
+            },
+            callback: {
+                onClick: onClickTree,
+                onCheck: onCheck
+
+            }
+        };
+
+        function getUrlByNodeId(treeId, treeNode) {
+            return window.restPath +"/etl/fileSystem/listFileAndDirTree?id="+wfdata.swapValue.avaWf.fileId+"&pId="+treeNode.id;
+        }
+        var zNodes =[
+            { id:"1",pId:"0",name:"文件名称", isParent:true,checked:false,chkDisabled:false}
+        ];
+        function fileTree(){
+            $.fn.zTree.init($("#treeDemo"), setting, zNodes);//初始化zTree树
+        }
+        function onClickTree(event,treeId, treeNode) {
+            if (!treeNode.isParent) {
+                alert("请选择父节点");
+                return false;
+            } else {
+                if (!treeNode.isAjaxing) {
+                    ajaxGetNodes(treeNode, "refresh");
+                    return true;
+                } else {
+                    alert("Loading...");
+                    return false;
+                }
+                return true;
+            }
+
+        }
+        function ajaxGetNodes(treeNode, reloadType) {
+            var zTree = $.fn.zTree.getZTreeObj("treeDemo");
+            if (reloadType == "refresh") {
+                zTree.updateNode(treeNode);
+            }
+            zTree.reAsyncChildNodes(treeNode, reloadType, true);
+        }
+
+        function onCheck(e, treeId, treeNode) {
+            var add_vm = wfdata.swapValue.avaWf;
+            if(treeNode.checked){
+                add_vm.filePath = treeNode.name;
+            }else{
+                add_vm.filePath="";
+            }
+        }
+
+        /**
+         *页面打开时候初始化页面信息
+         * @constructor
+         */
+        function CustomizeInitFormValue() {
+            if (wfdata.swapValue.avaWf.packageSize) {
+                wfdata.swapValue.avaWf.isCustomizePack = true;
+            }
+        }
+
+        /**
+         * 当avalon.define之后，可以进行model属性监控,$watch方法
+         */
+        function vmCustomizeDefineDoneCallback() {
+            var ava=wfdata.swapValue.avaWf;
+            ava.$watch("fileTypeId",function (newValue,oldValue) {
+                if((newValue!=oldValue)&&oldValue){
+                    ava.fileId="";
+                }
+            });
+            ava.$watch("fileId",function (newValue,oldValue) {
+                if((newValue!=oldValue)&&oldValue){
+                    ava.filePath="";
+                }
+            });
+            ava.$watch("filePath",function (newValue,oldValue) {
+                if((newValue!=oldValue)&&oldValue){
+                    ava.$fieldColumns=[];
+                }
+            });
+            ava.$watch("isCustomizePack", function (newValue) {
+                if (newValue&&ava.packageSize==0) {
+                    ava.packageSize = 1000;
+                }
+                if(!newValue) {
+                    ava.packageSize = 0;
+                }
+            });
+        }
+        var dialog1;
+
+        function openFileTitle() {
+            var dialogConfig = {
+                "title": "设置表头",
+                "width": 768,
+                "height": 400,
+                url: window.htmlPath + "input/dialog-excelTableTitle.html"
+            };
+            dialog1 = dialog(dialogConfig);
+            dialog1.showModal();
+
+        }
+
+        window.saveTableTitle = function (items) {
+
+            wfdata.swapValue.avaWf.$fieldColumns = items;
+            dialog1.close();
+
+        }
+
+        window.getSourceColumList = function () {
+
+            var originalSourceList = [];
+            var vm = wfdata.swapValue.avaWf;
+            wfdata.dataProxy.getInput_TableTitle(vm.fileId, vm.filePath,vm.fileFormat, vm.sheetIndex, vm.rowIndex,vm.isDir).done(function (data) {
+                if (data.content) {
+                    originalSourceList = JSON.parse(data.content);
+
+                } else {
+                    originalSourceList = [];
+                }
+            }).fail(function () {
+                originalSourceList = [];
+            });
+            var newArr = [];     //保存属性select中的值
+            var tabbleAttr = [];   //保存属性table中的值
+
+            _.each(originalSourceList, function (value) {
+                newArr.push({
+                    fieldName: value.fieldName,
+                    fieldlableName: value.fieldName,
+                    fieldType: value.fieldType,
+                    fieldTypeName:"",
+                    fieldFormat: ""
+                });
+                tabbleAttr.push({
+                    fieldName: value.fieldName,
+                    fieldlableName: value.fieldName,
+                    fieldType: value.fieldType,
+                    fieldTypeName: value.fieldTypeName,
+                    fieldFormat: ""
+                });
+            });
+
+            if (wfdata.swapValue.avaWf.$fieldColumns.length == 0) {
+                wfdata.swapValue.avaWf.$fieldColumns = tabbleAttr;
+            } else {
+                tabbleAttr = wfdata.swapValue.avaWf.$fieldColumns;
+            }
+            var obj = {
+                newArr: newArr,
+                tabbleAttr: tabbleAttr,
+                initFormatItems: initFormatItems(),
+                initDataType: initDataType()
+            };
+            return obj;
+        }
+
+        function initFormatItems() {
+
+            var formatItems = [];
+            wfdata.dataProxy.getFormatItems().done(function (data) {
+                if (data.content) {
+                    formatItems = JSON.parse(data.content).rule;
+                } else {
+                    formatItems = [];
+                }
+            }).fail(function () {
+                formatItems = [];
+            });
+
+            return formatItems;
+        }
+
+        function initDataType() {
+
+            var dataType = [];
+            wfdata.dataProxy.getDataType().done(function (data) {
+                if (data.content) {
+                    dataType = JSON.parse(data.content);
+                } else {
+                    dataType = [];
+                }
+            }).fail(function () {
+                dataType = [];
+            });
+
+            return dataType;
+        }
+
+        //页面里的avalon model定义接口，需要暴露出来到window对象
+        window.avalonCustomizeConfigInit = avalonCustomizeConfigInit;
+        window.CustomizeInitFormValue = CustomizeInitFormValue;
+        window.vmCustomizeDefineDoneCallback = vmCustomizeDefineDoneCallback;
+
+        //开始初始化avalon对象
+        window.initAvalon();
+
+
+    })
+</script>

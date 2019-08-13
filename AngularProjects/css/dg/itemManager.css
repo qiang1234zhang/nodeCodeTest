@@ -1,0 +1,23 @@
+#itemManager .MenuBarContent{
+    width: 100%;
+    position: relative;
+    top:46px;
+    bottom:0;
+}
+
+#itemManager .treeIovModal .modal-input .modal-column{
+    width:100%;
+}
+#itemManager .treeIovModal .drag{
+    width: 500px;
+}
+#itemManager .itemBtn {
+    width: 89.58px;
+    height: 33px;
+    background-color: rgb(48, 175, 174);
+    color: #FFF;
+    font: 400 16px 'microsoft yahei';
+}
+#itemManager .itemBtn span {
+    margin-right: 4px
+}

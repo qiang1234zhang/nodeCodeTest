@@ -1,0 +1,150 @@
+
+<div class="tab-content">
+    <div id="baseConfig" class="active">
+        ${component | componentFormat('CommonTextInputComponent', 'label:步骤名称,mappingProp:pluginName,required:required')}
+
+        ${component | componentFormat('DataSourceComponent')}
+        <div class="form-group">
+            <label class="col-sm-3 control-label">源表:<span class="necessary"> *</span></label>
+
+            <div class="col-sm-9">
+                <select class="form-control" ms-duplex-string="@tableName" required>
+                    <option value="">请选择</option>
+                    <option ms-attr="{value: el.name,selected: @tableName == el.name}" ms-for="el in @tableNameArr">
+                        {{el.name}}
+                    </option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group"  style="margin-top: 50px;">
+            <label class="col-sm-3 control-label">目标数据源类型:<span class="necessary"> *</span></label>
+
+            <div class="col-sm-9">
+                <select class="form-control" ms-duplex-string="@destDbType" required>
+                    <option value="">请选择</option>
+                    <option ms-attr="{value: el.id}" ms-for="el in @dsTypeLists">{{el.name}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">目标数据库名称:<span class="necessary"> *</span></label>
+
+            <div ms-class="@selectClass">
+                <select class="form-control" ms-duplex-string="@destDataSourceId" required>
+                    <option value="">请选择</option>
+                    <option ms-attr="{value: el.id,selected: @destDataSourceId == el.id}" ms-for="el in @dsLists_">{{el.sourceName}}
+                    </option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">目标表:<span class="necessary"> *</span></label>
+
+            <div class="col-sm-9">
+                <input class="form-control" ms-duplex-string="@destTables" required />
+
+               <!-- <select class="form-control" ms-duplex-string="@destTables" required>
+                    <option value="">请选择</option>
+                    <option ms-attr="{value: el.name,selected: @destTables == el.name}" ms-for="el in @tableNameArr_">
+                        {{el.name}}
+                    </option>
+                </select>-->
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    require(["component", "wfdata", "jsonFieldMapping", "avalon", "underscore"], function (component, wfdata, jsonFieldMapping, avalon, _) {
+
+        var mappingField = [
+            "dbType", "dataSourceId", "tableName","destDbType","destDataSourceId","destTables"
+        ];
+        jsonFieldMapping.setNodeSaveField(mappingField);
+
+
+        /**
+         * model自定义属性定义
+         * @param avaConfig
+         */
+        function avalonCustomizeConfigInit(avaConfig) {
+
+            avaConfig.tableName = "";//目标表,双向绑定
+            avaConfig.destDbType="";
+            avaConfig.destDataSourceId="";
+            avaConfig.destTables="";
+            avaConfig.tableNameArr = [];//目标表集合,select数据源
+            avaConfig.dsTypeLists_=[];
+            avaConfig.dsLists_=[];
+            avaConfig.tableNameArr_=[];
+
+
+        }
+        /**
+         * 当avalon.define之后，可以进行model属性监控,$watch方法
+         */
+        function vmCustomizeDefineDoneCallback() {
+
+            wfdata.swapValue.avaWf.$watch("dsId", function (newValue) {
+
+                if (newValue) {
+                    wfdata.dataProxy.getDataSourceTables(wfdata.swapValue.avaWf.dsId).done(function (data) {
+                        if (data.content) {
+                            wfdata.swapValue.avaWf.tableNameArr = JSON.parse(data.content);
+                        } else {
+                            wfdata.swapValue.avaWf.tableNameArr = [];
+                        }
+                    }).fail(function () {
+                        wfdata.swapValue.avaWf.tableNameArr = [];
+                    })
+                } else {
+                    wfdata.swapValue.avaWf.tableNameArr = [];
+                }
+            });
+
+            wfdata.swapValue.avaWf.$watch("destDbType", function (newValue) {
+
+                if (newValue) {
+                    wfdata.dataProxy.getDataSource(wfdata.swapValue.avaWf.destDbType).done(function (data) {
+                        if (data.content) {
+                            wfdata.swapValue.avaWf.dsLists_ = JSON.parse(data.content);
+                        } else {
+                            wfdata.swapValue.avaWf.dsLists_ = [];
+                        }
+                    }).fail(function () {
+                        wfdata.swapValue.avaWf.dsLists_ = [];
+                    })
+                } else {
+                    wfdata.swapValue.avaWf.dsLists_ = [];
+                }
+            });
+
+            wfdata.swapValue.avaWf.$watch("destDataSourceId", function (newValue) {
+
+                if (newValue) {
+                    wfdata.dataProxy.getDataSourceTables(wfdata.swapValue.avaWf.destDataSourceId).done(function (data) {
+                        if (data.content) {
+                            wfdata.swapValue.avaWf.tableNameArr_ = JSON.parse(data.content);
+                        } else {
+                            wfdata.swapValue.avaWf.tableNameArr_ = [];
+                        }
+                    }).fail(function () {
+                        wfdata.swapValue.avaWf.tableNameArr_ = [];
+                    })
+                } else {
+                    wfdata.swapValue.avaWf.tableNameArr_ = [];
+                }
+            });
+        }
+        window.CustomizeInitFormValue = function () {
+
+        };
+        window.avalonCustomizeConfigInit = avalonCustomizeConfigInit;
+        window.vmCustomizeDefineDoneCallback = vmCustomizeDefineDoneCallback;
+        window.preloadInit = function () {
+
+        };
+
+        window.initAvalon();
+    })
+</script>

@@ -1,0 +1,320 @@
+<ul class="nav nav-tabs">
+    <li class="active"><a href="javascript:void(0)">基础配置</a></li>
+    <li><a href="javascript:void(0)">属性配置</a></li>
+</ul>
+<div class="tab-content">
+    <div id="baseConfig" class="active">
+        ${component | componentFormat('CommonTextInputComponent', 'label:步骤名称,mappingProp:pluginName,required:required')}
+        ${component | componentFormat('DataSourceComponent','disabled:disabled')}
+        <div class="form-group">
+            <label class="col-sm-3 control-label">源表:<span class="necessary"> *</span></label>
+
+            <div class="col-sm-7">
+                <select class="form-control" ms-duplex-string="@tableName" required disabled >
+                    <option value="">请选择</option>
+                    <option ms-attr="{value: el.name,selected: @tableName == el.name}" ms-for="el in @tableNameArr">
+                        {{el.name}}
+                    </option>
+                </select>
+            </div>
+            <div class="col-sm-2" >
+                <button type="button" class="btn btn-primary" autocomplete="off"
+                        ms-click="@getSqlSelect()">获取sql语句
+                </button>
+            </div>
+        </div>
+        ${component | componentFormat('SqlInputComponent', 'label:sql,mappingProp:sql,required:required,readonly:readonly')}
+        <div class="form-group">
+            <label class="col-sm-3 control-label">分包策略:</label>
+            <div class="col-sm-9">
+                <select class="form-control" ms-duplex-boolean="@isCustomizePack">
+                    <option value="false">默认</option>
+                    <option value="true">自定义</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group" ms-if="@isCustomizePack">
+            <label class="col-sm-3 control-label">分页大小:</label>
+            <div class="col-sm-9">
+                <select class="form-control" ms-duplex-number="@pageSize">
+                    <option value="0">请选择</option>
+                    <option value="10000">10000</option>
+                    <option value="20000">20000</option>
+                    <option value="30000">30000</option>
+                    <option value="40000">40000(推荐使用)</option>
+                    <option value="50000">50000</option>
+                    <option value="60000">60000</option>
+                    <option value="70000">70000</option>
+                    <option value="80000">80000</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group" ms-if="@isCustomizePack">
+            <label class="col-sm-3 control-label">分包大小:</label>
+            <div class="col-sm-9">
+                <select class="form-control" ms-duplex-number="@packageSize">
+                    <option value="0">请选择</option>
+                    <option value="10000">10000</option>
+                    <option value="20000">20000</option>
+                    <option value="30000">30000</option>
+                    <option value="40000">40000(推荐使用)</option>
+                    <option value="50000">50000</option>
+                    <option value="60000">60000</option>
+                    <option value="70000">70000</option>
+                    <option value="80000">80000</option>
+                </select>
+            </div>
+        </div>
+
+        ${component | componentFormat('CommonTextInputComponent', 'label:输出变量,mappingProp:outValue,required:required')}
+    </div>
+    <div id="propConfig">
+        <table class="table table-striped table-hover table-condensed">
+            <caption>查询字段列表</caption>
+            <thead>
+            <tr>
+                <th>序号</th>
+                <th>名称</th>
+                <th>类型</th>
+                <th>主键</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ms-for="($index, item) in @sqlFieldList">
+                <td>{{$index + 1}}</td>
+                <td>{{item.fieldName}}</td>
+                <td>{{item.fieldTypeName}}</td>
+                <td>
+                    <input type="radio" name="isPk" ms-attr="{checked:item.isPk?true:false}"   ms-data-index=$index ms-click="@checkOne($event,item)" />
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<script type="text/javascript">
+    require(["component", "wfdata", "jsonFieldMapping","underscore"], function (component, wfdata, jsonFieldMapping,_) {
+        var mappingField = [
+            "dbType", "dataSourceId", "sql", "pageSize", "packageSize", "inValue", "outValue"
+        ];
+        jsonFieldMapping.setNodeSaveField(mappingField);
+
+        var tab = new component.Tab({
+            callback_tabChange: function ($li, index) {
+                if(index==0){
+                    return;
+                }
+
+                if(wfdata.swapValue.avaWf.$fieldColumns.length==0){
+                    wfdata.dataProxy.getColumns(wfdata.swapValue.avaWf.dsId, wfdata.swapValue.avaWf.sql).done(function (data) {
+                        wfdata.swapValue.avaWf.sqlFieldList = JSON.parse(data.content);
+                    });
+                }else{
+                    wfdata.swapValue.avaWf.sqlFieldList=wfdata.swapValue.avaWf.$fieldColumns;
+                }
+
+            }
+        });
+
+        /**
+         * model自定义属性定义
+         * @param avaConfig
+         */
+        function avalonCustomizeConfigInit(avaConfig) {
+            avaConfig.isCustomizePack = false;//分包策略
+            avaConfig.tableName="";
+            avaConfig.pageSize = 0;
+            avaConfig.packageSize = 0;
+            avaConfig.sqlFieldList = [];//填写的sql执行字段列表
+            avaConfig.tableNameArr = [];//目标表集合,select数据源
+            avaConfig.checkOne=function($event,item){
+
+                _.each(wfdata.swapValue.avaWf.$fieldColumns,function (x) {
+                    x.isPk=false;
+                });
+                item.isPk = $event.currentTarget.checked;
+                _.findWhere(wfdata.swapValue.avaWf.$fieldColumns,{fieldName:item.fieldName}).isPk=$event.currentTarget.checked;
+            };
+            avaConfig.getSqlSelect=function () {
+                getSqlSelect();
+
+            }
+        }
+
+        function getSqlSelect() {
+
+            var ava=wfdata.swapValue.avaWf;
+            var ids="";
+            if(ava.tableNameArr&&ava.tableName){
+                ids =_.find(ava.tableNameArr,function(obj){ return obj.name==ava.tableName; }).id;
+            }
+
+            if(ids!=""){
+                wfdata.dataProxy.getTableSql(ids).done(function (data) {
+                    ava.sql = data.content;
+                    ava.$fieldColumns=[];
+                });
+            }
+
+        }
+
+        /**
+         *页面打开时候初始化页面信息
+         * @constructor
+         */
+        function CustomizeInitFormValue() {
+            var ava=wfdata.swapValue.avaWf;
+            wfdata.dataProxy.getDataSourceByItemManageId(0).done(function (data) {
+
+                var obj = JSON.parse(data.content);
+                ava.dsTypeId=obj.dsTypeId;
+                ava.dsId=obj.dsId ;
+                ava.tableName=obj.tableName;
+
+            })
+
+            if (wfdata.swapValue.avaWf.pageSize) {
+                wfdata.swapValue.avaWf.isCustomizePack = true;
+            }
+            wfdata.swapValue.avaWf.showSqlBtn = false; //是否显示获取sql按钮
+        }
+
+        /**
+         * 当avalon.define之后，可以进行model属性监控,$watch方法
+         */
+        function vmCustomizeDefineDoneCallback() {
+
+            var ava=wfdata.swapValue.avaWf;
+            ava.$watch("isCustomizePack", function (newValue) {
+
+                if (newValue&&ava.pageSize==0) {
+                    ava.pageSize = 40000;
+                    ava.packageSize = 40000;
+                }
+                if(!newValue) {
+                    ava.pageSize = 0;
+                    ava.packageSize = 0;
+                }
+            });
+            //"dbType", "dataSourceId", "sql"
+
+            ava.$watch("dsId",function (newValue,oldValue) {
+
+                if (newValue) {
+                    wfdata.dataProxy.getDataSourceTables(ava.dsId).done(function (data) {
+
+                        if (data.content) {
+                            ava.tableNameArr = JSON.parse(data.content);
+                        } else {
+                            ava.tableNameArr = [];
+                        }
+                    }).fail(function () {
+                        ava.tableNameArr = [];
+                    })
+                } else {
+                    ava.tableNameArr = [];
+                }
+
+            });
+
+            ava.$watch("sqlFieldList", function (newValue) {
+
+                if(!newValue){
+                    return;
+                }
+                var tem_fieldName="";
+                var flag=false;
+               _.each( _.sortBy(ava.sqlFieldList.$model, 'fieldName'),function(value){
+                    if(tem_fieldName==value.fieldName&&tem_fieldName!=""){
+                        flag=true;
+                    }
+                    tem_fieldName=value.fieldName;
+                });
+                if(flag){
+
+                    noty({
+                        layout: "center",
+                        timeout: 3000,
+                        type: "warning",
+                        text: "SQL字段列名重复,请重新选择!"
+                    });
+                    ava.sqlFieldList.length = 0;
+                    return;
+                }else{
+                    ava.$fieldColumns.length = 0;
+                    _.each(newValue, function (value) {
+                        ava.$fieldColumns.push(jsonFieldMapping.createDataColumn(value.isPk, value.fieldName, value.fieldType, value.fieldTypeName, value.fieldLength, ""));
+                    })
+                }
+            });
+        }
+
+        function isPkChecked() {
+
+            if(!_.findWhere(wfdata.swapValue.avaWf.$fieldColumns, {isPk: true})) {
+                noty({
+                    layout: "center",
+                    timeout: 3000,
+                    type: "warning",
+                    text: "请勾选主键!"
+                });
+                return true;
+            }else{
+                return false;
+            };
+        }
+
+
+        //页面里的avalon model定义接口，需要暴露出来到window对象
+        window.avalonCustomizeConfigInit = avalonCustomizeConfigInit;
+        window.CustomizeInitFormValue = CustomizeInitFormValue;
+        window.vmCustomizeDefineDoneCallback = vmCustomizeDefineDoneCallback;
+        
+        window.customizeSave = function (nodeJson) {
+            $(".sk-rotating-plane").show();
+
+            if(wfdata.swapValue.avaWf.$fieldColumns.length==0){
+                wfdata.dataProxy.getColumns(wfdata.swapValue.avaWf.dsId, wfdata.swapValue.avaWf.sql).done(function (data) {
+
+                    var columnLists;
+                    try{
+                        columnLists = JSON.parse(data.content);
+                    }catch(err) {
+                        console.log("db_select" + err);
+                    }
+                    if (_.isArray(columnLists)) {
+                        var newList = [];
+                        _.each(columnLists, function (value) {
+                            newList.push(jsonFieldMapping.createDataColumn(value.isPk, value.fieldName, value.fieldType, value.fieldTypeName, value.fieldLength, ""));
+                        })
+                        nodeJson.columnList = newList;
+                    }
+                    $(".sk-rotating-plane").hide();
+                    if(isPkChecked()){
+                        return;
+                    }
+                    window.parent.flashapi.closePopup();
+                }).fail(function () {
+                    $(".sk-rotating-plane").hide();
+                })
+            }else{
+                nodeJson.columnList =wfdata.swapValue.avaWf.$fieldColumns;
+
+
+                $(".sk-rotating-plane").hide();
+                if(isPkChecked()){
+                    return;
+                }
+
+                window.parent.flashapi.closePopup();
+            }
+
+        }
+
+        $(".disabledSelect").attr("disabled","disabled");
+        //开始初始化avalon对象
+        window.initAvalon();
+
+
+    })
+</script>

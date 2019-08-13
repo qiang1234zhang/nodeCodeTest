@@ -1,0 +1,19 @@
+<div class="loginBg">
+	<div class="loginBoxMy">
+		<div class="login-header">平台管理中心</div>
+		<form name="loginForm" ng-submit="submitForm(loginForm.$valid)" novalidate="novalidate">
+			<div class="login">
+				<div class="loginInput">
+					<input class="userName" type="text" placeholder="请输入用户名" autocomplete="off" ng-focus="usernameOnFocus(this)" ng-blur="checkUserName(this)" ng-model="username">
+					<p class="tip" style="color: red">{{userNameMessage}}</p>
+				</div>
+				<div class="loginInput">
+					<input class="passWord" type="password"  placeholder="请输入密码" ng-focus="passwordOnFocus(this)"  ng-blur="checkPassword(this)"  autocomplete="off" ng-model="password">
+					<p class="tip" style="color: red">{{passwordMessage}}</p>
+				</div>
+				<button class="loginBtn">登 录</button>
+				<p class="tip">{{message}}</p>
+			</div>
+		</form>
+	</div>
+</div>

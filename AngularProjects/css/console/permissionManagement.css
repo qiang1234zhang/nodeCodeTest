@@ -1,0 +1,87 @@
+#permissionManagement .contentMainLeft{
+	float: left;
+	width: 50%;
+	height: 75%;
+	border-left:1px solid #E1E1E2;
+	border-right:1px solid #E1E1E2;
+	border-bottom:1px solid #E1E1E2 ;
+}
+#permissionManagement .contentMainLeft .contentMainLeftTop{
+	width: 100%;
+	height: 40px;
+	background-color: #F6F6F6;
+}
+
+#permissionManagement .contentMainLeft .contentMainLeftContent{
+	padding-top: 15px;
+}
+
+#permissionManagement .contentMainLeft .contentMainLeftContent ul li{
+	margin-left: 15px;
+}
+#permissionManagement .contentMainLeft .contentMainLeftTop span{
+	height: 40px;
+	line-height: 40px;
+	font-family: "microsoft yahei";
+	font-size: 14px;
+	font-weight: 300;
+	margin-left:15px;
+}
+#permissionManagement .contentMainRight{
+	float: right;
+	width: 50%;
+	height: 75%;
+	border-bottom:1px solid #E1E1E2 ;
+	border-right:1px solid #E1E1E2 ;
+}
+#permissionManagement .contentMainRight .contentMainRightContent {
+	padding-top: 15px;
+	overflow: auto;
+	height:560px;
+}
+#permissionManagement .contentMainRight .contentMainRightContent ul li{
+	margin-left: 15px;
+}
+
+#permissionManagement .contentMainRight .contentMainRightTop{
+	width: 100%;
+	height: 40px;
+	background-color: #F6F6F6;
+}
+
+#permissionManagement .contentMainRight .contentMainRightTop span{
+	height: 40px;
+	line-height: 40px;
+	font-family: "microsoft yahei";
+	font-size: 14px;
+	font-weight: 300;
+	margin-left:15px;
+}
+
+#permissionManagement .contentMainBottom{
+	float: left;
+	width: 100%;
+	height: 75px;
+	border-bottom: 1px solid #E1E1E2;
+	border-left: 1px solid #E1E1E2;
+	border-right: 1px solid #E1E1E2;
+}
+#permissionManagement .imgIcon{
+	display: inline-block;
+	height:16px;
+	width:16px;
+	margin-left:25px;
+	background-position: -110px -16px;
+	vertical-align: top;
+	background-image:url("../../css/basecss/img/zTreeStandard.png");
+}
+#permissionManagement .permissionTitle{
+	display: inline-block;
+	font-size:12px;
+}
+#permissionManagement .contentMainBottom .iovButton{
+	float: right;
+	margin-right: 15px;
+	margin-top: 20px;
+}
+

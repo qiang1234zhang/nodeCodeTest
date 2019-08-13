@@ -1,0 +1,45 @@
+#servicePermission .MenuBarContent{
+    width: 100%;
+    position: relative;
+    top:46px;
+    bottom:0;
+}
+
+#servicePermission .treeIovModal .modal-input .modal-column{
+    width:100%;
+}
+#servicePermission .treeIovModal .drag{
+    width: 500px;
+}
+#servicePermission .itemBtn {
+    width: 89.58px;
+    height: 33px;
+    background-color: rgb(48, 175, 174);
+    color: #FFF;
+    font: 400 16px 'microsoft yahei';
+}
+#servicePermission .itemBtn span {
+    margin-right: 4px
+}
+
+#servicePermission .fieldList fieldset {
+    float: left;
+    width: 100%;
+    height: 170px;
+}
+#servicePermission .fieldList {
+    position: relative;
+}
+
+#servicePermission fieldset {
+    padding: .15em .625em .75em;
+    /*margin:0 2px;*/
+    border: 1px solid #3C763D;
+}
+
+#servicePermission fieldset legend {
+    padding: .5em .5em 0 .5em;
+    border: 0;
+    width: auto;
+    font-size: 14px;
+}
