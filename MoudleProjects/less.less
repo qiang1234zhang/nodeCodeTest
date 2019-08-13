@@ -1,0 +1,50 @@
+//1. @编译符 2.作用域不同于sass 3.没有设置输出 4.不支持if else  5.引入外部文件@import 6.有组件库bootstrap
+@import "library"; // library.less
+@import "typo.css";
+@aa:red;
+div{
+    @aa:green;
+    height:100px;
+    background: @aa;//实际输出红色
+}
+#header {
+    color: black;
+    .navigation {
+        font-size: 12px;
+    }
+    .logo {
+        width: 300px;
+    }
+}
+.screencolor{
+    @media screen {
+        color: green;
+        @media (min-width:768px) {
+            color: red;
+        }
+    }
+    @media tv {
+        color: black;
+    }
+}
+// 变量
+@mySelector: banner;
+@property: color;
+// 用法
+.@{mySelector} {
+     @property:red;
+    background-@{property}: #999;
+    font-weight: bold;
+    line-height: 40px;
+    margin: 0 auto;
+}
+//混合  class 或者 id
+.a, #b {
+    color: red;
+}
+.mixin-class {
+    .a;//color: red;
+}
+.mixin-id {
+    #b;//color: red;
+}

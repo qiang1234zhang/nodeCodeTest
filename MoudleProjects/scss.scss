@@ -1,0 +1,40 @@
+//scss是对css的扩展通过Ruby安装比less功能强大  1.  $编译符 2. 作用域不同于less   3.提供4种输出  4.支持if else  5.引入的文件名需加下划线_
+//6.工具库compass
+*{
+  font{
+    size:12px;
+  }
+}
+$color:red;
+.div{
+    $color:blue;
+    height: 100px;
+    background: $color;//实际输出蓝色
+}
+.btn {
+  border: 1px solid #ccc;
+  padding: 6px 10px;
+  font-size: 14px;
+}
+.btn-primary {
+  background-color: #f36;
+  color: #fff;
+  @extend .btn;
+}
+.box {
+  width: 20px + 8in;
+  height:20px - 5px;
+}
+.box {
+  width: ((220px + 720px) - 11 * 20 ) / 12 ;
+}
+$content: "Hello" + "" + "Sass!";
+.box:before {
+  content: " #{$content} ";
+}
+@if lightness($color) > 30% {
+
+} @else {
+
+}
+@import "_test1.scss";

@@ -1,0 +1,14 @@
+{
+  "name": "webpacktest",
+  "version": "1.0.0",
+  "description": "test  webpack  bundle",
+  "scripts": {
+    "start": "webpack",
+    "server": "webpack-dev-server --open"
+  },
+  "author": "Qiang Zhang",
+  "license": "ISC",
+  "dependencies": {
+    "webpack": "3.0.0"
+  }
+}

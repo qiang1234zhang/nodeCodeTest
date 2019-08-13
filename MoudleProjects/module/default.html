@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!--<script src="//cdnjs.cloudflare.com/ajax/libs/less.js/2.2.0/less.min.js"></script>-->
+    <!--插件的引用-->
+    <script type="text/javascript" src="js/lib/jquery.min.js"></script>
+    <script type="text/javascript" src="js/app/plugs/plugs.js"></script>
+    <!--第一种 amd的模块加载  -->
+    <script type="text/javascript" src="js/require.js" data-main="js/main.js"></script>
+<!-- 第二种 根据config路径配置加载
+    <script type="text/javascript" src="js/require.js"></script>
+    <script type="text/javascript" src="configs.js"></script>
+-->
+    <title>Title</title>
+</head>
+<body>
+  <div id="aa">ssssssssss</div>
+  <div class="aaa">ssssssssss</div>
+  <div class="aaa">ssssssssss</div>
+  <div class="aaa">ssssssssss</div>
+  <div style="height: 100px;width: 100px;">发的斯蒂芬是否<div>
+     <div>
+         <form action="">
+             <input type="date">
+             <input type="url">url
+             <input type="email">email
+             <input type="search">search
+             <input type="month">
+             <input type="datetime">
+             <input type="tel">tel
+             <input type="color">
+             <input type="range">
+             <input type="week">
+             <input type="text" pattern="[A-z]{3}">
+             <input type="submit" />
+         </form>
+     </div>
+</body>
+<script>
+    $(function(){
+        $(".aaa").aaaa({c:'9909'});
+
+        $("#aa").bind("myclick",function(a,b){
+            $(this).html("aaaaaaaaaaaaaaaaaaaaaaaaa");
+//          $(this).next("div").html("<p>"+a+b+"</p>");
+        });
+        $("#aa").trigger("myclick");
+    });
+</script>
+</html>
